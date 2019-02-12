@@ -20,38 +20,24 @@ public class AscendifyTest {
         Ascendify.getDriver().quit();
     }
 
+
     @Test
     public void t1_signIn() {
         System.out.println("executing signIn");
         Web.ascendify.signIn
                 .inputEmail("tatyana@ascendify.com")
-                .inputPassword("testing123")
+                .inputPassword("test12345")
                 .clickSignin()
                 .confirmSignin();
     }
 
     @Ignore
     @Test
-    public void t2_peopleTab() {
-        System.out.println("executing peopleTab");
-        Web.ascendify.peopleTab.goToPeopleTab();
-    }
-
-    @Ignore
-    @Test
-    public void t3_hometab() {
-        System.out.println("clicking on People tab, Requisitions tab, Assessments tab and confirming");
-        Web.ascendify.hometab
-                .clickPeopletab()
-                .confirmClickPeopletab()
-                .goToHometab()
-                .confirmGoToHometab()
-                .clickRequisitionstab()
-                .confirmClickRequisitionstab()
-                .goToHometab()
-                .confirmGoToHometab()
-                .clickAssessmentstab()
-                .confirmClickAssessmentstab();
+    public void forgot_password() {
+        System.out.println("executing fyp");
+        Web.ascendify.forgotYourPassword
+                .clickSignin()
+                .confirmClickSignin();
     }
 
     @Test
