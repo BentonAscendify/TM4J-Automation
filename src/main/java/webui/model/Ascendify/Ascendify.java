@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webui.controller.Driver;
-import webui.model.Ascendify.hometab.Hometab;
-import webui.model.Ascendify.peopletab.PeopleTab;
-import webui.model.Ascendify.signin.SignIn;
-import webui.model.Ascendify.signout.SignOut;
+import webui.model.Ascendify.app.tabs.hometab.Hometab;
+import webui.model.Ascendify.app.signin.SignIn;
+import webui.model.Ascendify.app.signout.SignOut;
+import webui.model.Ascendify.talentcommunity.ForgotYourPassword;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,9 +21,9 @@ public class Ascendify {
     private static WebDriver driver;
     private static WebDriverWait waitElement;
     public static SignIn signIn;
-    public static PeopleTab peopleTab;
     public static Hometab hometab;
     public static SignOut signOut;
+    public static ForgotYourPassword forgotYourPassword;
 
 
     public Ascendify() {
@@ -34,9 +34,9 @@ public class Ascendify {
         waitElement = Driver.getDriverWait();
 
         signIn = new SignIn();
-        peopleTab = new PeopleTab();
         hometab = new Hometab();
         signOut = new SignOut();
+        forgotYourPassword = new ForgotYourPassword();
 
     }
 
@@ -49,6 +49,17 @@ public class Ascendify {
     public static void openAscendifyProd() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("https://testcommunity.ascendify.com/");
+    }
+
+    public static void openTalentCommunityWorks() {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get("http://master.client.ascendify.works");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }
+
+    public static void openTalentCommunityProd() {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get("https://master.ascendify.net");
     }
 
     /**

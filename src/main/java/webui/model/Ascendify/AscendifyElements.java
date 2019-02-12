@@ -6,24 +6,29 @@ package webui.model.Ascendify;
  */
 public class AscendifyElements {
     public static final String
-            signin_emailF = "input[id=id_username]",
-            signin_passF = "input[id=id_password]",
+            signin_emailfield = "input[id=id_username]",
+            signin_passfield = "input[id=id_password]",
             signin_button = "button[id=asc-signin-btn]",
-            profile_image = "asc-my-profile-logo-container",
+            mainmenu_profileimage = "asc-my-profile-logo-container",
             signout_button = "a[id=asc-sign-out-button]",
-            profile_image_dropdown = "img[id=asc-my-account-image]";
+            profileimage_dropdown = "img[id=asc-my-account-image]";
 
     public static final String
-            hometab_dropdown = "asc-main-menu-auto",
-            hometab_peopletab = "//div[text()='People Tab']",
-            hometab_requisitionstab = "//div[text()='Requisitions']",
-            hometab_announcementitle = "//span[text()='Announcements']",
-            hometab_assessmentstab = "//div[text()='Assessments']",
+            mainmenu_dropdown = "asc-main-menu-auto",
+            mainmenu_peopletab = "//div[text()='People Tab']",
+            mainmenu_requisitionstab = "//div[text()='Requisitions']",
+            mainmenu_announcementitle = "//span[text()='Announcements']",
+            mainmenu_assessmentstab = "//div[text()='Assessments']",
             peopletab_selectall = "div[id=asc-select-all]",
             peopletab_statusdropdown = "asc-crm-status-text",
             peopletab_showingcount = "span[id=asc-showing-count]",
             requisitionstab_resetfilters = "div[id=asc-show-all]",
-            assessments_assessmentschart_ = "div[class=chart__assessment]";
+            assessmentstab_assessmentschart_ = "div[class=chart__assessment]";
+
+    public static final String
+        tc_signin_button = "a[id=menu_sign_in]",
+        tc_forgotyourpassowrd_link = "a[class=forgot]",
+        tc_createacount_button = "div[id=asc-init-signin]";
 
 
 }
