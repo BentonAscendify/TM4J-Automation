@@ -10,8 +10,7 @@ import static webui.model.Ascendify.Ascendify.waitForElementCss;
 
 public class SignIn extends WebPage {
 
-
-    /**git status
+    /**
      * Action methods
      */
     public SignIn inputEmail(String email) {
@@ -19,7 +18,6 @@ public class SignIn extends WebPage {
         emailField.sendKeys(email);
         return this;
     }
-
 
     public SignIn inputPassword(String pass) {
         waitForElementCss(AscendifyElements.signin_passfield);
@@ -36,7 +34,11 @@ public class SignIn extends WebPage {
     public SignIn confirmSignin() {
         waitForElementClass(AscendifyElements.mainmenu_profileimage);
         return this;
+    }
 
+    public SignIn confirmSigninTC() {
+        waitForElementCss(AscendifyElements.tc_menudropdown);
+        return this;
     }
 
 

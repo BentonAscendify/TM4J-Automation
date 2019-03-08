@@ -9,7 +9,9 @@ import static webui.model.Ascendify.Ascendify.waitForElementCss;
 
 public class SignOut extends WebPage {
 
-
+    /**
+     * Action methods
+     */
     public SignOut clickProfileDropdown() {
         waitForElementCss(AscendifyElements.profileimage_dropdown);
         profileImageDropdown.click();
@@ -27,7 +29,9 @@ public class SignOut extends WebPage {
         return this;
     }
 
-
+    /**
+     * UI elements
+     */
     @FindBy(css = AscendifyElements.signout_button)
     public WebElement signoutButton;
 
