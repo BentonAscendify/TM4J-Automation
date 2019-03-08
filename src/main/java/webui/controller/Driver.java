@@ -51,7 +51,6 @@ public class Driver {
      * *********GETTERS**********
      * **************************
      */
-
     public static WebDriver getDriver() {
         return driver;
     }

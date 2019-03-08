@@ -1,38 +1,23 @@
 package tests.web;
 
-import org.junit.*;
-import org.junit.runners.MethodSorters;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import webui.model.Ascendify.Ascendify;
 import webui.model.Web;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
-public class AscendifyTest {
-
+public class ForgotYourPasswordTCWorks {
 
     @BeforeClass
     public static void setUp() {
         Web.ascendify.openTalentCommunityWorks();
     }
-//
+
 //    @AfterClass
 //    public static void tearDown() {
 //        System.out.println("closing the Driver");
 //        Ascendify.getDriver().quit();
 //    }
-
-
-    @Ignore
-    @Test
-    public void t1_signIn() {
-        System.out.println("executing signIn");
-        Web.ascendify.signIn
-                .inputEmail("tatyana@ascendify.com")
-                .inputPassword("test12345")
-                .clickSignin()
-                .confirmSignin();
-    }
-
 
     @Test
     public void forgot_password() throws InterruptedException {
@@ -46,11 +31,6 @@ public class AscendifyTest {
                 .clickRecoverPasword()
                 .confirmClickRecoverPassword();
 
-    }
-
-
-    @Test
-    public void gmail() throws InterruptedException {
         Web.ascendify.gmailForgotYourPasswordEmail
                 .goToGmail()
                 .confirmGoToGmail()
@@ -65,43 +45,27 @@ public class AscendifyTest {
 
         Web.ascendify.forgotYourPassword
                 .resetNewPasswordWorks("Testing123");
-                //.confirmNewPassword("Testing123")
-                //.clickChangePassword();
-        Web.ascendify.gmailForgotYourPasswordEmail
-                .confirmSignin()
-                //.waitForPasswordResetEmail()
-                //.clickPasswordResetLink()
-                .clickMoreSettings()
-                .clickMoreSettingsDelete();
-    }
 
-    @Ignore
-    @Test
-    public void testTrashIcon() throws InterruptedException {
         Web.ascendify.gmailForgotYourPasswordEmail
-                .goToGmail()
-                .confirmGoToGmail()
-                .insertEmail("qa.ascendify@gmail.com")
-                .clickNext()
-                .confirmClickNext()
-                .insertPasswordAndClickEnter("Testing12345")
                 .confirmSignin()
-                .waitForPasswordResetEmail()
-                //.clickPasswordResetLink()
-                //.clickTrashIcon()
                 .clickMoreSettings()
                 .clickMoreSettingsDelete()
                 .confirmNoEmails();
-    }
+        Thread.sleep(1000);
 
-    @Ignore
-    @Test
-    public void t3_signOut() {
-        System.out.println("executing signOut");
-        Web.ascendify.signOut
-                .clickProfileDropdown()
-                .clickSignout()
-                .confirmSignout();
-    }
+        Web.ascendify.openTalentCommunityWorksSingin();
 
+        Web.ascendify.signIn
+                .inputEmail("qa.ascendify@gmail.com")
+                .inputPassword("Testing123")
+                .clickSignin()
+                .confirmSigninTC();
+        Thread.sleep(2000);
+
+        //Ascendify.getDriver().navigate().refresh();
+
+
+        //Web.ascendify.forgotYourPassword.confirmSignin();
+    }
 }
+
