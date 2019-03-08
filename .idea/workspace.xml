@@ -2,68 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8ae8d81-7481-40dd-9400-206625ccf41c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/classes/tests/web/ForgotYourPasswordTCProd.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/classes/tests/web/ForgotYourPasswordTCWorks.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/GlobalURLs.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/tabs/mainmenutab/MainMenuTab.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/emails/GmailForgotPasswordEmail.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tests/web/ForgotYourPasswordTCProd.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/tests/web/ForgotYourPasswordTCWorks.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/GlobalURLs.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/emails/GmailForgotPasswordEmail.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__cglib_cglib_3_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__cglib_cglib_nodep_2_1_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_6_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_guava_guava_19_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_beanutils_commons_beanutils_1_9_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_codec_commons_codec_1_9.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_digester_commons_digester_1_8_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_io_commons_io_2_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_validator_commons_validator_1_5_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_appium_java_client_4_0_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_ant_ant_1_9_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_ant_ant_launcher_1_9_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_commons_commons_lang3_3_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_httpclient_4_5_2.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_httpcore_4_4_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_5_0_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_api_2_53_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_chrome_driver_2_53_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_edge_driver_2_53_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_firefox_driver_2_53_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_ie_driver_2_53_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_java_2_53_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_leg_rc_2_53_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_remote_driver_2_53_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_safari_driver_2_53_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_seleniumhq_selenium_selenium_support_2_53_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__xerces_xercesImpl_2_9_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__xml_apis_xml_apis_1_3_04.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/tabs/hometab/Hometab.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/hometab/Hometab.java" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/mainmenutab/MainMenuTab.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/Main.class" afterPath="$PROJECT_DIR$/out/production/classes/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/tests/web/AscendifyTest.class" afterPath="$PROJECT_DIR$/out/production/classes/tests/web/AscendifyTest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/webui/controller/Driver.class" afterPath="$PROJECT_DIR$/out/production/classes/webui/controller/Driver.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/webui/controller/ExtentManager.class" afterPath="$PROJECT_DIR$/out/production/classes/webui/controller/ExtentManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/Ascendify.class" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/Ascendify.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/AscendifyElements.class" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/AscendifyElements.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/signin/SignIn.class" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/signin/SignIn.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/signout/SignOut.class" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/signout/SignOut.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/talentcommunity/ForgotYourPassword.class" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/talentcommunity/ForgotYourPassword.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/qa-automation_main.iml" afterPath="$PROJECT_DIR$/.idea/modules/qa-automation_main.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/qa-automation_test.iml" afterPath="$PROJECT_DIR$/.idea/modules/qa-automation_test.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tests/web/AscendifyTest.java" afterPath="$PROJECT_DIR$/src/main/java/tests/web/AscendifyTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/webui/controller/Driver.java" afterPath="$PROJECT_DIR$/src/main/java/webui/controller/Driver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/webui/controller/ExtentManager.java" afterPath="$PROJECT_DIR$/src/main/java/webui/controller/ExtentManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/Ascendify.java" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/Ascendify.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/AscendifyElements.java" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/AscendifyElements.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/signin/SignIn.java" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/signin/SignIn.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/signout/SignOut.java" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/signout/SignOut.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/talentcommunity/ForgotYourPassword.java" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/talentcommunity/ForgotYourPassword.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -99,7 +39,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GlobalURLs.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AscendifyTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/tests/web/AscendifyTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="397">
+              <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GlobalURLs.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/webui/model/Ascendify/GlobalURLs.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
@@ -811,7 +763,6 @@
         <option value="$PROJECT_DIR$/src/main/java/webui/controller/ExtentManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/hometab/MainMenuTab.java" />
         <option value="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/mainmenutab/MainMenuTab.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tests/web/AscendifyTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/Ascendify.java" />
         <option value="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/talentcommunity/ForgotYourPassword.java" />
         <option value="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/AscendifyElements.java" />
@@ -820,6 +771,7 @@
         <option value="$PROJECT_DIR$/src/main/java/tests/web/ForgotYourPasswordTCWorks.java" />
         <option value="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/emails/GmailForgotPasswordEmail.java" />
         <option value="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/GlobalURLs.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tests/web/AscendifyTest.java" />
       </list>
     </option>
   </component>
@@ -830,10 +782,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="585" />
-    <option name="y" value="134" />
+    <option name="x" value="608" />
+    <option name="y" value="138" />
     <option name="width" value="1272" />
-    <option name="height" value="974" />
+    <option name="height" value="1030" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -1242,7 +1194,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="585" y="134" width="1272" height="974" extended-state="0" />
+    <frame x="608" y="138" width="1272" height="1030" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1254,10 +1207,10 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3292683" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51155114" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279503" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40420562" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37938598" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4113821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4113821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25686136" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1604,16 +1557,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tests/web/AscendifyTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-296">
-          <caret line="28" column="26" lean-forward="true" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/signin/SignIn.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -1679,6 +1622,16 @@
         <state relative-caret-position="240">
           <caret line="16" column="77" lean-forward="false" selection-start-line="16" selection-start-column="77" selection-end-line="16" selection-end-column="77" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tests/web/AscendifyTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="43" column="5" lean-forward="true" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
