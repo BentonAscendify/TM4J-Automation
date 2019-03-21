@@ -13,23 +13,39 @@ public class AscendifyTest {
     public static void setUp() {
         Web.ascendify.openAscendifyWorks();
     }
-
-    @AfterClass
-    public static void tearDown() {
-        System.out.println("closing the Driver");
-        Ascendify.getDriver().quit();
-    }
+//
+//    @AfterClass
+//    public static void tearDown() {
+//        System.out.println("closing the Driver");
+//        Ascendify.getDriver().quit();
+//    }
 
 
     @Test
     public void t1_signIn() {
         System.out.println("executing signIn");
         Web.ascendify.signIn
-                .inputEmail("tatyana@ascendify.com")
-                .inputPassword("test12345")
+                .inputEmail("hiral@ascendify.com")
+                .inputPassword("testing12345")
                 .clickSignin()
                 .confirmSignin();
     }
+
+    @Test
+    public void t2_requisition() {
+        System.out.println("requisition tab");
+        Web.ascendify.requisition.goToRequisitionWorks();
+
+
+    }
+    @Test
+    public void t3_requisition() throws InterruptedException {
+        System.out.println("requisition");
+        Web.ascendify.requisition.clickNew().confirmclickNew().selectOrg().addTitle().addPosting().addLocation().
+                clickButton().clickCap().addCap();
+
+    }
+
 
     @Ignore
     @Test
@@ -40,8 +56,9 @@ public class AscendifyTest {
                 .confirmClickSignin();
     }
 
+    @Ignore
     @Test
-    public void t3_signOut() {
+    public void t4_signOut() {
         System.out.println("executing signOut");
         Web.ascendify.signOut
                 .clickProfileDropdown()

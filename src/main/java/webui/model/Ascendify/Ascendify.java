@@ -8,6 +8,7 @@ import webui.controller.Driver;
 import webui.model.Ascendify.app.tabs.hometab.Hometab;
 import webui.model.Ascendify.app.signin.SignIn;
 import webui.model.Ascendify.app.signout.SignOut;
+import webui.model.Ascendify.app.tabs.requisition.Requisition;
 import webui.model.Ascendify.talentcommunity.ForgotYourPassword;
 
 import java.util.concurrent.TimeUnit;
@@ -22,6 +23,7 @@ public class Ascendify {
     private static WebDriverWait waitElement;
     public static SignIn signIn;
     public static Hometab hometab;
+    public static Requisition requisition;
     public static SignOut signOut;
     public static ForgotYourPassword forgotYourPassword;
 
@@ -35,6 +37,7 @@ public class Ascendify {
 
         signIn = new SignIn();
         hometab = new Hometab();
+        requisition = new Requisition();
         signOut = new SignOut();
         forgotYourPassword = new ForgotYourPassword();
 
