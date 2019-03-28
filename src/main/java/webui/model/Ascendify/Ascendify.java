@@ -8,6 +8,7 @@ import webui.controller.Driver;
 import webui.model.Ascendify.app.tabs.hometab.Hometab;
 import webui.model.Ascendify.app.signin.SignIn;
 import webui.model.Ascendify.app.signout.SignOut;
+import webui.model.Ascendify.app.tabs.people.People;
 import webui.model.Ascendify.app.tabs.requisition.Requisition;
 import webui.model.Ascendify.talentcommunity.ForgotYourPassword;
 
@@ -24,6 +25,7 @@ public class Ascendify {
     public static SignIn signIn;
     public static Hometab hometab;
     public static Requisition requisition;
+    public static People people;
     public static SignOut signOut;
     public static ForgotYourPassword forgotYourPassword;
 

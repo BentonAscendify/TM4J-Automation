@@ -84,7 +84,6 @@ public class Requisition<var> {
 
     public Requisition addPrimaryhiring() throws InterruptedException {
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"hiring_manager\"]")).sendKeys("Alex");
-        Thread.sleep(5000);
         Actions action = new Actions(Ascendify.getDriver());
         action.sendKeys(Keys.DOWN);
         action.sendKeys(Keys.ENTER);
@@ -97,7 +96,7 @@ public class Requisition<var> {
 
     public Requisition clickButton() throws InterruptedException {
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"asc-add-user-btn\"]")).click();
-        Thread.sleep(2000);
+        Thread.sleep(15000);
         return this;
 
     }
@@ -163,7 +162,7 @@ public class Requisition<var> {
 
 
     public Requisition clickQualifying() throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"tab-questions\"]")).click();
         Thread.sleep(5000);
         return this;
@@ -181,14 +180,14 @@ public class Requisition<var> {
 
     public Requisition turnOn() throws InterruptedException {
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"tsgn11\"]/label/div[2]")).click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         return this;
     }
 
     public Requisition selectDecline() throws InterruptedException{
-        Ascendify.getDriver().findElement(By.xpath("//*[@id=\"auto_reject_email_chosen\"]")).click();
+        Ascendify.getDriver().findElement(By.xpath("//*[@id=\"auto_reject_email_chosen\"]/a")).click();
         Thread.sleep(5000);
-        WebDriverWait selectTemplate = new WebDriverWait(Ascendify.getDriver(), 10);
+        WebDriverWait selectTemplate = new WebDriverWait(Ascendify.getDriver(), 20);
         selectTemplate.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"auto_status_update_chosen\"]"))).click();
         Thread.sleep(5000);
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"auto_status_update_chosen\"]/div/ul/li[2]")).click();
@@ -214,18 +213,19 @@ public class Requisition<var> {
         orgselection.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"asc-job-screening-questions-select\"]/div[3]"))).click();
         Thread.sleep(5000);
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"asc-job-screening-questions-select\"]/div[3]/div/ul/li[4]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(7000);
         return this;
     }
 
     public Requisition clickIntake() throws InterruptedException {
         Ascendify.getDriver().findElement(By.id("tab-intake")).click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         return this;
     }
 
     public Requisition editIntake() throws InterruptedException {
-        Ascendify.getDriver().findElement(By.cssSelector("#QuFaieYZsa > div.asc-edit-block-inner > div > div.asc-edit-readonly > button")).click();
+        Thread.sleep(5000);
+        Ascendify.getDriver().findElement(By.id("wpilAmmwQF")).click();
         Thread.sleep(2000);
         return this;
     }
@@ -233,11 +233,15 @@ public class Requisition<var> {
     public Requisition addIntake() throws InterruptedException {
         Thread.sleep(5000);
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"asc-question-csvq_f8b1139791\"]")).sendKeys("Hiral Selenium Test");
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         return this;
     }
 
     public Requisition clickNotes() throws InterruptedException {
+        Thread.sleep(5000);
+        //WebElement element;
+       // WebDriverWait wait = new WebDriverWait(Ascendify.getDriver(), 10);
+       // element= wait.until(ExpectedConditions.elementToBeClickable(By.id("usrUtils")));
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"tab-notes\"]")).click();
         Thread.sleep(5000);
         return this;
@@ -248,43 +252,44 @@ public class Requisition<var> {
         Thread.sleep(5000);
 
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"private\"]")).click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         return this;
     }
 
     public Requisition clickSavenotes() throws InterruptedException {
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"asc-note-save-btn\"]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         return this;
     }
 
     public Requisition clickWorkflow() throws InterruptedException {
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"tab-workflows\"]")).click();
-        Thread.sleep(2000);
+        Thread.sleep(10000);
         return this;
     }
 
     public Requisition addnewworkflow() throws InterruptedException {
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"asc-workflow-holder\"]/div/i")).click();
-        Thread.sleep(2000);
+        Thread.sleep(10000);
         return this;
     }
 
     public Requisition selectWorkflow() throws InterruptedException {
         Select workflow = new Select(Ascendify.getDriver().findElement(By.xpath("//*[@id=\"asc-workflow-select-form\"]/select")));
-        workflow.selectByValue("fldr_3e6f8100000000154304");
-        Thread.sleep(2000);
+        workflow.selectByVisibleText("Interested Workflow 2 - Interested");
+        Thread.sleep(10000);
         return this;
     }
 
     public Requisition saveWorkflow() throws InterruptedException {
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"modal-dialog-replace-workflow\"]/button[1]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         return this;
     }
 
-    public Requisition clickApprovals() {
+    public Requisition clickApprovals() throws InterruptedException {
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"tab-approvals\"]")).click();
+        Thread.sleep(5000);
         return this;
     }
 
@@ -296,7 +301,7 @@ public class Requisition<var> {
         action.perform();
         WebElement approval = Ascendify.getDriver().findElement(By.xpath("//*[@id=\"cusr_d30ee100000001217520\"]"));
         approval.click();
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         Ascendify.getDriver().findElement(By.id("seq-routing-chk")).click();
         return this;
 
@@ -304,16 +309,16 @@ public class Requisition<var> {
 
    public Requisition beginRouting() throws InterruptedException {
         Ascendify.getDriver().findElement(By.id("asc-launch-approval-btn")).click();
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         return this;
    }
 
    public Requisition changeStatus() throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         Ascendify.getDriver().findElement(By.id("asc-status-btn")).click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"asc-job-status-list\"]/li[3]/a")).click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         return this;
    }
 
@@ -364,10 +369,10 @@ public class Requisition<var> {
    public Requisition Selectreq() throws InterruptedException {
 
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"full-header-search-input\"]")).sendKeys("JY377");
-       Thread.sleep(5000);
+       Thread.sleep(10000);
        Ascendify.getDriver().findElement(By.xpath("//*[@id=\"job_d70e51000000000114035\"]")).click();
         //Ascendify.getDriver().findElement(By.xpath("//*[@id=\"asc-list-job_d70e51000000000114035-tile\"]/div/div/div[1]/div/div[1]")).click();
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         return this;
    }
 
@@ -379,9 +384,9 @@ public class Requisition<var> {
    }
 
    public Requisition Talentmatching() throws InterruptedException {
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"candidate-info-reg-job\"]/div/div[7]/a")).click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         return this;
    }
     public Requisition Totalcandidate() throws InterruptedException {

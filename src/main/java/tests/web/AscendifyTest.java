@@ -42,7 +42,12 @@ public class AscendifyTest {
     public void t3_requisition() throws InterruptedException {
         System.out.println("requisition");
         Web.ascendify.requisition.clickNew().confirmclickNew().selectOrg().addTitle().addPosting().addLocation().
-                clickButton().clickCap().addCap();
+                addPrimaryhiring().clickButton().clickQualifying().addNew().turnOn().selectDecline().clickSaveQ().clickScreening().addScreening().
+                clickIntake().clickNotes().addNotes().
+                clickSavenotes().clickWorkflow().addnewworkflow().selectWorkflow().saveWorkflow().clickApprovals().
+                selectApporval().beginRouting().changeStatus().viewAll().Myrequisition().
+                Recentviewd().Recentlyadded().Recruiterlist().Openstatuses().Org().Selectreq().CandidateReport().Talentmatching().Totalcandidate();
+
 
     }
 
