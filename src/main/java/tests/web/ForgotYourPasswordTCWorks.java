@@ -31,27 +31,27 @@ public class ForgotYourPasswordTCWorks {
                 .clickRecoverPasword()
                 .confirmClickRecoverPassword();
 
-        Web.ascendify.gmailForgotYourPasswordEmail
-                .goToGmail()
-                .confirmGoToGmail()
-                .insertEmail("qa.ascendify@gmail.com")
-                .clickNext()
-                .confirmClickNext()
-                .insertPasswordAndClickEnter("Testing12345")
-                .confirmSignin()
-                .waitForPasswordResetEmail()
-                .confirmInsidePasswordResetEmail()
-                .clickPasswordResetLinkWorks();
-
-        Web.ascendify.forgotYourPassword
-                .resetNewPasswordWorks("Testing123");
-
-        Web.ascendify.gmailForgotYourPasswordEmail
-                .confirmSignin()
-                .clickMoreSettings()
-                .clickMoreSettingsDelete()
-                .confirmNoEmails();
-        Thread.sleep(1000);
+//        Web.ascendify.gmailForgotYourPasswordEmail
+//                .goToGmail()
+//                .confirmGoToGmail()
+//                .insertEmail("qa.ascendify@gmail.com")
+//                .clickNext()
+//                .confirmClickNext()
+//                .insertPasswordAndClickEnter("Testing12345")
+//                .confirmSignin()
+//                .waitForPasswordResetEmail()
+//                .confirmInsidePasswordResetEmail()
+//                .clickPasswordResetLinkWorks();
+//
+//        Web.ascendify.forgotYourPassword
+//                .resetNewPasswordWorks("Testing123");
+//
+//        Web.ascendify.gmailForgotYourPasswordEmail
+//                .confirmSignin()
+//                .clickMoreSettings()
+//                .clickMoreSettingsDelete()
+//                .confirmNoEmails();
+//        Thread.sleep(1000);
 
         Web.ascendify.openTalentCommunityWorksSingin();
 

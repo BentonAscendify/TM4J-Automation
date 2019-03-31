@@ -28,27 +28,27 @@ public class ForgotYourPasswordTCProd {
                 .inputEmail("qa.ascendify@gmail.com")
                 .clickRecoverPasword()
                 .confirmClickRecoverPassword();
-
-        Web.ascendify.gmailForgotYourPasswordEmail
-                .goToGmail()
-                .confirmGoToGmail()
-                .insertEmail("qa.ascendify@gmail.com")
-                .clickNext()
-                .confirmClickNext()
-                .insertPasswordAndClickEnter("Testing12345")
-                .confirmSignin()
-                .waitForPasswordResetEmail()
-                .confirmInsidePasswordResetEmail()
-                .clickPasswordResetLinkProd();
-
-        Web.ascendify.forgotYourPassword
-                .resetNewPasswordProd("Testing123");
-
-        Web.ascendify.gmailForgotYourPasswordEmail
-                .confirmSignin()
-                .clickMoreSettings()
-                .clickMoreSettingsDelete()
-                .confirmNoEmails();
+//
+//        Web.ascendify.gmailForgotYourPasswordEmail
+//                .goToGmail()
+//                .confirmGoToGmail()
+//                .insertEmail("qa.ascendify@gmail.com")
+//                .clickNext()
+//                .confirmClickNext()
+//                .insertPasswordAndClickEnter("Testing12345")
+//                .confirmSignin()
+//                .waitForPasswordResetEmail()
+//                .confirmInsidePasswordResetEmail()
+//                .clickPasswordResetLinkProd();
+//
+//        Web.ascendify.forgotYourPassword
+//                .resetNewPasswordProd("Testing123");
+//
+//        Web.ascendify.gmailForgotYourPasswordEmail
+//                .confirmSignin()
+//                .clickMoreSettings()
+//                .clickMoreSettingsDelete()
+//                .confirmNoEmails();
     }
 }
 
