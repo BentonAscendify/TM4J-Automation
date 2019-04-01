@@ -15,7 +15,7 @@ import static webui.model.Ascendify.Ascendify.*;
 import static webui.model.Ascendify.GlobalURLs.GmailLogin;
 
 /**
- * Gmail is used for receiving Forgot Your Password email and for resetting the password from the link inside the email
+ * This class is used for receiving Forgot Your Password email and for resetting the password from the link inside the email
  */
 public class GmailForgotPasswordEmail extends WebPage {
 

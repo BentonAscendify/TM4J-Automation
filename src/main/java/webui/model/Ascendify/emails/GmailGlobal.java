@@ -15,6 +15,10 @@ import static webui.model.Ascendify.Ascendify.waitForElementCss;
 import static webui.model.Ascendify.Ascendify.waitForElementXpath;
 import static webui.model.Ascendify.GlobalURLs.GmailLogin;
 
+/**
+ * This class contains the main methods (sign in/sign out etc) for Gmail
+ */
+
 public class GmailGlobal extends WebPage {
 
     public GmailGlobal goToGmail() {
@@ -73,15 +77,13 @@ public class GmailGlobal extends WebPage {
     }
 
     public GmailGlobal deleteAllInbox() {
-//        waitForElementXpath(AscendifyElements.gmail_selectcheckbox);
-//        gmailSelectCheckbox.click();
+        //gmailSelectCheckbox.click();
 
         List<WebElement> emailList = getDriver().findElements(By.cssSelector(AscendifyElements.gmail_noemail_text));
 
         if (emailList.size() > 0) {
             System.out.println("no Inbox");
-        }
-        else {
+        } else {
             waitForElementXpath(AscendifyElements.gmail_selectcheckbox);
             gmailSelectCheckbox.click();
             waitForElementXpath(AscendifyElements.gmail_selecttrashcan);
