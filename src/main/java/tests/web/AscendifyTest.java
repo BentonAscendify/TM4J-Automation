@@ -14,33 +14,54 @@ public class AscendifyTest {
     public static void setUp() {
         Web.ascendify.openTalentCommunityWorks();
     }
-
-    @AfterClass
-    public static void tearDown() {
-        System.out.println("closing the Driver");
-        Ascendify.getDriver().quit();
-    }
+//
+//    @AfterClass
+//    public static void tearDown() {
+//        System.out.println("closing the Driver");
+//        Ascendify.getDriver().quit();
+//    }
 
 
     @Test
     public void t1_signIn() {
         System.out.println("executing signIn");
         Web.ascendify.signIn
-                .inputEmail("tatyana@ascendify.com")
-                .inputPassword("test12345")
+                .inputEmail("hiral@ascendify.com")
+                .inputPassword("testing12345")
                 .clickSignin()
                 .confirmSignin();
     }
 
+    @Test
+    public void t2_requisition() {
+        System.out.println("requisition tab");
+        Web.ascendify.requisition.goToRequisitionWorks();
 
+
+    }
 
     @Test
-    public void t2_signOut() {
-        System.out.println("executing signOut");
-        Web.ascendify.signOut
-                .clickProfileDropdown()
-                .clickSignout()
-                .confirmSignout();
+    public void t3_requisition() throws InterruptedException {
+        System.out.println("requisition");
+        Web.ascendify.requisition.Selectreq().Totalcandidate();
+
+
+    }
+
+    @Test
+    public void t4_people() {
+        System.out.println(("people"));
+        Web.ascendify.people.clickPeople().addObject().addDescription();
+    }
+
+
+    @Ignore
+    @Test
+    public void forgot_password() {
+        System.out.println("executing fyp");
+        Web.ascendify.forgotYourPassword
+                .clickSignin()
+                .confirmClickSignin();
     }
 
 }

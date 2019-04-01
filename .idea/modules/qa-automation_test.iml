@@ -3,10 +3,7 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output-test url="file://$MODULE_DIR$/../../out/test/classes" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$/../../src/test">
-      <sourceFolder url="file://$MODULE_DIR$/../../src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../../src/test/resources" type="java-test-resource" />
-    </content>
+    <content url="file://$MODULE_DIR$/../../src/test" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="qa-automation_main" />
@@ -22,16 +19,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../libs/jsoup-1.9.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
+<<<<<<< HEAD
           <root url="jar://$MODULE_DIR$/../../libs/httpclient-4.5.2.jar!/" />
+=======
+          <root url="jar://$MODULE_DIR$/../../libs/jsoup-1.9.2.jar!/" />
+>>>>>>> master
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -40,7 +32,24 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+<<<<<<< HEAD
+          <root url="jar://$MODULE_DIR$/../../libs/mongodb-driver-3.3.0.jar!/" />
+=======
+          <root url="jar://$MODULE_DIR$/../../libs/httpclient-4.5.2.jar!/" />
+>>>>>>> master
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+<<<<<<< HEAD
+          <root url="jar://$MODULE_DIR$/../../libs/commons-codec-1.9.jar!/" />
+=======
           <root url="jar://$MODULE_DIR$/../../libs/bson-3.3.0.jar!/" />
+>>>>>>> master
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -58,7 +67,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+<<<<<<< HEAD
+          <root url="jar://$MODULE_DIR$/../../libs/commons-logging-1.2.jar!/" />
+=======
           <root url="jar://$MODULE_DIR$/../../libs/extentreports-3.0.3.jar!/" />
+>>>>>>> master
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -67,7 +80,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+<<<<<<< HEAD
+          <root url="jar://$MODULE_DIR$/../../libs/mongodb-driver-core-3.3.0.jar!/" />
+=======
           <root url="jar://$MODULE_DIR$/../../libs/mongodb-driver-3.3.0.jar!/" />
+>>>>>>> master
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -76,7 +93,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+<<<<<<< HEAD
+          <root url="jar://$MODULE_DIR$/../../libs/jsoup-1.9.2.jar!/" />
+=======
           <root url="jar://$MODULE_DIR$/../../libs/commons-codec-1.9.jar!/" />
+>>>>>>> master
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -103,7 +124,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
+<<<<<<< HEAD
+          <root url="jar://$MODULE_DIR$/../../libs/extentreports-3.0.3.jar!/" />
+=======
           <root url="jar://$MODULE_DIR$/../../libs/httpmime-4.5.2.jar!/" />
+>>>>>>> master
         </CLASSES>
         <JAVADOC />
         <SOURCES />

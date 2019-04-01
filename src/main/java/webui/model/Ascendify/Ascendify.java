@@ -8,7 +8,12 @@ import webui.controller.Driver;
 import webui.model.Ascendify.app.tabs.mainmenutab.MainMenuTab;
 import webui.model.Ascendify.app.signin.SignIn;
 import webui.model.Ascendify.app.signout.SignOut;
+<<<<<<< HEAD
+import webui.model.Ascendify.app.tabs.people.People;
+import webui.model.Ascendify.app.tabs.requisition.Requisition;
+=======
 import webui.model.Ascendify.emails.GmailForgotPasswordEmail;
+>>>>>>> master
 import webui.model.Ascendify.talentcommunity.ForgotYourPassword;
 
 import java.util.concurrent.TimeUnit;
@@ -23,7 +28,13 @@ public class Ascendify {
     private static WebDriver driver;
     private static WebDriverWait waitElement;
     public static SignIn signIn;
+<<<<<<< HEAD
+    public static Hometab hometab;
+    public static Requisition requisition;
+    public static People people;
+=======
     public static MainMenuTab hometab;
+>>>>>>> master
     public static SignOut signOut;
     public static ForgotYourPassword forgotYourPassword;
     public static GmailForgotPasswordEmail gmailForgotYourPasswordEmail;
@@ -36,7 +47,13 @@ public class Ascendify {
         waitElement = Driver.getDriverWait();
 
         signIn = new SignIn();
+<<<<<<< HEAD
+        hometab = new Hometab();
+        requisition = new Requisition();
+        people = new People();
+=======
         hometab = new MainMenuTab();
+>>>>>>> master
         signOut = new SignOut();
         forgotYourPassword = new ForgotYourPassword();
         gmailForgotYourPasswordEmail = new GmailForgotPasswordEmail();
