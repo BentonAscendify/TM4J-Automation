@@ -35,6 +35,12 @@ public class Requisition<var> {
         return this;
     }
 
+    public Requisition goToRequisitionprod() {
+        Ascendify.getDriver().get("https://testcommunity.ascendify.com/requisitions");
+        return this;
+
+    }
+
     public Requisition clickonRequisition() {
 
         Ascendify.waitForElementCss(AscendifyElements.requisition_chevronarrow);
@@ -101,44 +107,44 @@ public class Requisition<var> {
 
     }
 
-    //public Requisition editDescription() throws InterruptedException {
-      //  Thread.sleep(10000);
-        //Ascendify.getDriver().findElement(By.xpath("//*[@id=\"job-desc\"]/button")).click();
-        //return this;
-    //}
+    public Requisition editDescription() throws InterruptedException {
+        Thread.sleep(10000);
+        Ascendify.getDriver().findElement(By.xpath("//*[@id=\"job-desc\"]/button")).click();
+        return this;
+     }
 
-    //public Requisition addDescription() {
-      //  Ascendify.getDriver().switchTo().frame(Ascendify.getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div[2]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div/div/iframe")));
-        //Ascendify.getDriver().findElement(By.tagName("body")).sendKeys("This is selenium description");
-        //return  this;
-   // }
+     public Requisition addDescription() {
+       Ascendify.getDriver().switchTo().frame(Ascendify.getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div[2]/div[2]/div[2]/div/div[2]/div[1]/div/div[2]/div/div/iframe")));
+       Ascendify.getDriver().findElement(By.tagName("body")).sendKeys("This is selenium description");
+       return  this;
+     }
 
-    //public Requisition clickSave() throws InterruptedException {
-        //WebDriverWait wait = new WebDriverWait(Ascendify.getDriver(), 30);
-        //WebElement element1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("asc-dynamic-save-button")));
-        //element1.click();
-        //return this;
-    //}
+     public Requisition clickSave() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(Ascendify.getDriver(), 30);
+        WebElement element1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("asc-dynamic-save-button")));
+        element1.click();
+        return this;
+    }
 
-   // public Requisition editResponsibilities() throws InterruptedException {
-     //   Thread.sleep(10000);
-       // Ascendify.getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div[2]/div[3]/div[2]/div/div[1]/button")).click();
-        //return this;
-    //}
+     public Requisition editResponsibilities() throws InterruptedException {
+       Thread.sleep(10000);
+       Ascendify.getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div[2]/div[3]/div[2]/div/div[1]/button")).click();
+        return this;
+    }
 
 
 
-    //public Requisition addResponsibilities() {
-      //  Ascendify.getDriver().switchTo().frame(Ascendify.getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div[2]/div[3]/div[2]/div/div[2]/div[1]/div/div/div/div/iframe")));
-        //Ascendify.getDriver().findElement(By.tagName("body")).sendKeys("This is selenium responsbilities");
-        //return  this;
-    //}
+       public Requisition addResponsibilities() {
+          Ascendify.getDriver().switchTo().frame(Ascendify.getDriver().findElement(By.xpath("/html/body/div[1]/div[2]/div[2]/div[2]/div/div/div[3]/div[2]/div[2]/div[3]/div[2]/div/div[2]/div[1]/div/div/div/div/iframe")));
+          Ascendify.getDriver().findElement(By.tagName("body")).sendKeys("This is selenium responsbilities");
+          return  this;
+    }
 
-    //public Requisition clickSaveR() {
-      //  Ascendify.getDriver().findElement(By.partialLinkText("Save")).click();
+      public Requisition clickSaveR() {
+         Ascendify.getDriver().findElement(By.partialLinkText("Save")).click();
     //need to get unique id
-        //return this;
-    //}
+        return this;
+    }
 
     public Requisition clickTeam() throws InterruptedException {
 
@@ -147,17 +153,11 @@ public class Requisition<var> {
         return this;
     }
 
-    public Requisition addSourcer() {
-        Ascendify.getDriver().findElement(By.xpath("//*[@id=\"asc-group-edit-aclg_c30c395360\"]/div[3]")).click();
-       // Actions action = new Actions(Ascendify.getDriver());
-        //action.sendKeys(Keys.DOWN);
-        //action.sendKeys(Keys.ENTER);
-        //action.perform();
-        //WebElement primarybutton = Ascendify.getDriver().findElement(By.xpath("//*[@id=\"ui-id-21\"]"));
-       // primarybutton.click();
-        //need more info from developer
-        return this;
-    }
+    //need more info from developer public Requisition addSourcer() {
+       // Ascendify.getDriver().findElement(By.xpath("//*[@id=\"asc-group-edit-aclg_c30c395360\"]/div[3]")).click();
+
+       // return this;
+    //}
 
 
 
@@ -293,7 +293,7 @@ public class Requisition<var> {
         return this;
     }
 
-    public Requisition selectApporval() throws InterruptedException {
+    public Requisition selectApproval() throws InterruptedException {
         Ascendify.getDriver().findElement(By.xpath("//*[@id=\"add-approver\"]")).sendKeys("hiral myteam");
         Actions action = new Actions(Ascendify.getDriver());
         action.sendKeys(Keys.DOWN);
@@ -397,12 +397,6 @@ public class Requisition<var> {
 
 
 
-
-
-
-
-
-
     @FindBy(css = AscendifyElements.requisition_chevronarrow)
     public WebElement requisitionchevron;
 
@@ -454,8 +448,8 @@ public class Requisition<var> {
     @FindBy(css = AscendifyElements.requisition_clickSaveR)
     public WebElement clickSaveR;
 
-   // @FindBy(css = AscendifyElements.requisition_clickTeam)
-   // public WebElement clickTeam;
+    @FindBy(css = AscendifyElements.requisition_clickTeam)
+    public WebElement clickTeam;
 
     @FindBy(css = AscendifyElements.requisition_addSourcer)
     public WebElement addSourcer;
@@ -503,6 +497,49 @@ public class Requisition<var> {
     @FindBy(css = AscendifyElements.requisition_saveworkflow)
     public WebElement saveworkflow;
 
+    @FindBy(css = AscendifyElements.requisition_clickApprovals)
+    public WebElement clickApprovals;
 
+    @FindBy(css = AscendifyElements.requisition_selectApproval)
+    public WebElement requisition_selectApproval;
+
+    @FindBy(css = AscendifyElements.requisition_beginRouting)
+    public WebElement requisition_beginRouting;
+
+    @FindBy(css = AscendifyElements.requisition_changeStatus)
+    public WebElement requisition_changeStatus;
+
+    @FindBy(css = AscendifyElements.requisition_viewAll)
+    public WebElement requisition_viewAll;
+
+    @FindBy(css = AscendifyElements.requisition_Myrequisition)
+    public WebElement requisition_Myrequisition;
+
+    @FindBy(css = AscendifyElements.requisition_Recentviewd)
+    public WebElement requisition_Recentviewd;
+
+    @FindBy(css = AscendifyElements.requisition_Recenlyadded)
+    public WebElement requisition_Recentlyadded;
+
+    @FindBy(css = AscendifyElements.requisition_Recruiterlist)
+    public WebElement requisition_Recruiterlist;
+
+    @FindBy(css = AscendifyElements.requisition_Openstatuses)
+    public WebElement requisition_Openstatuses;
+
+    @FindBy(css = AscendifyElements.requisition_Org)
+    public WebElement requisition_Org;
+
+    @FindBy(css = AscendifyElements.requisition_Selectreq)
+    public WebElement requisition_Selectreq;
+
+    @FindBy(css = AscendifyElements.requisition_CandidateReport)
+    public WebElement requisition_CandidateReport;
+
+    @FindBy(css = AscendifyElements.requisition_Talentmatching)
+    public WebElement requisition_Talentmatching;
+
+    @FindBy(css = AscendifyElements.requisition_Totalcandidate)
+    public WebElement requisition_Totalcandidate;
 
 }

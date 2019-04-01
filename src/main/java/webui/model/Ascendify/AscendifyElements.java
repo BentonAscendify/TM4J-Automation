@@ -24,7 +24,7 @@ public class AscendifyElements {
             peopletab_showingcount = "span[id=asc-showing-count]",
             requisitionstab_resetfilters = "div[id=asc-show-all]",
             assessmentstab_assessmentschart_ = "div[class=chart__assessment]",
-            requistion_selectall = "input[id=view_all]",
+            requisition_selectall = "input[id=view_all]",
             requisition_chevronarrow = "//div[text()='kjkdjfhsdf - #NN2699']",
             requistion_new = "asc-dropdown-button-menu",
             requisition_addmanually = "a[id=asc-add-req-manually]",
@@ -42,7 +42,7 @@ public class AscendifyElements {
             requisition_editResponsbilities = "btn btn-primary asc-edit-icon btn-sm",
             requisition_addResponsbilities = "cke_44_contents",
             requisition_clickSaveR = "asc-dynamic-save-button",
-            requistion_clickTeam = "id=tab-team",
+            requisition_clickTeam = "id=tab-team",
             requisition_addSourcer = "input[id = add-group-member-aclg_8d2ca0469d-primary-sourcer]",
             requisition_clickQualifying = "tab-questions",
             requisition_addQualifying = "asc-job-qualifying-questions-select",
@@ -57,7 +57,22 @@ public class AscendifyElements {
             requisition_clickSavenotes = "asc-note-save-btn",
             requisition_clickWorkflow = "tab-workflows",
             requisition_selectworkflow = "asc-workflow-holder",
-            requisition_saveworkflow = "modal__button modal__button--submit btn btn-primary";
+            requisition_saveworkflow = "modal__button modal__button--submit btn btn-primary",
+            requisition_clickApprovals = "tab-approvals",
+            requisition_selectApproval = "input[id=add-approver]",
+            requisition_beginRouting = "asc-launch-approval-btn",
+            requisition_changeStatus = "asc-status-btn",
+            requisition_viewAll = "view_all",
+            requisition_Myrequisition = "fav-link",
+            requisition_Recentviewd = "view_recently",
+            requisition_Recenlyadded = "view_added",
+            requisition_Recruiterlist = "recruiters",
+            requisition_Openstatuses = "job-status-folder",
+            requisition_Org = "job-organizations",
+            requisition_Selectreq = "input[id=full-header-search-input]",
+            requisition_CandidateReport = "candidate-info-reg-job",
+            requisition_Talentmatching = "talent-matching",
+            requisition_Totalcandidate = "candidate-folder-link link";
 
 
     public static final String

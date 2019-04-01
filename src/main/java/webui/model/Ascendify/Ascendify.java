@@ -40,6 +40,7 @@ public class Ascendify {
         signIn = new SignIn();
         hometab = new Hometab();
         requisition = new Requisition();
+        people = new People();
         signOut = new SignOut();
         forgotYourPassword = new ForgotYourPassword();
 

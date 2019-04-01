@@ -15,10 +15,10 @@ import webui.model.Web;
 public class RequisitionProd {
 
 
-        @BeforeClass
-        public static void setUp() {
-            Web.ascendify.openAscendifyProd();
-        }
+    @BeforeClass
+    public static void setUp() {
+        Web.ascendify.openAscendifyProd();
+    }
 //
 //    @AfterClass
 //    public static void tearDown() {
@@ -27,56 +27,57 @@ public class RequisitionProd {
 //    }
 
 
-        @Test
-        public void t1_signIn() {
-            System.out.println("executing signIn");
-            Web.ascendify.signIn
-                    .inputEmail("hiral@ascendify.com")
-                    .inputPassword("testing12345")
-                    .clickSignin()
-                    .confirmSignin();
-        }
+    @Test
+    public void t1_signIn() {
+        System.out.println("executing signIn");
+        Web.ascendify.signIn
+                .inputEmail("hiral@ascendify.com")
+                .inputPassword("testing12345")
+                .clickSignin()
+                .confirmSignin();
+    }
 
-        @Test
-        public void t2_requisition() {
-            System.out.println("requisition tab");
-            Web.ascendify.requisition.goToRequisitionWorks();
+    @Test
+    public void t2_requisition() {
+        System.out.println("requisition tab");
+        Web.ascendify.requisition.goToRequisitionprod();
 
-
-        }
-        @Test
-        public void t3_requisition() throws InterruptedException {
-            System.out.println("requisition");
-            Web.ascendify.requisition.clickNew().confirmclickNew().selectOrg().addTitle().addPosting().addLocation().
-                    addPrimaryhiring().clickButton().clickQualifying().addNew().turnOn().selectDecline().clickSaveQ().clickScreening().addScreening().
-                    clickIntake().clickNotes().addNotes().
-                    clickSavenotes().clickWorkflow().addnewworkflow().selectWorkflow().saveWorkflow().clickApprovals().
-                    selectApporval().beginRouting().changeStatus().viewAll().Myrequisition().
-                    Recentviewd().Recentlyadded().Recruiterlist().Openstatuses().Org().Selectreq().CandidateReport().Talentmatching().Totalcandidate();
-
-
-        }
-
-
-        @Ignore
-        @Test
-        public void forgot_password() {
-            System.out.println("executing fyp");
-            Web.ascendify.forgotYourPassword
-                    .clickSignin()
-                    .confirmClickSignin();
-        }
-
-        @Ignore
-        @Test
-        public void t4_signOut() {
-            System.out.println("executing signOut");
-            Web.ascendify.signOut
-                    .clickProfileDropdown()
-                    .clickSignout()
-                    .confirmSignout();
-        }
 
     }
+
+    @Test
+    public void t3_requisition() throws InterruptedException {
+        System.out.println("requisition");
+        Web.ascendify.requisition.clickNew().confirmclickNew().selectOrg().addTitle().addPosting().addLocation().
+                addPrimaryhiring().clickButton().clickQualifying().addNew().turnOn().selectDecline().clickSaveQ().clickScreening().addScreening().
+                clickIntake().clickNotes().addNotes().
+                clickSavenotes().clickWorkflow().addnewworkflow().selectWorkflow().saveWorkflow().clickApprovals().
+                selectApproval().beginRouting().changeStatus().viewAll().Myrequisition().
+                Recentviewd().Recentlyadded().Recruiterlist().Openstatuses().Org().Selectreq().CandidateReport().Talentmatching().Totalcandidate();
+
+
+    }
+
+
+    @Ignore
+    @Test
+    public void forgot_password() {
+        System.out.println("executing fyp");
+        Web.ascendify.forgotYourPassword
+                .clickSignin()
+                .confirmClickSignin();
+    }
+
+    @Ignore
+    @Test
+    public void t4_signOut() {
+        System.out.println("executing signOut");
+        Web.ascendify.signOut
+                .clickProfileDropdown()
+                .clickSignout()
+                .confirmSignout();
+    }
+
+}
 
 

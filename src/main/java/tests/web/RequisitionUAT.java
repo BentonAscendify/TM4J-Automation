@@ -1,13 +1,17 @@
 package tests.web;
 
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+import webui.model.Web;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 import webui.model.Ascendify.Ascendify;
 import webui.model.Web;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
-public class AscendifyTest {
+public class RequisitionUAT {
 
     @BeforeClass
     public static void setUp() {
@@ -42,15 +46,14 @@ public class AscendifyTest {
     @Test
     public void t3_requisition() throws InterruptedException {
         System.out.println("requisition");
-        Web.ascendify.requisition.Selectreq().Totalcandidate();
+        Web.ascendify.requisition.clickNew().confirmclickNew().selectOrg().addTitle().addPosting().addLocation().
+                addPrimaryhiring().clickButton().clickQualifying().addNew().turnOn().selectDecline().clickSaveQ().clickScreening().addScreening().
+                clickIntake().clickNotes().addNotes().
+                clickSavenotes().clickWorkflow().addnewworkflow().selectWorkflow().saveWorkflow().clickApprovals().
+                selectApproval().beginRouting().changeStatus().viewAll().Myrequisition().
+                Recentviewd().Recentlyadded().Recruiterlist().Openstatuses().Org().Selectreq().CandidateReport().Talentmatching().Totalcandidate();
 
 
-    }
-
-    @Test
-    public void t4_people() {
-        System.out.println(("people"));
-        Web.ascendify.people.clickPeople().addObject().addDescription();
     }
 
 
@@ -74,3 +77,7 @@ public class AscendifyTest {
     }
 
 }
+
+
+
+
