@@ -1,4 +1,4 @@
-package webui.model.Ascendify.app.tabs.hometab;
+package webui.model.Ascendify.app.tabs.mainmenutab;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,60 +8,59 @@ import webui.model.WebPage;
 
 import static webui.model.Ascendify.Ascendify.*;
 
-public class Hometab extends WebPage {
+public class MainMenuTab extends WebPage {
 
     /**
      * Action methods
      */
-
-    public Hometab goToHometabWorks() {
+    public MainMenuTab goToHometabWorks() {
         Ascendify.getDriver().get("https://testcommunity.ascendify.works/main_menu");
         return this;
     }
 
-    public Hometab confirmGoToHometab() {
+    public MainMenuTab confirmGoToHometab() {
         waitForElementXpath(AscendifyElements.mainmenu_announcementitle);
         return this;
     }
 
-    public Hometab clickPeopletab() {
+    public MainMenuTab clickPeopletab() {
         waitForElementXpath(AscendifyElements.mainmenu_peopletab);
         hometabpeopletab.click();
         return this;
     }
 
-    public Hometab confirmClickPeopletab() {
+    public MainMenuTab confirmClickPeopletab() {
         waitForElementCss(AscendifyElements.peopletab_selectall);
         waitForElementClass(AscendifyElements.peopletab_statusdropdown);
         waitForElementCss(AscendifyElements.peopletab_showingcount);
         return this;
     }
 
-    public Hometab clickRequisitionstab() {
+    public MainMenuTab clickRequisitionstab() {
         waitForElementXpath(AscendifyElements.mainmenu_requisitionstab);
         hometabrequisitionstab.click();
         return this;
     }
 
-    public Hometab confirmClickRequisitionstab() {
+    public MainMenuTab confirmClickRequisitionstab() {
         waitForElementCss(AscendifyElements.requisitionstab_resetfilters);
         return this;
     }
 
-    public Hometab clickAssessmentstab() {
+    public MainMenuTab clickAssessmentstab() {
         waitForElementXpath(AscendifyElements.mainmenu_assessmentstab);
         hometabassessmentstab.click();
         return this;
     }
 
-    public Hometab confirmClickAssessmentstab() {
-        waitForElementCss(AscendifyElements.assessmentstab_assessmentschart_);
+    public MainMenuTab confirmClickAssessmentstab() {
+        waitForElementCss(AscendifyElements.assessmentstab_assessmentschart);
         return this;
     }
 
 
     // this method does not really work
-    public Hometab clickDropdown() {
+    public MainMenuTab clickDropdown() {
         waitForClickableElementClass(AscendifyElements.mainmenu_dropdown);
         waitForElementClass(AscendifyElements.mainmenu_dropdown);
         hometabdropdown.click();
@@ -71,8 +70,6 @@ public class Hometab extends WebPage {
     /**
      * UI elements
      */
-
-
     @FindBy(xpath = AscendifyElements.mainmenu_peopletab)
     public WebElement hometabpeopletab;
 

@@ -9,9 +9,10 @@ import webui.model.Web;
 
 public class AscendifyTest {
 
+
     @BeforeClass
     public static void setUp() {
-        Web.ascendify.openAscendifyWorks();
+        Web.ascendify.openTalentCommunityWorks();
     }
 //
 //    @AfterClass
@@ -61,16 +62,6 @@ public class AscendifyTest {
         Web.ascendify.forgotYourPassword
                 .clickSignin()
                 .confirmClickSignin();
-    }
-
-    @Ignore
-    @Test
-    public void t4_signOut() {
-        System.out.println("executing signOut");
-        Web.ascendify.signOut
-                .clickProfileDropdown()
-                .clickSignout()
-                .confirmSignout();
     }
 
 }

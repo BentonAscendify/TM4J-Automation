@@ -5,15 +5,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webui.controller.Driver;
-import webui.model.Ascendify.app.tabs.hometab.Hometab;
+import webui.model.Ascendify.app.tabs.mainmenutab.MainMenuTab;
 import webui.model.Ascendify.app.signin.SignIn;
 import webui.model.Ascendify.app.signout.SignOut;
+<<<<<<< HEAD
 import webui.model.Ascendify.app.tabs.people.People;
 import webui.model.Ascendify.app.tabs.requisition.Requisition;
+=======
+import webui.model.Ascendify.emails.GmailForgotPasswordEmail;
+>>>>>>> master
 import webui.model.Ascendify.talentcommunity.ForgotYourPassword;
 
 import java.util.concurrent.TimeUnit;
 
+import static webui.model.Ascendify.GlobalURLs.*;
 
 /**
  * This is the main class in the project.
@@ -23,12 +28,16 @@ public class Ascendify {
     private static WebDriver driver;
     private static WebDriverWait waitElement;
     public static SignIn signIn;
+<<<<<<< HEAD
     public static Hometab hometab;
     public static Requisition requisition;
     public static People people;
+=======
+    public static MainMenuTab hometab;
+>>>>>>> master
     public static SignOut signOut;
     public static ForgotYourPassword forgotYourPassword;
-
+    public static GmailForgotPasswordEmail gmailForgotYourPasswordEmail;
 
     public Ascendify() {
         Driver.setDriver("Chrome");
@@ -38,34 +47,45 @@ public class Ascendify {
         waitElement = Driver.getDriverWait();
 
         signIn = new SignIn();
+<<<<<<< HEAD
         hometab = new Hometab();
         requisition = new Requisition();
         people = new People();
+=======
+        hometab = new MainMenuTab();
+>>>>>>> master
         signOut = new SignOut();
         forgotYourPassword = new ForgotYourPassword();
+        gmailForgotYourPasswordEmail = new GmailForgotPasswordEmail();
 
     }
 
     public static void openAscendifyWorks() {
         //driver.manage().window().fullscreen();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("https://testcommunity.ascendify.works/");
+        driver.get(AscendifyAppWorks);
     }
 
     public static void openAscendifyProd() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("https://testcommunity.ascendify.com/");
+        driver.get(AscendifyAppProd);
     }
 
     public static void openTalentCommunityWorks() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("http://master.client.ascendify.works");
+        driver.get(AscendifyTalentCommunityWorks);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }
+
+    public static void openTalentCommunityWorksSingin() {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get(AscendifyTalentCommunityWorksSignin);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     public static void openTalentCommunityProd() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get("https://master.ascendify.net");
+        driver.get(AscendifyTalentCommunityProd);
     }
 
     /**
@@ -73,7 +93,6 @@ public class Ascendify {
      * *********GETTERS**********
      * **************************
      */
-
     public static WebDriver getDriver() {
         return driver;
     }
@@ -86,7 +105,6 @@ public class Ascendify {
      * Wait methods which are being used throughout the project.
      * Add more if needed.
      */
-
     public static void waitForElementCss(String element) {
         waitElement.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(element)));
     }

@@ -31,7 +31,6 @@ public class ExtentManager {
         report = new ExtentReports();
 
         report.attachReporter(htmlReporter);
-
     }
 
     @AfterClass
