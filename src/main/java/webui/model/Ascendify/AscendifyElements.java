@@ -23,9 +23,6 @@ public class AscendifyElements {
             peopletab_statusdropdown = "asc-crm-status-text",
             peopletab_showingcount = "span[id=asc-showing-count]",
             requisitionstab_resetfilters = "div[id=asc-show-all]",
-<<<<<<< HEAD
-            assessmentstab_assessmentschart_ = "div[class=chart__assessment]",
-            requisition_selectall = "input[id=view_all]",
             requisition_chevronarrow = "//div[text()='kjkdjfhsdf - #NN2699']",
             requistion_new = "asc-dropdown-button-menu",
             requisition_addmanually = "a[id=asc-add-req-manually]",
@@ -73,11 +70,8 @@ public class AscendifyElements {
             requisition_Selectreq = "input[id=full-header-search-input]",
             requisition_CandidateReport = "candidate-info-reg-job",
             requisition_Talentmatching = "talent-matching",
-            requisition_Totalcandidate = "candidate-folder-link link";
-
-=======
+            requisition_Totalcandidate = "candidate-folder-link link",
             assessmentstab_assessmentschart = "div[class=chart__assessment]";
->>>>>>> master
 
     public static final String
             tc_signin_button = "a[id=menu_sign_in]",
