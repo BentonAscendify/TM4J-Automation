@@ -41,13 +41,6 @@ public class Requisition<var> {
 
     }
 
-    public Requisition clickonRequisition() {
-
-        Ascendify.waitForElementCss(AscendifyElements.requisition_chevronarrow);
-        requisitionchevron.click();
-        return this;
-    }
-
     public Requisition clickNew() throws InterruptedException {
         Ascendify.getDriver().findElement(By.id("asc-add-candidate")).click();
         /*Ascendify.waitForElementCss(AscendifyElements.requistion_new);
@@ -396,9 +389,6 @@ public class Requisition<var> {
     }
 
 
-
-    @FindBy(css = AscendifyElements.requisition_chevronarrow)
-    public WebElement requisitionchevron;
 
     @FindBy(css = AscendifyElements.requistion_new)
     public WebElement requisitionnew;
