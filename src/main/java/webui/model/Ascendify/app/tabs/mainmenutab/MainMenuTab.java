@@ -54,7 +54,7 @@ public class MainMenuTab extends WebPage {
     }
 
     public MainMenuTab confirmClickAssessmentstab() {
-        waitForElementCss(AscendifyElements.assessmentstab_assessmentschart);
+        waitForElementCss(AscendifyElements.assessmentstab_assessmentschart_);
         return this;
     }
 

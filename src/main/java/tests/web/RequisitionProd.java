@@ -11,9 +11,9 @@ import org.junit.runners.MethodSorters;
 import webui.model.Ascendify.Ascendify;
 import webui.model.Web;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class RequisitionProd {
-
 
     @BeforeClass
     public static void setUp() {

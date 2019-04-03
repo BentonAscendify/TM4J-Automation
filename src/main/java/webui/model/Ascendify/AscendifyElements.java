@@ -23,6 +23,7 @@ public class AscendifyElements {
             peopletab_statusdropdown = "asc-crm-status-text",
             peopletab_showingcount = "span[id=asc-showing-count]",
             requisitionstab_resetfilters = "div[id=asc-show-all]",
+            assessmentstab_assessmentschart_ = "div[class=chart__assessment]",
             requisition_chevronarrow = "//div[text()='kjkdjfhsdf - #NN2699']",
             requistion_new = "asc-dropdown-button-menu",
             requisition_addmanually = "a[id=asc-add-req-manually]",
