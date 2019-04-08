@@ -6,6 +6,9 @@ import org.junit.Test;
 import webui.model.Ascendify.Ascendify;
 import webui.model.Web;
 
+/**
+ * This test covers the flow of resetting Forgot Your Password on TC Prod.
+ */
 public class ForgotYourPasswordTCProd {
 
 //    @BeforeClass
@@ -45,7 +48,7 @@ public class ForgotYourPasswordTCProd {
                 .clickForgotPassword()
                 .confirmClickForgotPassword()
                 .inputEmail("qa.ascendify@gmail.com")
-                .clickRecoverPasword()
+                .clickRecoverPassword()
                 .confirmClickRecoverPassword();
 
         Web.ascendify.gmailGlobal

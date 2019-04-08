@@ -7,6 +7,9 @@ import webui.model.WebPage;
 
 import static webui.model.Ascendify.Ascendify.waitForElementCss;
 
+/**
+ * This class contains methods for signing out from the app.
+ */
 public class SignOut extends WebPage {
 
     /**

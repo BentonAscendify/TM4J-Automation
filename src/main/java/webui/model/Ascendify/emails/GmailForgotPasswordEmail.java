@@ -15,11 +15,13 @@ import static webui.model.Ascendify.Ascendify.*;
 import static webui.model.Ascendify.GlobalURLs.GmailLogin;
 
 /**
- * This class is used for receiving Forgot Your Password email and for resetting the password from the link inside the email
+ * This class contains methods for waiting and opening Forgot Your Password email.
  */
 public class GmailForgotPasswordEmail extends WebPage {
 
-
+    /**
+     * Action methods
+     */
     public GmailForgotPasswordEmail waitForPasswordResetEmail() {
         for (int i = 0; i < 6; i++) {
             List<WebElement> elements = getDriver().findElements(By.xpath(AscendifyElements.gmail_passwordreset_email));
@@ -55,8 +57,9 @@ public class GmailForgotPasswordEmail extends WebPage {
         return this;
     }
 
-
-
+    /**
+     * UI elements
+     */
     @FindBy(xpath = AscendifyElements.gmail_passwordreset_email)
     public WebElement gmailPasswordResetEmail;
 

@@ -16,11 +16,13 @@ import static webui.model.Ascendify.Ascendify.waitForElementXpath;
 import static webui.model.Ascendify.GlobalURLs.GmailLogin;
 
 /**
- * This class contains the main methods (sign in/sign out etc) for Gmail
+ * This class contains the main methods (sign in/sign out etc) for Gmail.
  */
-
 public class GmailGlobal extends WebPage {
 
+    /**
+     * Action methods
+     */
     public GmailGlobal goToGmail() {
         Ascendify.getDriver().get(GmailLogin);
         return this;
@@ -93,7 +95,9 @@ public class GmailGlobal extends WebPage {
         return this;
     }
 
-
+    /**
+     * UI elements
+     */
     @FindBy(css = AscendifyElements.gmail_emailfield)
     public WebElement gmailEmailField;
 

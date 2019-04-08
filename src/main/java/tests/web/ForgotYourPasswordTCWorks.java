@@ -6,18 +6,22 @@ import org.junit.Test;
 import webui.model.Ascendify.Ascendify;
 import webui.model.Web;
 
+
+/**
+ * This test covers the flow of resetting Forgot Your Password on TC .works.
+ */
 public class ForgotYourPasswordTCWorks {
 
-//    @BeforeClass
-//    public static void setUp() {
-//        Web.ascendify.openTalentCommunityWorks();
-//    }
+    @BeforeClass
+    public static void setUp() {
+        Web.ascendify.openTalentCommunityWorks();
+    }
 
-//    @AfterClass
-//    public static void tearDown() {
-//        System.out.println("closing the Driver");
-//        Ascendify.getDriver().quit();
-//    }
+    @AfterClass
+    public static void tearDown() {
+        System.out.println("closing the Driver");
+        Ascendify.getDriver().quit();
+    }
 
     @Test
     public void forgot_password() throws InterruptedException {
@@ -46,7 +50,7 @@ public class ForgotYourPasswordTCWorks {
                 .clickForgotPassword()
                 .confirmClickForgotPassword()
                 .inputEmail("qa.ascendify@gmail.com")
-                .clickRecoverPasword()
+                .clickRecoverPassword()
                 .confirmClickRecoverPassword();
 
         Web.ascendify.gmailGlobal

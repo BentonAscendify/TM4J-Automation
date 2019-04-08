@@ -1,7 +1,7 @@
 package webui.model.Ascendify;
 
 /**
- * This class contain URLS used thorughout the project
+ * This class contains URLs used throughout the project.
  */
 public class GlobalURLs {
     public static String AscendifyAppWorks = "https://testcommunity.ascendify.works/";
