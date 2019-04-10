@@ -8,6 +8,9 @@ import webui.model.WebPage;
 import static webui.model.Ascendify.Ascendify.waitForElementClass;
 import static webui.model.Ascendify.Ascendify.waitForElementCss;
 
+/**
+ * This class contains methods for signing into the app.
+ */
 public class SignIn extends WebPage {
 
     /**

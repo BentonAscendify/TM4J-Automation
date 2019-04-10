@@ -11,7 +11,9 @@ import static webui.model.Ascendify.Ascendify.getDriver;
 import static webui.model.Ascendify.Ascendify.waitForElementClass;
 import static webui.model.Ascendify.Ascendify.waitForElementCss;
 
-
+/**
+ * This class covers the flow of 'forgetting' and resetting a password on TC.
+ */
 public class ForgotYourPassword extends WebPage {
 
     public ForgotYourPassword clickSignin() {
@@ -42,7 +44,7 @@ public class ForgotYourPassword extends WebPage {
         return this;
     }
 
-    public ForgotYourPassword clickRecoverPasword() {
+    public ForgotYourPassword clickRecoverPassword() {
         waitForElementCss(AscendifyElements.tc_recoverpassword_button);
         recoverpasswordButton.click();
         return this;

@@ -15,48 +15,13 @@ import static webui.model.Ascendify.Ascendify.*;
 import static webui.model.Ascendify.GlobalURLs.GmailLogin;
 
 /**
- * Gmail is used for receiving Forgot Your Password email and for resetting the password from the link inside the email
+ * This class contains methods for waiting and opening Forgot Your Password email.
  */
 public class GmailForgotPasswordEmail extends WebPage {
 
-    public GmailForgotPasswordEmail goToGmail() {
-        Ascendify.getDriver().get(GmailLogin);
-        return this;
-    }
-
-    public GmailForgotPasswordEmail confirmGoToGmail() {
-        waitForElementCss(AscendifyElements.gmail_emailfield);
-        return this;
-    }
-
-    public GmailForgotPasswordEmail insertEmail(String email) {
-        waitForElementCss(AscendifyElements.gmail_emailfield);
-        gmailEmailField.sendKeys(email);
-        return this;
-    }
-
-    public GmailForgotPasswordEmail clickNext() {
-        waitForElementCss(AscendifyElements.gmail_nextbutton);
-        gmailNextButton.click();
-        return this;
-    }
-
-    public GmailForgotPasswordEmail confirmClickNext() {
-        waitForElementCss(AscendifyElements.gmail_passfield);
-        return this;
-    }
-
-    public GmailForgotPasswordEmail insertPasswordAndClickEnter(String password) {
-        gmailPasswordField.sendKeys(password);
-        gmailPasswordField.sendKeys(Keys.ENTER);
-        return this;
-    }
-
-    public GmailForgotPasswordEmail confirmSignin() {
-        waitForElementCss(AscendifyElements.gmail_inboxfolder);
-        return this;
-    }
-
+    /**
+     * Action methods
+     */
     public GmailForgotPasswordEmail waitForPasswordResetEmail() {
         for (int i = 0; i < 6; i++) {
             List<WebElement> elements = getDriver().findElements(By.xpath(AscendifyElements.gmail_passwordreset_email));
@@ -92,33 +57,9 @@ public class GmailForgotPasswordEmail extends WebPage {
         return this;
     }
 
-    public GmailForgotPasswordEmail clickMoreSettings() {
-        waitForElementXpath(AscendifyElements.gmail_moresettings);
-        gmailMoreSettings.click();
-        return this;
-    }
-
-    public GmailForgotPasswordEmail clickMoreSettingsDelete() {
-        waitForElementXpath(AscendifyElements.gmail_moresettings_delete);
-        gmailMoreSettingsDelete.click();
-        return this;
-    }
-
-    public GmailForgotPasswordEmail confirmNoEmails() {
-        waitForElementCss(AscendifyElements.gmail_noemail_text);
-        return this;
-    }
-
-
-    @FindBy(css = AscendifyElements.gmail_emailfield)
-    public WebElement gmailEmailField;
-
-    @FindBy(css = AscendifyElements.gmail_passfield)
-    public WebElement gmailPasswordField;
-
-    @FindBy(css = AscendifyElements.gmail_nextbutton)
-    public WebElement gmailNextButton;
-
+    /**
+     * UI elements
+     */
     @FindBy(xpath = AscendifyElements.gmail_passwordreset_email)
     public WebElement gmailPasswordResetEmail;
 
@@ -128,10 +69,6 @@ public class GmailForgotPasswordEmail extends WebPage {
     @FindBy(xpath = AscendifyElements.gmail_passwordteset_link_works)
     public WebElement gmailPasswordResetLinkWorks;
 
-    @FindBy(xpath = AscendifyElements.gmail_moresettings)
-    public WebElement gmailMoreSettings;
 
-    @FindBy(xpath = AscendifyElements.gmail_moresettings_delete)
-    public WebElement gmailMoreSettingsDelete;
 
 }

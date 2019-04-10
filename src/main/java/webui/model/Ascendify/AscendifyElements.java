@@ -102,5 +102,9 @@ public class AscendifyElements {
             gmail_passwordteset_link_works = "//a[text()='http://master.client.']",
             gmail_moresettings = "//div[@aria-label='More']",
             gmail_moresettings_delete = "//*[contains(text(), 'Delete this message')]",
-            gmail_noemail_text = "td[class=TC]";
+            gmail_noemail_text = "td[class=TC]",
+
+
+            gmail_selectcheckbox = "//div[@aria-label='Select']",
+            gmail_selecttrashcan = "//div[@aria-label='Delete']";
 }
