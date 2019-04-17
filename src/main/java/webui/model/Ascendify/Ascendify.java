@@ -8,11 +8,12 @@ import webui.controller.Driver;
 import webui.model.Ascendify.app.tabs.mainmenutab.MainMenuTab;
 import webui.model.Ascendify.app.signin.SignIn;
 import webui.model.Ascendify.app.signout.SignOut;
-import webui.model.Ascendify.app.tabs.people.People;
-import webui.model.Ascendify.app.tabs.requisition.Requisition;
+//import webui.model.Ascendify.app.tabs.people.People;
+//import webui.model.Ascendify.app.tabs.requisition.Requisition;
 import webui.model.Ascendify.emails.GmailForgotPasswordEmail;
 import webui.model.Ascendify.emails.GmailGlobal;
 import webui.model.Ascendify.talentcommunity.ForgotYourPassword;
+import webui.model.Ascendify.talentcommunity.SignupWithResume;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,13 +27,14 @@ public class Ascendify {
     private static WebDriver driver;
     private static WebDriverWait waitElement;
     public static SignIn signIn;
-    public static Requisition requisition;
-    public static People people;
+//    public static Requisition requisition;
+//    public static People people;
     public static MainMenuTab hometab;
     public static SignOut signOut;
     public static ForgotYourPassword forgotYourPassword;
     public static GmailForgotPasswordEmail gmailForgotYourPasswordEmail;
     public static GmailGlobal gmailGlobal;
+    public static SignupWithResume signupWithResume;
 
     public Ascendify() {
         Driver.setDriver("Chrome");
@@ -42,13 +44,14 @@ public class Ascendify {
         waitElement = Driver.getDriverWait();
 
         signIn = new SignIn();
-        requisition = new Requisition();
-        people = new People();
+//        requisition = new Requisition();
+//        people = new People();
         hometab = new MainMenuTab();
         signOut = new SignOut();
         forgotYourPassword = new ForgotYourPassword();
         gmailForgotYourPasswordEmail = new GmailForgotPasswordEmail();
         gmailGlobal = new GmailGlobal();
+        signupWithResume = new SignupWithResume();
 
     }
 
