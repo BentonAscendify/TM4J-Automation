@@ -4,7 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import webui.model.Web;
 
-public class SignupWithResume {
+public class SignupWithResumeWorks {
 
     @BeforeClass
     public static void setUp() {
@@ -30,6 +30,15 @@ public class SignupWithResume {
                 .clickProfiletab()
                 .confirmClickProfiletab()
                 .clickDocumentstab()
-                .confirmClickDocumentstab();
+                .confirmClickDocumentstab()
+                .clickPersonaltab()
+                .confirmClickPersonaltab();
+
+        Web.ascendify.signOut
+                .clickTCProfileImage()
+                .clickSignout();
+
+        Web.ascendify.signupWithResume
+                .clickJoinOurTeam();
     }
 }

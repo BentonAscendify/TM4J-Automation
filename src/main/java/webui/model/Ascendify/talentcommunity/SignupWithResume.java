@@ -1,6 +1,5 @@
 package webui.model.Ascendify.talentcommunity;
 
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -8,11 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import webui.model.Ascendify.Ascendify;
 import webui.model.Ascendify.AscendifyElements;
-import webui.model.Ascendify.app.tabs.requisition.IJavaScriptExecutor;
-import webui.model.Web;
 import webui.model.WebPage;
-
-
 
 import static webui.model.Ascendify.Ascendify.waitForElementCss;
 import static webui.model.Ascendify.Ascendify.waitForElementXpath;
@@ -38,16 +33,19 @@ public class SignupWithResume extends WebPage {
     public SignupWithResume clickDragResumeIcon() {
 
         waitForElementCss(AscendifyElements.tc_dragresume_icon);
-        DropFile(tcdragresume, (System.getProperty("user.dir") + "/src/main/resources/data/test_resume.pdf").toString(), 0, 0);
-
-        //tcdragresume.sendKeys(System.getProperty("user.dir") + "/src/main/resources/data/test_resume.pdf");
-
+        DropFile(tcdragresume, (System.getProperty("user.dir") + "/src/main/resources/data/test_resume.pdf").toString());
         return this;
     }
 
-    public SignupWithResume DropFile(WebElement target, String filePath, double offsetX, double offsetY ) {
-        offsetX = 0;
-        offsetY = 0;
+    /**
+     *
+     * @param target
+     * @param filePath
+     * @return
+     */
+    public SignupWithResume DropFile(WebElement target, String filePath) {
+        double offsetX = 0;
+        double offsetY = 0;
         JavascriptExecutor jse = (JavascriptExecutor) Ascendify.getDriver();
 
         String JS_DROP_FILE =
@@ -158,15 +156,16 @@ public class SignupWithResume extends WebPage {
         return this;
     }
 
+    public SignupWithResume clickPersonaltab() {
+        waitForElementCss(AscendifyElements.tc_personalinfo_tab);
+        tcpersonalinfotab.click();
+        return this;
+    }
 
-
-
-
-
-
-
-
-
+    public SignupWithResume confirmClickPersonaltab() {
+        waitForElementCss(AscendifyElements.tc_contactdata_section);
+        return this;
+    }
 
 
     /**

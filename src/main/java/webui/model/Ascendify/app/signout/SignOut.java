@@ -32,6 +32,12 @@ public class SignOut extends WebPage {
         return this;
     }
 
+    public SignOut clickTCProfileImage() {
+        waitForElementCss(AscendifyElements.tc_profileimage_dropdown);
+        tcprofileimagedropdown.click();
+        return this;
+    }
+
     /**
      * UI elements
      */
@@ -40,5 +46,8 @@ public class SignOut extends WebPage {
 
     @FindBy(css = AscendifyElements.profileimage_dropdown)
     public WebElement profileImageDropdown;
+
+    @FindBy(css = AscendifyElements.tc_profileimage_dropdown)
+    public WebElement tcprofileimagedropdown;
 
 }

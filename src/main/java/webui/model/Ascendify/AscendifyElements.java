@@ -126,7 +126,8 @@ public class AscendifyElements {
             tc_personalinfo_tab = "li[id=tab-personal]",
             tc_profiletab_skills = "div[id=asc-profile-skills-holder]",
             tc_documentstab_resumebuttons = "div[id=asc-resume-controls]",
-            tc_documentstab_deleteresume = "//div[text()='Delete Resume/CV']"
+            tc_contactdata_section = "div[id=asc-personal-data]",
+            tc_profileimage_dropdown = "a[id=asc-main-user-menu]"
 
 
 
