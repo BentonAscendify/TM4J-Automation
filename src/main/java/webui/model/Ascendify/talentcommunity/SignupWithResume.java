@@ -38,9 +38,9 @@ public class SignupWithResume extends WebPage {
     }
 
     /**
-     *
-     * @param target
-     * @param filePath
+     * This methods simulates the action of dragging and dropping a resume
+     * @param target where to drop a resume
+     * @param filePath the filepath to a resume in the project
      * @return
      */
     public SignupWithResume DropFile(WebElement target, String filePath) {

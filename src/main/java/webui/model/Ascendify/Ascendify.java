@@ -27,8 +27,8 @@ public class Ascendify {
     private static WebDriver driver;
     private static WebDriverWait waitElement;
     public static SignIn signIn;
-//    public static Requisition requisition;
-//    public static People people;
+    public static Requisition requisition;
+    public static People people;
     public static MainMenuTab hometab;
     public static SignOut signOut;
     public static ForgotYourPassword forgotYourPassword;
@@ -44,8 +44,8 @@ public class Ascendify {
         waitElement = Driver.getDriverWait();
 
         signIn = new SignIn();
-//        requisition = new Requisition();
-//        people = new People();
+        requisition = new Requisition();
+        people = new People();
         hometab = new MainMenuTab();
         signOut = new SignOut();
         forgotYourPassword = new ForgotYourPassword();
