@@ -13,6 +13,7 @@ import webui.model.Ascendify.app.tabs.requisition.Requisition;
 import webui.model.Ascendify.emails.GmailForgotPasswordEmail;
 import webui.model.Ascendify.emails.GmailGlobal;
 import webui.model.Ascendify.talentcommunity.ForgotYourPassword;
+import webui.model.Ascendify.talentcommunity.SignupWithResume;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +34,7 @@ public class Ascendify {
     public static ForgotYourPassword forgotYourPassword;
     public static GmailForgotPasswordEmail gmailForgotYourPasswordEmail;
     public static GmailGlobal gmailGlobal;
+    public static SignupWithResume signupWithResume;
 
     public Ascendify() {
         Driver.setDriver("Chrome");
@@ -49,6 +51,7 @@ public class Ascendify {
         forgotYourPassword = new ForgotYourPassword();
         gmailForgotYourPasswordEmail = new GmailForgotPasswordEmail();
         gmailGlobal = new GmailGlobal();
+        signupWithResume = new SignupWithResume();
 
     }
 

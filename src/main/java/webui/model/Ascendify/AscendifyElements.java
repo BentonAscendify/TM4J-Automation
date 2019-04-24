@@ -107,4 +107,30 @@ public class AscendifyElements {
 
             gmail_selectcheckbox = "//div[@aria-label='Select']",
             gmail_selecttrashcan = "//div[@aria-label='Delete']";
+
+    public static final String
+            tc_joinourteam_button = "//*[contains(text(), 'Join Our Team')]",
+            tc_dragresume_icon = "div[id=asc-alt-upload-resume]",
+            tc_removeresume_button = "button[id=asc-remove-resume-button]",
+            tc_signup_firstname = "input[id=asc-signup-firstname]",
+            tc_signup_lastname = "input[id=asc-signup-lastname]",
+            tc_signup_email = "input[id=asc-signup-email2]",
+            tc_signup_password = "input[id=password1]",
+            tc_signup_confirmpassword = "input[id=password2]",
+            tc_signup_submit = "button[id=asc-signup-main-button",
+            tc_signup_canvas = "canvas[id=asc-esign__canvas]";
+
+    public static final String
+            tc_profile_tab = "li[id=tab-profile]",
+            tc_documents_tab = "li[id=tab-resume]",
+            tc_personalinfo_tab = "li[id=tab-personal]",
+            tc_profiletab_skills = "div[id=asc-profile-skills-holder]",
+            tc_documentstab_resumebuttons = "div[id=asc-resume-controls]",
+            tc_contactdata_section = "div[id=asc-personal-data]",
+            tc_profileimage_dropdown = "a[id=asc-main-user-menu]"
+
+
+
+                    ;
 }
+
