@@ -127,10 +127,13 @@ public class AscendifyElements {
             tc_profiletab_skills = "div[id=asc-profile-skills-holder]",
             tc_documentstab_resumebuttons = "div[id=asc-resume-controls]",
             tc_contactdata_section = "div[id=asc-personal-data]",
-            tc_profileimage_dropdown = "a[id=asc-main-user-menu]"
+            tc_profileimage_dropdown = "a[id=asc-main-user-menu]";
 
-
-
-                    ;
+    public static final String
+            tc_signin_li = "button[id=linkedin]",
+            li_email_field = "input[id=username]",
+            li_password_field = "input[id=password]",
+            li_singin_button = "button[type=submit]"
+            ;
 }
 
