@@ -110,4 +110,8 @@ public class Ascendify {
         waitElement.until(ExpectedConditions.elementToBeClickable(By.className(element)));
     }
 
+    public static void waitForElementTagName(String element) {
+        waitElement.until(ExpectedConditions.elementToBeClickable(By.tagName(element)));
+    }
+
 }

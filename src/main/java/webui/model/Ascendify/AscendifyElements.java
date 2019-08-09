@@ -70,7 +70,9 @@ public class AscendifyElements {
             requisition_Selectreq = "input[id=full-header-search-input]",
             requisition_CandidateReport = "candidate-info-reg-job",
             requisition_Talentmatching = "talent-matching",
-            requisition_Totalcandidate = "candidate-folder-link link";
+            requisition_Totalcandidate = "candidate-folder-link link",
+            people_addObject = "div[id=asc-objective]",
+            people_addResume = "//*[@id=\"tab-resume\"]";
 
     public static final String
             tc_signin_button = "a[id=menu_sign_in]",

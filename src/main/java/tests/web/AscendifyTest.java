@@ -48,11 +48,11 @@ public class AscendifyTest {
 
     }
 
-    @Test
-    public void t4_people() {
+   /* @Test
+    public void t4_people() throws InterruptedException {
         System.out.println(("people"));
-        Web.ascendify.people.clickPeople().addObject().addDescription();
-    }
+        Web.ascendify.people.clickPeople().addResume();
+    }*/
 
 
     @Ignore

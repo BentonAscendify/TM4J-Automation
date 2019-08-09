@@ -13,7 +13,7 @@ import webui.model.Web;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-public class RequisitionUAT {
+public class PeopleUAT {
 
     @BeforeClass
     public static void setUp() {
@@ -26,7 +26,7 @@ public class RequisitionUAT {
 //        Ascendify.getDriver().quit();
 //    }
 
-    @Ignore
+
     @Test
     public void t1_signIn() {
         System.out.println("executing signIn");
@@ -44,19 +44,22 @@ public class RequisitionUAT {
 
 
     }
-    /*@Ignore
+
     @Test
     public void t3_requisition() throws InterruptedException {
         System.out.println("requisition");
-        Web.ascendify.requisition.clickNew().confirmclickNew().selectOrg().addTitle().addPosting().addLocation().
-                addPrimaryhiring().clickButton().clickQualifying().addNew().turnOn().selectDecline().clickSaveQ().clickScreening().addScreening().
-                clickIntake().clickNotes().addNotes().
-                clickSavenotes().clickWorkflow().addnewworkflow().selectWorkflow().saveWorkflow().clickApprovals().
-                selectApproval().beginRouting().changeStatus().viewAll().Myrequisition().
-                Recentviewd().Recentlyadded().Recruiterlist().Openstatuses().Org().Selectreq().CandidateReport().Talentmatching().Totalcandidate();
+        Web.ascendify.requisition.Selectreq().Totalcandidate();
 
 
-    }*/
+    }
+
+
+    @Test
+    public void t4_people() throws InterruptedException {
+        System.out.println(("people"));
+        Web.ascendify.people.clickPeople().addCert().addNotes().clickActivity();
+    }
+
 
 
     @Ignore
@@ -79,6 +82,8 @@ public class RequisitionUAT {
     }
 
 }
+
+
 
 
 
