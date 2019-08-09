@@ -74,7 +74,7 @@ public class AscendifyElements {
             requisition_Totalcandidate = "candidate-folder-link link",
             people_addObject = "div[id=asc-objective]",
             people_addResume = "//*[@id=\"tab-resume\"]";
-            assessmentstab_assessmentschart = "div[class=chart__assessment]";
+            //assessmentstab_assessmentschart = "div[class=chart__assessment]";
 
     public static final String
             tc_signin_button = "a[id=menu_sign_in]",
