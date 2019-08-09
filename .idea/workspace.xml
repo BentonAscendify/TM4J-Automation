@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="50e19f07-6740-4971-ba32-7c97e7c39e83" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tests/web/PeopleUAT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/TestResume/Angela-Brown.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.5-rc-2/taskHistory/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5-rc-2/taskHistory/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.5-rc-2/taskHistory/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5-rc-2/taskHistory/fileSnapshots.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.5-rc-2/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5-rc-2/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.5-rc-2/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.5-rc-2/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/META-INF/qa-automation_main.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/tests/web/AscendifyTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/tests/web/AscendifyTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/tests/web/RequisitionProd.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/tests/web/RequisitionProd.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/Ascendify.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/Ascendify.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/AscendifyElements.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/AscendifyElements.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/tabs/hometab/Hometab.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/tabs/people/People.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/tabs/people/People.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/tabs/requisition/Requisition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/app/tabs/requisition/Requisition.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/emails/GmailForgotPasswordEmail.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/webui/model/Ascendify/emails/GmailForgotPasswordEmail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tests/web/AscendifyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tests/web/AscendifyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tests/web/RequisitionUAT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tests/web/RequisitionUAT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/Ascendify.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/Ascendify.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/AscendifyElements.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/AscendifyElements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/people/People.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/people/People.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/requisition/Requisition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/requisition/Requisition.java" afterDir="false" />
-    </list>
+    <list default="true" id="50e19f07-6740-4971-ba32-7c97e7c39e83" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -68,8 +44,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/signin/SignIn.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+            <state relative-caret-position="219">
+              <caret line="23" selection-start-line="22" selection-end-line="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,10 +54,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/signout/SignOut.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/people/People.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="91">
-              <caret line="80" lean-forward="true" selection-end-line="200" selection-end-column="1" />
+              <caret line="80" selection-end-line="200" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,7 +78,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/requisition/Requisition.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="3568">
-              <caret line="498" column="47" lean-forward="true" selection-end-line="535" />
+              <caret line="498" column="47" selection-end-line="535" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -119,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/tests/web/PeopleUAT.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="219">
-              <caret line="48" column="62" lean-forward="true" selection-end-line="90" />
+              <caret line="48" column="62" selection-end-line="90" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#441#442#0" expanded="true" />
@@ -198,137 +183,7 @@
           <expand>
             <path>
               <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="webui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="webui" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="webui" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="Ascendify" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="webui" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="Ascendify" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="webui" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="Ascendify" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="signin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="webui" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="Ascendify" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="tabs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="webui" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="Ascendify" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="tabs" type="462c0819:PsiDirectoryNode" />
-              <item name="people" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qa-automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qa-automation" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="drivers" type="462c0819:PsiDirectoryNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
           </expand>
           <select />
@@ -485,7 +340,7 @@
       <workItem from="1558541031270" duration="213000" />
       <workItem from="1559367078802" duration="11124000" />
       <workItem from="1563739320517" duration="14052000" />
-      <workItem from="1565273604011" duration="338000" />
+      <workItem from="1565273604011" duration="1160000" />
     </task>
     <task id="LOCAL-00001" summary="Fix merge conflicts&#10;Add selenium library">
       <created>1554318231943</created>
@@ -530,7 +385,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50725000" />
+    <option name="totallyTimeSpent" value="51547000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="976" extended-state="0" />
@@ -553,7 +408,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4993895" weight="0.35918367" />
       <window_info anchor="bottom" id="sbt-shell-toolwindow" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4993895" weight="0.22850679" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4993895" visible="true" weight="0.22850679" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50061053" side_tool="true" weight="0.32959184" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.33710408" />
@@ -763,7 +618,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/tests/web/PeopleUAT.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
-          <caret line="48" column="62" lean-forward="true" selection-end-line="90" />
+          <caret line="48" column="62" selection-end-line="90" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#441#442#0" expanded="true" />
@@ -775,7 +630,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/requisition/Requisition.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3568">
-          <caret line="498" column="47" lean-forward="true" selection-end-line="535" />
+          <caret line="498" column="47" selection-end-line="535" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -785,17 +640,32 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/tabs/people/People.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="91">
-          <caret line="80" lean-forward="true" selection-end-line="200" selection-end-column="1" />
+          <caret line="80" selection-end-line="200" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/signout/SignOut.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/webui/model/Ascendify/app/signin/SignIn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        <state relative-caret-position="219">
+          <caret line="23" selection-start-line="22" selection-end-line="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
