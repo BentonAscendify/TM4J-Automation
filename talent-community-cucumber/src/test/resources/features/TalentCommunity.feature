@@ -5,15 +5,15 @@ Feature: Join via email
     When I click on "Join Our Team" button
     And I click on link text "email address"
     Then "Application" page is displayed
-    And I type "First Name" as "Tessy"
-    And I type "Last Name" as "Mathew"
-    And I type an unused email
-    And I type password "Ascendify246!" on "sign up" page
-    And I type "Country or Region" as "India"
+    And I fill in "Your Information" fields
+    And I fill in "Additional Information" fields
+    And I fill in "Profile Information" fields
+    And I fill in "Automatic Routing to Pipelines" fields
     And I click and agree to Privacy Policy
     And I click on "Submit" button
     Then "Dashboard" page is displayed
 
+#Not working due to change in workflow
   Scenario: Apply to a job by sign-in to a community
     Given I navigate to "TC login" page
     When I click on link text "Search Careers"
@@ -38,13 +38,9 @@ Feature: Join via email
     And I click on link text "Tessy QA"
     And I click on "Apply Now" button
     And I choose my file to be uploaded by clicking "Upload Your Resume" button
+#    Paste the path to your file in step defs
     Then "Application" page is displayed
-    And I type an unused email
-    And I type password "Ascendify246!" on "sign up" page
-    And I type "Most Recent School" as "Bellevue University"
-    And I type "Grad Year" as "2000"
-    And I type "Degree Type" as "Management Information Systems"
-    And I type "Degree" as "MBA"
+    And I fill in empty fields
     And I sign to confirm
     And I click on "Submit" button
     Then "Dashboard" page is displayed
@@ -57,14 +53,7 @@ Feature: Join via email
     And I click on "Apply Now" button
     And I click on link text "email address"
     Then "Application" page is displayed
-    And I type "First Name" as "Tessy"
-    And I type "Last Name" as "Mathew"
-    And I type an unused email
-    And I type password "Ascendify246!" on "sign up" page
-    And I type "Most Recent School" as "Bellevue University"
-    And I type "Grad Year" as "2000"
-    And I type "Degree Type" as "Management Information Systems"
-    And I type "Degree" as "MBA"
+    And I fill in empty fields
     And I sign to confirm
     And I click on "Submit" button
     Then "Dashboard" page is displayed
@@ -84,3 +73,41 @@ Feature: Join via email
     And I sign to confirm
     And I click on "Submit Application" button
     Then success message is displayed
+
+  Scenario: Add all other personal and basic info
+    Given I navigate to "TC login" page
+    When I click on "Sign In" button on "Home" page
+    And I type "email" as "tessy@gmail.com"
+    And I type password "Ascendify246!" on "sign in" page
+    And I click on "Sign In" button on "Sign In" page
+    Then "Dashboard" page is displayed
+    And I add "Profile" info
+    And I add "Personal" info
+
+  Scenario: Org Sign Up
+    Given I navigate to "TC login" page
+    When I click on link text "Search Careers"
+    And I search for "Tessy's Org" in search box
+    And I click on link text "Opportunity under Tessy's Org"
+    And I click on "Apply Now" button
+    And I click on link text "email address"
+    Then "Application" page is displayed
+    And I fill in "Your Information" fields
+    And I fill in "Additional Information" fields
+    And I fill in "Profile Information" fields
+    And I fill in empty fields
+    And I sign to confirm
+    And I click on "Submit" button
+    Then "Dashboard" page is displayed
+
+#Incomplete
+  Scenario: Login/SignUp via Social
+    Given I navigate to "LinkedIn" page
+    When I click on "Sign In" button on "LinkedIn Sign In" page
+    And I type "LinkedIn email" as "nmohmed.ho@workhard.by"
+    And I type password "Mac123q!" on "LinkedIn Sign In" page
+    And I click on "Sign In" button on "LinkedIn 2nd Sign In" page
+    Given I navigate to "TC login" page
+    When I click on "Join Our Team" button
+    And I click on "Apply with LinkedIn" button
+    Then an email is sent to your address to set password
