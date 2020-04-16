@@ -75,13 +75,22 @@ public class TCStepdefs<session> {
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(2000);
             getDriver().switchTo().defaultContent();
+            Thread.sleep(16000);
 
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[contains(@src,'https://www.linkedin.com')]")));getDriver().findElement(By.xpath("//button[@name='awli-button-member']")).click();
-            Thread.sleep(2000);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-            Thread.sleep(2000);
-            getDriver().switchTo().defaultContent();
+            try {
+                while (getDriver().findElement(By.xpath("//iframe[contains(@src,'https://www.linkedin.com')]")).isDisplayed()) {
+                    new WebDriverWait(getDriver(), 20).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[contains(@src,'https://www.linkedin.com')]")));
+                    getDriver().findElement(By.xpath("//button[@name='awli-button-member']")).click();
+                    Thread.sleep(2000);
+                    robot.keyPress(KeyEvent.VK_ENTER);
+                    robot.keyRelease(KeyEvent.VK_ENTER);
+//                Thread.sleep(2000);
+                    getDriver().switchTo().defaultContent();
+                    Thread.sleep(16000);
+                }
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -137,20 +146,56 @@ public class TCStepdefs<session> {
     @And("I fill in {string} fields")
     public void iFillInFields(String arg0) throws Throwable{
         if (arg0.equalsIgnoreCase("Your Information")) {
-            getDriver().findElement(By.xpath("//*[@id='asc-signup-firstname']")).sendKeys("Tessy");
-            getDriver().findElement(By.xpath("//*[@id='asc-signup-lastname']")).sendKeys("Mathew");
-            final String randomEmail = randomEmail();
-            getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).sendKeys(randomEmail);
-            getDriver().findElement(By.xpath("//input[@id='asc-signup-email1']")).sendKeys(randomEmail);
+            WebElement FN = getDriver().findElement(By.xpath("//*[@id='asc-signup-firstname']"));
+            String textInsideFN = FN.getAttribute("value");
+            if(textInsideFN.isEmpty())
+            {
+                getDriver().findElement(By.xpath("//*[@id='asc-signup-firstname']")).sendKeys("Tessy");
+            }
+
+            WebElement LN = getDriver().findElement(By.xpath("//*[@id='asc-signup-lastname']"));
+            String textInsideLN = LN.getAttribute("value");
+            if(textInsideLN.isEmpty())
+            {
+                getDriver().findElement(By.xpath("//*[@id='asc-signup-lastname']")).sendKeys("Mathew");
+            }
+
+            WebElement EM = getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']"));
+            String textInsideEM = EM.getAttribute("value");
+            if(textInsideEM.isEmpty())
+            {
+                final String randomEmail = randomEmail();
+                getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).sendKeys(randomEmail);
+                getDriver().findElement(By.xpath("//input[@id='asc-signup-email1']")).sendKeys(randomEmail);
+            }
+
             Thread.sleep(2000);
-            getDriver().findElement(By.xpath("//input[@id='password1']")).sendKeys("Ascendify246!");
-            getDriver().findElement(By.xpath("//input[@id='password2']")).sendKeys("Ascendify246!");
+
+            WebElement PWD = getDriver().findElement(By.xpath("//input[@id='password1']"));
+            String textInsidePWD = PWD.getAttribute("value");
+            if(textInsidePWD.isEmpty())
+            {
+                getDriver().findElement(By.xpath("//input[@id='password1']")).sendKeys("Ascendify246!");
+                getDriver().findElement(By.xpath("//input[@id='password2']")).sendKeys("Ascendify246!");
+            }
         }
 
         else if(arg0.equalsIgnoreCase("Additional Information")){
             try {
-                getDriver().findElement(By.xpath("//input[@id='asc-signup-cellphonenumber']")).sendKeys("610-852-8288");
-                getDriver().findElement(By.xpath("//input[@id='asc-signup-phonenumber']")).sendKeys("609-602-2709");
+                WebElement CPN = getDriver().findElement(By.xpath("//input[@id='asc-signup-cellphonenumber']"));
+                String textInsideCPN = CPN.getAttribute("value");
+                if(textInsideCPN.isEmpty())
+                {
+                    getDriver().findElement(By.xpath("//input[@id='asc-signup-cellphonenumber']")).sendKeys("610-852-8288");
+                }
+
+                WebElement PN = getDriver().findElement(By.xpath("//input[@id='asc-signup-phonenumber']"));
+                String textInsidePN = PN.getAttribute("value");
+                if(textInsidePN.isEmpty())
+                {
+                    getDriver().findElement(By.xpath("//input[@id='asc-signup-phonenumber']")).sendKeys("609-602-2709");
+                }
+
                 getDriver().findElement(By.xpath("//input[@id='asc-signup-address1']")).sendKeys("4144  Filbert Street");
                 getDriver().findElement(By.xpath("//input[@id='asc-signup-city']")).sendKeys("WILDWOOD");
                 getDriver().findElement(By.xpath("//input[@id='asc-signup-state']")).sendKeys("New Jersey");
@@ -243,32 +288,34 @@ public class TCStepdefs<session> {
         {
             getDriver().findElement(By.xpath("//input[@id='asc-signup-postal_code']")).sendKeys("08260");
         }
-        WebElement Sch = getDriver().findElement(By.xpath("//input[@id='asc-signup-school']"));
-        String textInsideSch = Sch.getAttribute("value");
-        if(textInsideSch.isEmpty())
-        {
-            getDriver().findElement(By.xpath("//input[@id='asc-signup-school']")).sendKeys("Bellevue University");
-        }
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@id='asc-signup-grad-year']")));
-        WebElement Year = getDriver().findElement(By.xpath("//select[@id='asc-signup-grad-year']"));
-        String textInsideYear = Year.getAttribute("value");
-        if(textInsideYear.isEmpty())
-        {
-            getDriver().findElement(By.xpath("//select[@id='asc-signup-grad-year']/option[contains(text(),'2000')]")).click();
-        }
-        WebElement DT = getDriver().findElement(By.xpath("//input[@id='asc-signup-degree-type']"));
-        String textInsideDT = DT.getAttribute("value");
-        if(textInsideDT.isEmpty())
-        {
-            getDriver().findElement(By.xpath("//input[@id='asc-signup-degree-type']")).sendKeys("Management Information Systems");
-        }
-        WebElement Deg = getDriver().findElement(By.xpath("//input[@id='asc-signup-degree']"));
-        String textInsideDeg = Deg.getAttribute("value");
-        if(textInsideDeg.isEmpty())
-        {
-            getDriver().findElement(By.xpath("//input[@id='asc-signup-degree']")).sendKeys("MBA");
-        }
-        try {
+
+        try{
+            WebElement Sch = getDriver().findElement(By.xpath("//input[@id='asc-signup-school']"));
+            String textInsideSch = Sch.getAttribute("value");
+            if(textInsideSch.isEmpty())
+            {
+                getDriver().findElement(By.xpath("//input[@id='asc-signup-school']")).sendKeys("Bellevue University");
+            }
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@id='asc-signup-grad-year']")));
+            WebElement Year = getDriver().findElement(By.xpath("//select[@id='asc-signup-grad-year']"));
+            String textInsideYear = Year.getAttribute("value");
+            if(textInsideYear.isEmpty())
+            {
+                getDriver().findElement(By.xpath("//select[@id='asc-signup-grad-year']/option[contains(text(),'2000')]")).click();
+            }
+            WebElement DT = getDriver().findElement(By.xpath("//input[@id='asc-signup-degree-type']"));
+            String textInsideDT = DT.getAttribute("value");
+            if(textInsideDT.isEmpty())
+            {
+                getDriver().findElement(By.xpath("//input[@id='asc-signup-degree-type']")).sendKeys("Management Information Systems");
+            }
+            WebElement Deg = getDriver().findElement(By.xpath("//input[@id='asc-signup-degree']"));
+            String textInsideDeg = Deg.getAttribute("value");
+            if(textInsideDeg.isEmpty())
+            {
+                getDriver().findElement(By.xpath("//input[@id='asc-signup-degree']")).sendKeys("MBA");
+            }
+//        try {
             getDriver().findElement(By.xpath("//input[@id='ct_sms']")).click();
             getDriver().findElement(By.xpath("//input[@name='ascendify[communication_preference][automated_sms_sys_msg]']")).click();
             //getDriver().findElement(By.xpath("//input[@name='ascendify[communication_preference][receive_email_news_info_career_event]']")).click();
@@ -664,10 +711,14 @@ public class TCStepdefs<session> {
             getDriver().findElement(By.xpath("//div[@id='asc_question_csvq_fb71121491_chosen']//input")).sendKeys("I identify as one or more of the classifications of protected veteran listed above",Keys.ENTER);
             getDriver().findElement(By.xpath("//div[@id='asc-user-eeoc-data']//button[@id='asc-dynamic-save-button']")).click();
 
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[contains(text(),'Account Management')]")));
-            getDriver().findElement(By.xpath("//span[contains(text(),'Change Password')]")).click();
-            //new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='asc_question_csvq_ddd1121493_chosen']")));
-            getDriver().findElement(By.xpath("//span[@id='asc-btn-reset-cancel']")).click();
+            try {
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[contains(text(),'Account Management')]")));
+                getDriver().findElement(By.xpath("//span[contains(text(),'Change Password')]")).click();
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='button-holder']//button[contains(text(),'Cancel')]")));
+                getDriver().findElement(By.xpath("//div[@id='button-holder']//button[contains(text(),'Cancel')]")).click();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[contains(text(),'Pipelines')]")));
             getDriver().findElement(By.xpath("//div[@id='asc-personal-pipelineviews']//button[contains(text(),'Edit')]")).click();
@@ -677,10 +728,5 @@ public class TCStepdefs<session> {
             getDriver().findElement(By.xpath("//input[@id='asc-pipeline-pipe_f32b1000000000011081']")).click();
             getDriver().findElement(By.xpath("//div[@id='asc-personal-pipelineviews']//button[@id='asc-dynamic-save-button']")).click();
         }
-    }
-
-    @Then("an email is sent to your address to set password")
-    public void anEmailIsSentToYourAddressToSetPassword() {
-        getDriver().findElement(By.xpath("//li[contains(text(),'Good news! We have found an existing profile in our database')]")).isDisplayed();
     }
 }
