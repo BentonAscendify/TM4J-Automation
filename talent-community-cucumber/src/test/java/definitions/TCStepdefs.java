@@ -445,7 +445,8 @@ public class TCStepdefs<session> {
             actions.moveToElement(getDriver().findElement(By.id("asc-alt-upload-resume")));
             getDriver().findElement(By.id("asc-alt-upload-resume")).click();
             Thread.sleep(2000);
-            uploadFile("C:\\Users\\tessy\\OneDrive\\Desktop\\Profile.pdf");
+            //NOTE: The upload file path must be changed before running the scenario
+            uploadFile("C:\\Users\\tessy.anicattumathew\\Desktop\\Profile.pdf");
             Thread.sleep(2000);
         }
         catch (Exception exp) {

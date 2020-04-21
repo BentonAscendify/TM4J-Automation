@@ -1,5 +1,6 @@
-@TalentCommunity
-Feature: Join via email
+@java
+Feature: Talent Community
+
   Scenario: Join community via email
     Given I navigate to "TC login" page
     When I click on "Join Our Team" button
@@ -13,7 +14,6 @@ Feature: Join via email
     And I click on "Submit" button
     Then "Dashboard" page is displayed
 
-#Not working due to change in workflow
   Scenario: Apply to a job by sign-in to a community
     Given I navigate to "TC login" page
     When I click on link text "Search Careers"
@@ -39,8 +39,6 @@ Feature: Join via email
     And I click on "Apply Now" button
 
     And I choose my file to be uploaded by clicking "Upload Your Resume" button
-#    Paste the path to your file in step defs
-
     Then "Application" page is displayed
     And I fill in empty fields
     And I sign to confirm
@@ -105,11 +103,9 @@ Feature: Join via email
   Scenario: Login/SignUp via Social
     Given I navigate to "LinkedIn" page
     When I click on "Sign In" button on "LinkedIn Sign In" page
-
+#    NOTE:Use a valid LinkedIn email and password that is not present in the Ascendify Database
     And I type "LinkedIn email" as "6adel-ade@xevents.buzz"
     And I type password "Mac123q!" on "LinkedIn Sign In" page
-#Use a valid LinkedIn email and password that is not present in the Ascendify Database
-
     And I click on "Sign In" button on "LinkedIn 2nd Sign In" page
     Given I navigate to "TC login" page
     When I click on "Join Our Team" button
