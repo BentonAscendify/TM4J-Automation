@@ -13,6 +13,7 @@ Feature: Talent Community
     And I click and agree to Privacy Policy
     And I click on "Submit" button
     Then "Dashboard" page is displayed
+    And I clean up
 
   Scenario: Apply to a job by sign-in to a community
     Given I navigate to "TC login" page
@@ -37,13 +38,13 @@ Feature: Talent Community
     And I search for "Tessy QA" in search box
     And I click on link text "Tessy QA"
     And I click on "Apply Now" button
-
     And I choose my file to be uploaded by clicking "Upload Your Resume" button
     Then "Application" page is displayed
     And I fill in empty fields
     And I sign to confirm
     And I click on "Submit" button
     Then "Dashboard" page is displayed
+    And I clean up
 
   Scenario: Search for opportunity and apply
     Given I navigate to "TC login" page
@@ -57,6 +58,7 @@ Feature: Talent Community
     And I sign to confirm
     And I click on "Submit" button
     Then "Dashboard" page is displayed
+    And I clean up
 
   Scenario: Login as a candidate and apply to a job
     Given I navigate to "TC login" page
@@ -96,21 +98,24 @@ Feature: Talent Community
     And I fill in "Additional Information" fields
     And I fill in "Profile Information" fields
     And I fill in empty fields
+    And I answer the survey questions
     And I sign to confirm
     And I click on "Submit" button
     Then "Dashboard" page is displayed
+    And I clean up
 
   Scenario: Login/SignUp via Social
     Given I navigate to "LinkedIn" page
     When I click on "Sign In" button on "LinkedIn Sign In" page
 #    NOTE:Use a valid LinkedIn email and password that is not present in the Ascendify Database
-    And I type "LinkedIn email" as "6adel-ade@xevents.buzz"
+    And I type "LinkedIn email" as "2arjunsreekumar9@unoutta.cf"
     And I type password "Mac123q!" on "LinkedIn Sign In" page
     And I click on "Sign In" button on "LinkedIn 2nd Sign In" page
     Given I navigate to "TC login" page
     When I click on "Join Our Team" button
     And I click on "Apply with LinkedIn" button
     Then "Application" page is displayed
+    And I copy the LinkedIn email
     And I fill in "Your Information" fields
     And I fill in "Additional Information" fields
     And I fill in "Profile Information" fields
@@ -119,3 +124,4 @@ Feature: Talent Community
     And I click and agree to Privacy Policy
     And I click on "Submit" button
     Then "Dashboard" page is displayed
+    And I clean up
