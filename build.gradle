@@ -1,7 +1,21 @@
 group 'Ascendify'
 version '0.1'
 apply plugin: 'java'
+
 sourceCompatibility = 1.8
+
+allprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://repo1.maven.org/maven2/"
+        }
+        maven {
+            url "https://repo.maven.apache.org/maven2/"
+        }
+        jcenter()
+    }
+}
 
 task buildJar(type: Jar) {
     zip64 = true
@@ -20,9 +34,6 @@ test {
         junitXml.enabled = false
         html.enabled = true
     }
-}
-repositories {
-    mavenCentral()
 }
 
 buildscript {
@@ -49,3 +60,4 @@ dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
 }
 
+task wrapper(type: Wrapper) { gradleVersion = "4.9" }

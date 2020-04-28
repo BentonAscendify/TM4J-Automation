@@ -1,3 +1,4 @@
 rootProject.name = 'qa-automation'
 
 include ':talent-community-cucumber'
+include ':people-tab-cucumber'
