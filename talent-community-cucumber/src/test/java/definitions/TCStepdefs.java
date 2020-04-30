@@ -721,6 +721,7 @@ public class TCStepdefs<session> {
         Thread.sleep(8000);
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu tab')]")));
         getDriver().findElement(By.xpath("//span[contains(text(),'Main Menu tab')]")).isDisplayed();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[contains(@class,'fa fa-caret-down')]")));
         getDriver().findElement(By.xpath("//i[contains(@class,'fa fa-caret-down')]")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.xpath("//li[contains(text(),'Admin Console')]")).click();
