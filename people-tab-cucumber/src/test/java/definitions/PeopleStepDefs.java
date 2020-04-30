@@ -28,7 +28,7 @@ import static support.TestContext.getDriver;
 public class PeopleStepDefs {
 
     @Given("I navigate to {string} page")
-    public void iNavigateToPag(String arg0) {
+    public void iNavigateToPage(String arg0) {
         getDriver().get("https://testcommunity.ascendify.com/");
     }
 
