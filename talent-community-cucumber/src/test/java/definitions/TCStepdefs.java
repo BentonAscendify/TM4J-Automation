@@ -1,27 +1,21 @@
 package definitions;
 
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import cucumber.api.java.id.Ketika;
-import cucumber.api.java8.Th;
-import org.openqa.selenium.*;
-import org.openqa.selenium.Point;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.remote.LocalFileDetector;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
-import java.awt.Robot;
-import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 import java.util.List;
 import java.util.UUID;
 
@@ -792,8 +786,7 @@ public class TCStepdefs<session> {
                     robot.keyPress(KeyEvent.VK_ENTER);
                     robot.keyRelease(KeyEvent.VK_ENTER);
                     Thread.sleep(1000);
-                }
-                else {
+                } else {
                     System.out.println("element click intercepted");
                 }
             } catch (Exception e) {
@@ -898,7 +891,7 @@ public class TCStepdefs<session> {
     }
 
     @And("I copy the LinkedIn email")
-    public void iCopyTheLinkedInEmail() throws Throwable{
+    public void iCopyTheLinkedInEmail() throws Throwable {
         getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).click();
 
         Robot robot = new Robot();

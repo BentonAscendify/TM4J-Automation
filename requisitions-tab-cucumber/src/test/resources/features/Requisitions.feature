@@ -3,7 +3,7 @@ Feature: Requisitions Tab
 
   Scenario: Create and apply for a requisition
     Given I navigate to "Test Community login" page
-    When I sign in as super admin
+    When I sign in as super admin with credentials "tessy.anicattumathew@ascendify.com" and "Mac123q!"
     And I create a person's profile with role Recruiter
     And I sign out
     Then I sign in as the new Recruiter
@@ -20,6 +20,6 @@ Feature: Requisitions Tab
     And make sure the new applicant is visible
     Then I delete the new requisition
     And I sign out
-    Then I sign in as super admin
+    Then I sign in as super admin with credentials "tessy.anicattumathew@ascendify.com" and "Mac123q!"
     And I delete the new applicant
     And I delete the new Recruiter

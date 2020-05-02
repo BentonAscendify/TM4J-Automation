@@ -1,0 +1,2 @@
+INFO 00:19:03:906 wdm.WebDriverManager detectDriverVersionFromBrowser:615 Using chromedriver 81.0.4044.69 (since Google Chrome 81 is installed in your machine)
+INFO 00:19:03:951 wdm.WebDriverManager exportDriver:1113 Exporting webdriver.chrome.driver as C:\Users\tessy\.m2\repository\webdriver\chromedriver\win32\81.0.4044.69\chromedriver.exe

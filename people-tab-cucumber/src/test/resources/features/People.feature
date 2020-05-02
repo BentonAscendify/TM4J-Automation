@@ -3,9 +3,7 @@ Feature: People Tab
 
   Scenario: Add new user by uploading a CSV file
     Given I navigate to "Test Community login" page
-    When I type "email" as "tessy.anicattumathew@ascendify.com"
-    And I type "password" as "Mac123q!"
-    And I click on "Sign In" button
+    When I sign in
     Then "Main Menu" page is displayed
     And I click on "People" tab
     And I click on "New" button
@@ -19,9 +17,7 @@ Feature: People Tab
 
   Scenario: Bulk Add People
     Given I navigate to "Test Community login" page
-    When I type "email" as "tessy.anicattumathew@ascendify.com"
-    And I type "password" as "Mac123q!"
-    And I click on "Sign In" button
+    When I sign in
     Then "Main Menu" page is displayed
     And I click on "People" tab
     And I click on "New" button
@@ -34,9 +30,7 @@ Feature: People Tab
 
   Scenario: Consider candidates for an opportunity
     Given I navigate to "Test Community login" page
-    When I type "email" as "tessy.anicattumathew@ascendify.com"
-    And I type "password" as "Mac123q!"
-    And I click on "Sign In" button
+    When I sign in
     Then "Main Menu" page is displayed
     And I click on "People" tab
     And I click on the right arrow of a candidate
@@ -45,9 +39,7 @@ Feature: People Tab
 
   Scenario: Moving candidates through different hiring status
     Given I navigate to "Test Community login" page
-    When I type "email" as "tessy.anicattumathew@ascendify.com"
-    And I type "password" as "Mac123q!"
-    And I click on "Sign In" button
+    When I sign in
     Then "Main Menu" page is displayed
     And I click on "People" tab
     And I click on the right arrow of a candidate
@@ -55,13 +47,9 @@ Feature: People Tab
     Then candidate has been "Applied to Opportunity"
     And I move the candidate through different hiring status
 
-  Scenario: Set up Interview kit
-
   Scenario: Edit/save responses
     Given I navigate to "Test Community login" page
-    When I type "email" as "tessy.anicattumathew@ascendify.com"
-    And I type "password" as "Mac123q!"
-    And I click on "Sign In" button
+    When I sign in
     Then "Main Menu" page is displayed
     And I click on "People" tab
     And I click on the right arrow of a candidate
@@ -72,9 +60,9 @@ Feature: People Tab
 
   Scenario: Drag n Drop candidates to folder
     Given I navigate to "Test Community login" page
-    When I type "email" as "tessy.anicattumathew@ascendify.com"
-    And I type "password" as "Mac123q!"
-    And I click on "Sign In" button
+    When I sign in
     Then "Main Menu" page is displayed
     And I click on "People" tab
     And I drag and drop candidates to folder
+
+  Scenario: Set up Interview kit

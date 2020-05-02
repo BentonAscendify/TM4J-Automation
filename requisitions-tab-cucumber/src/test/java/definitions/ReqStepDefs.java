@@ -1,12 +1,10 @@
 package definitions;
 
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import cucumber.api.java8.Th;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
@@ -15,10 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
 import java.awt.event.KeyEvent;
 import java.util.UUID;
 
@@ -34,8 +28,8 @@ public class ReqStepDefs {
         }
     }
 
-    @When("I sign in as super admin")
-    public void iSignInAsSuperAdmin() throws Throwable {
+    @When("I sign in as super admin with credentials {string} and {string}")
+    public void iSignInAsSuperAdminWithCredentialsAnd(String arg0, String arg1) {
         getDriver().findElement(By.xpath("//input[@id='id_username']")).click();
         getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys("tessy.anicattumathew@ascendify.com");
         getDriver().findElement(By.xpath("//input[@id='id_password']")).click();
