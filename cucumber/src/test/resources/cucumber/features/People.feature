@@ -9,11 +9,11 @@ Feature: People Tab
     And I click on "New" button PT
     And I navigate to "Upload a CSV file" PT
     And I choose my file to be uploaded by clicking "Upload a File" button PT
-#    NOTE:Paste the path to your file in step defs
     Then "Data Mapping" page is displayed PT
     And I map the fields in the .CSV file to the appropriate fields in the application PT
     And I click on "Import" button PT
     Then "CSV processing" message is displayed PT
+    And I clean up "CSV" PT
 
   Scenario: Bulk Add People
     Given I navigate to "Test Community login" page PT
@@ -23,10 +23,10 @@ Feature: People Tab
     And I click on "New" button PT
     And I navigate to "Bulk Add" PT
     And I choose my file to be uploaded by clicking "Drop Files" button PT
-#    NOTE:Paste the path to your folder containing the files in step defs
     And I fill in empty fields PT
     And I click on "Add Profiles" button PT
     Then "Bulk Add processing" message is displayed PT
+    And I clean up "Bulk" PT
 
   Scenario: Consider candidates for an opportunity
     Given I navigate to "Test Community login" page PT

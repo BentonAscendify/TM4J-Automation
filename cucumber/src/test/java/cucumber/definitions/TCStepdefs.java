@@ -17,6 +17,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 import java.util.UUID;
 
@@ -422,9 +425,14 @@ public class TCStepdefs<session> {
             actions.moveToElement(getDriver().findElement(By.id("asc-alt-upload-resume")));
             getDriver().findElement(By.id("asc-alt-upload-resume")).click();
             Thread.sleep(2000);
-            //NOTE: The upload file path must be changed before running the scenario
-            uploadFile("C:\\Users\\tessy\\OneDrive\\Desktop\\Profile.pdf");
-            Thread.sleep(2000);
+            URL resumeUrl = getClass().getClassLoader().getResource("resumes/Profile.pdf");
+            if (resumeUrl != null) {
+                File resumeFile = new File(resumeUrl.getFile());
+                uploadFile(resumeFile.getAbsolutePath());
+                Thread.sleep(2000);
+            } else {
+                throw new Exception("Failed to find resume absolute path");
+            }
         } catch (Exception exp) {
             exp.printStackTrace();
         }
@@ -737,7 +745,8 @@ public class TCStepdefs<session> {
         getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
-        Thread.sleep(5000);
+        Thread.sleep(2000);
+        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
     }
 
     @And("I answer the survey questions TC")

@@ -16,8 +16,13 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.net.URL;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
+
+import static cucumber.support.TestContext.getDriver;
 
 public class PeopleStepDefs {
 
@@ -28,8 +33,8 @@ public class PeopleStepDefs {
 
     @When("I sign in PT")
     public void iSignIn() {
-            TestContext.getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys("tessy.anicattumathew@ascendify.com");
-            TestContext.getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys("Mac123q!");
+        TestContext.getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys("tessy.anicattumathew@ascendify.com");
+        TestContext.getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys("Mac123q!");
         TestContext.getDriver().findElement(By.xpath("//button[@id='asc-signin-btn']")).click();
     }
 
@@ -88,14 +93,28 @@ public class PeopleStepDefs {
                 actions.moveToElement(TestContext.getDriver().findElement(By.id("asc-bulk-upload-div")));
                 TestContext.getDriver().findElement(By.id("asc-bulk-upload-div")).click();
                 Thread.sleep(2000);
-                uploadFile("C:\\Users\\tessy\\OneDrive\\Desktop\\profiles-import");
+                URL resumeUrl = getClass().getClassLoader().getResource("resumes/profiles-import.csv");
+                if (resumeUrl != null) {
+                    File resumeFile = new File(resumeUrl.getFile());
+                    uploadFile(resumeFile.getAbsolutePath());
+                    Thread.sleep(2000);
+                } else {
+                    throw new Exception("Failed to find resume absolute path");
+                }
                 Thread.sleep(2000);
             } else if (arg0.equalsIgnoreCase("Drop Files")) {
                 Actions actions = new Actions(TestContext.getDriver());
                 actions.moveToElement(TestContext.getDriver().findElement(By.id("asc-bulk-upload-users-form")));
                 TestContext.getDriver().findElement(By.id("asc-bulk-upload-users-form")).click();
                 Thread.sleep(2000);
-                uploadFile("C:\\Users\\tessy\\OneDrive\\Desktop\\Records");
+                URL resumeUrl = getClass().getClassLoader().getResource("resumes/Records");
+                if (resumeUrl != null) {
+                    File resumeFile = new File(resumeUrl.getFile());
+                    uploadFile(resumeFile.getAbsolutePath());
+                    Thread.sleep(2000);
+                } else {
+                    throw new Exception("Failed to find resume absolute path");
+                }
                 Thread.sleep(2000);
             }
         } catch (Exception exp) {
@@ -511,6 +530,85 @@ public class PeopleStepDefs {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @And("I clean up {string} PT")
+    public void iCleanUpPT(String arg0) throws Throwable {
+        getDriver().findElement(By.xpath("//i[contains(@class,'fa fa-caret-down')]")).click();
+        Thread.sleep(1000);
+        getDriver().findElement(By.xpath("//li[contains(text(),'Admin Console')]")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='user-search']")));
+
+        if (arg0.equalsIgnoreCase("CSV")) {
+            getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("donald@gmail.com");
+            Thread.sleep(168440);
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(4000);
+
+            getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-down']")).click();
+            Thread.sleep(2000);
+            getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(2000);
+            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+
+            getDriver().findElement(By.xpath("//input[@id='user-search']")).click();
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_A);
+            robot.keyRelease(KeyEvent.VK_A);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_BACK_SPACE);
+            robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+            getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("trump@gmail.com");
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(4000);
+            getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-down']")).click();
+            Thread.sleep(2000);
+            getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(2000);
+            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+        } else if (arg0.equalsIgnoreCase("Bulk")) {
+            getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Donald Trump");
+            Thread.sleep(4000);
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(4000);
+            getDriver().findElement(By.xpath("//th[contains(text(),'Created Date')]")).click();
+            Thread.sleep(2000);
+            getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-down']")).click();
+            Thread.sleep(2000);
+            getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(2000);
+            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+
+            getDriver().findElement(By.xpath("//input[@id='user-search']")).click();
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_A);
+            robot.keyRelease(KeyEvent.VK_A);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_BACK_SPACE);
+            robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+            getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Narendra Modi");
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(4000);
+            getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-down']")).click();
+            Thread.sleep(2000);
+            getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(2000);
+            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
         }
     }
 }

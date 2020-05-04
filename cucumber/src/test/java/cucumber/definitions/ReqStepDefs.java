@@ -556,5 +556,6 @@ public class ReqStepDefs {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
         Thread.sleep(5000);
+        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
     }
 }
