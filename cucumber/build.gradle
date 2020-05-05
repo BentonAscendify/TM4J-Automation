@@ -1,0 +1,25 @@
+description = "Cucumber Module"
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "se.thinkcode:gradle-cucumber-runner:0.0.8"
+        classpath "de.javaansehz:cluecumber-report-gradle-plugin:1.1.5"
+    }
+}
+
+apply plugin: "se.thinkcode.cucumber-runner"
+apply plugin: "de.javaansehz.cluecumber-report-gradle-plugin"
+
+cucumber {
+    featurePath = "${projectDir}/src/test/resources/cucumber/features"
+}
+
+//cluecumberReports {
+//    sourceJsonReportDirectory = "build/cucumber-report/json"
+//    generatedHtmlReportDirectory = "build/cucumber-report/html"
+//}

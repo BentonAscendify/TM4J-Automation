@@ -1,5 +1,3 @@
 rootProject.name = 'qa-automation'
 
-include ':talent-community-cucumber'
-include ':people-tab-cucumber'
-include ':requisitions-tab-cucumber'
+include ':cucumber'
