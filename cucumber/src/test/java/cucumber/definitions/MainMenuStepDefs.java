@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static cucumber.support.TestContext.getDriver;
+import static cucumber.support.TestContext.*;
 
 public class MainMenuStepDefs {
     @Given("I navigate to {string} page MM")

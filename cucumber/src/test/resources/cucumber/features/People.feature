@@ -45,7 +45,7 @@ Feature: People Tab
     And I click on the right arrow of a candidate PT
     And I consider for new opportunity PT
     Then candidate has been "Applied to Opportunity" PT
-    And I move the candidate through different hiring status PT
+    And I move the candidate through different hiring status to Onsite Interview PT
 
   Scenario: Edit/save responses
     Given I navigate to "Test Community login" page PT
@@ -66,3 +66,17 @@ Feature: People Tab
     And I drag and drop candidates to folder PT
 
   Scenario: Set up Interview kit
+    Given I navigate to "Test Community login" page PT
+    When I sign in PT
+    Then "Main Menu" page is displayed PT
+    And I go to my profile to find my organization PT
+    And I find an opportunity associated with my organization PT
+    And I make sure interview is setup for this opportunity PT
+    And I choose a person who is associated with the same organization as mine PT
+    And I consider for same opportunity PT
+    Then candidate has been "Applied to Opportunity" PT
+    And I move the candidate through different hiring status to Onsite Interview PT
+    And I go to Interview tab to set up Interview kit PT
+    And I do the Interview setup PT
+    Then I make sure the new interviewers are added as Team Members PT
+

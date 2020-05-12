@@ -1,25 +1,78 @@
 description = "Cucumber Module"
 
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+repositories {
+    maven {
+        url = uri('http://repo.maven.apache.org/maven2/')
+    }
+
+    maven {
+        url = uri('http://repo1.maven.org/maven2/org/seleniumhq/selenium/')
+    }
+
+    maven {
+        url = uri('http://repo.maven.apache.org/maven2')
+    }
+    mavenLocal()
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+sourceCompatibility = '8'
+
+dependencies {
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    implementation 'org.seleniumhq.selenium:selenium-server:3.141.59'
+    implementation 'org.seleniumhq.selenium:selenium-remote-driver:3.141.59'
+    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:3.141.59'
+    implementation 'org.seleniumhq.selenium:selenium-firefox-driver:3.141.59'
+    implementation 'org.seleniumhq.selenium:selenium-support:3.141.59'
+    implementation 'org.seleniumhq.selenium:selenium-api:3.141.59'
+
+    testImplementation 'io.github.bonigarcia:webdrivermanager:3.8.1'
+    testImplementation 'io.cucumber:cucumber-core:5.6.0'
+    testImplementation 'io.cucumber:cucumber-java:5.6.0'
+    testImplementation 'io.cucumber:cucumber-junit:5.6.0'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
+}
+
+task cucumber(group: "cucumber") {
+    dependsOn assemble, compileTestJava
+    doLast {
+        def r = file("${project.buildDir}/cucumber")
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            systemProperties = ["cucumber.headless": project.property("cucumber.headless")]
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '-p', "json:build/cucumber/json/report.json",
+                    '-p', 'pretty',
+                    '-p', 'html:build/cucumber/html',
+                    'src/test/resources/cucumber/features']
+//            args = ['--help']
         }
     }
-    dependencies {
-        classpath "se.thinkcode:gradle-cucumber-runner:0.0.8"
-        classpath "de.javaansehz:cluecumber-report-gradle-plugin:1.1.5"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from(components.java)
+        }
     }
 }
 
-apply plugin: "se.thinkcode.cucumber-runner"
-apply plugin: "de.javaansehz.cluecumber-report-gradle-plugin"
-
-cucumber {
-    featurePath = "${projectDir}/src/test/resources/cucumber/features"
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
-//cluecumberReports {
-//    sourceJsonReportDirectory = "build/cucumber-report/json"
-//    generatedHtmlReportDirectory = "build/cucumber-report/html"
-//}
+test {
+    useTestNG()
+}
