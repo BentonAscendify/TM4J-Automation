@@ -16,8 +16,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 public class TestContext {
 
@@ -28,7 +30,10 @@ public class TestContext {
     }
 
     public static void initialize() {
-        initialize("chrome", false);
+        String cucumberHeadlessProp = System.getProperty("cucumber.headless");
+        boolean isHeadless = cucumberHeadlessProp != null && !cucumberHeadlessProp.isEmpty() ? Boolean.valueOf(cucumberHeadlessProp): false;
+        System.out.println("Automation running in headless mode ? " + isHeadless);
+        initialize("chrome", isHeadless);
     }
 
     public static void teardown() {

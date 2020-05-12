@@ -1,6 +1,5 @@
 package cucumber.definitions;
 
-import cucumber.support.TestContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -23,7 +22,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.UUID;
 
-import static cucumber.support.TestContext.getDriver;
+import static cucumber.support.TestContext.*;
 
 public class TCStepdefs<session> {
 
@@ -228,7 +227,7 @@ public class TCStepdefs<session> {
         WebElement FN = getDriver().findElement(By.xpath("//input[@id='asc-signup-firstname']"));
         String textInsideFN = FN.getAttribute("value");
         if (textInsideFN.isEmpty()) {
-            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='asc-signup-firstname']")));
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='asc-signup-firstname']")));
             getDriver().findElement(By.xpath("//input[@id='asc-signup-firstname']")).sendKeys("Tessy");
         }
         WebElement LN = getDriver().findElement(By.xpath("//input[@id='asc-signup-lastname']"));
@@ -746,7 +745,7 @@ public class TCStepdefs<session> {
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
         Thread.sleep(2000);
-        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
     }
 
     @And("I answer the survey questions TC")

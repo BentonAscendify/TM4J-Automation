@@ -1,11 +1,11 @@
 package cucumber.definitions;
 
-import cucumber.support.TestContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -19,7 +19,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.UUID;
 
 import static cucumber.support.TestContext.getDriver;
@@ -28,25 +28,26 @@ public class PeopleStepDefs {
 
     @Given("I navigate to {string} page PT")
     public void iNavigateToPage(String arg0) {
-        TestContext.getDriver().get("https://testcommunity.ascendify.com/");
+        getDriver().get("https://testcommunity.ascendify.com/");
     }
 
     @When("I sign in PT")
     public void iSignIn() {
-        TestContext.getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys("tessy.anicattumathew@ascendify.com");
-        TestContext.getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys("Mac123q!");
-        TestContext.getDriver().findElement(By.xpath("//button[@id='asc-signin-btn']")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='id_username']")));
+        getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys("tessy.anicattumathew@ascendify.com");
+        getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys("Mac123q!");
+        getDriver().findElement(By.xpath("//button[@id='asc-signin-btn']")).click();
     }
 
     @And("I click on {string} button PT")
     public void iClickOnButton(String arg0) throws Throwable {
         if (arg0.equalsIgnoreCase("New")) {
-            TestContext.getDriver().findElement(By.xpath("//span[@id='asc-add-candidate']")).click();
+            getDriver().findElement(By.xpath("//span[@id='asc-add-candidate']")).click();
         } else if (arg0.equalsIgnoreCase("Import")) {
             Thread.sleep(2000);
-            TestContext.getDriver().findElement(By.xpath("//button[contains(text(),'Import')]")).click();
+            getDriver().findElement(By.xpath("//button[contains(text(),'Import')]")).click();
         } else if (arg0.equalsIgnoreCase("Add Profiles")) {
-            TestContext.getDriver().findElement(By.xpath("//button[@id='asc-add-user-btn']")).click();
+            getDriver().findElement(By.xpath("//button[@id='asc-add-user-btn']")).click();
         }
     }
 
@@ -54,11 +55,11 @@ public class PeopleStepDefs {
     public void pageIsDisplayed(String arg0) throws Throwable {
         if (arg0.equalsIgnoreCase("Main Menu")) {
             Thread.sleep(8000);
-            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu tab')]")));
-            TestContext.getDriver().findElement(By.xpath("//span[contains(text(),'Main Menu tab')]")).isDisplayed();
+            new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu tab')]")));
+            getDriver().findElement(By.xpath("//span[contains(text(),'Main Menu tab')]")).isDisplayed();
         } else if (arg0.equalsIgnoreCase("Data Mapping")) {
             Thread.sleep(20000);
-            TestContext.getDriver().findElement(By.xpath("//h3[@class='asc-admin-header']")).isDisplayed();
+            getDriver().findElement(By.xpath("//h3[@class='asc-admin-header']")).isDisplayed();
         }
     }
 
@@ -66,11 +67,12 @@ public class PeopleStepDefs {
     public void iClickOnTa(String arg0) throws Throwable {
         if (arg0.equalsIgnoreCase("People")) {
             Thread.sleep(2000);
-            TestContext.getDriver().findElement(By.xpath("//div[contains(text(),'People')]")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'People')]")));
+            getDriver().findElement(By.xpath("//div[contains(text(),'People')]")).click();
         } else if (arg0.equalsIgnoreCase("Responses")) {
             Thread.sleep(2000);
-            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@id='tab-staff-aboutme-one']")));
-            TestContext.getDriver().findElement(By.xpath("//li[@id='tab-staff-aboutme-one']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@id='tab-staff-aboutme-one']")));
+            getDriver().findElement(By.xpath("//li[@id='tab-staff-aboutme-one']")).click();
         }
     }
 
@@ -78,9 +80,9 @@ public class PeopleStepDefs {
     public void iNavigateTo(String arg0) throws Throwable {
         Thread.sleep(2000);
         if (arg0.equalsIgnoreCase("Upload a CSV file")) {
-            TestContext.getDriver().findElement(By.xpath("//a[@id='asc-add-candidate-csv']")).click();
+            getDriver().findElement(By.xpath("//a[@id='asc-add-candidate-csv']")).click();
         } else if (arg0.equalsIgnoreCase("Bulk Add")) {
-            TestContext.getDriver().findElement(By.xpath("//a[@id='asc-add-bulk-candidate-manually']")).click();
+            getDriver().findElement(By.xpath("//a[@id='asc-add-bulk-candidate-manually']")).click();
         }
     }
 
@@ -89,9 +91,9 @@ public class PeopleStepDefs {
         Thread.sleep(2000);
         try {
             if (arg0.equalsIgnoreCase("Upload a File")) {
-                Actions actions = new Actions(TestContext.getDriver());
-                actions.moveToElement(TestContext.getDriver().findElement(By.id("asc-bulk-upload-div")));
-                TestContext.getDriver().findElement(By.id("asc-bulk-upload-div")).click();
+                Actions actions = new Actions(getDriver());
+                actions.moveToElement(getDriver().findElement(By.id("asc-bulk-upload-div")));
+                getDriver().findElement(By.id("asc-bulk-upload-div")).click();
                 Thread.sleep(2000);
                 URL resumeUrl = getClass().getClassLoader().getResource("resumes/profiles-import.csv");
                 if (resumeUrl != null) {
@@ -103,9 +105,9 @@ public class PeopleStepDefs {
                 }
                 Thread.sleep(2000);
             } else if (arg0.equalsIgnoreCase("Drop Files")) {
-                Actions actions = new Actions(TestContext.getDriver());
-                actions.moveToElement(TestContext.getDriver().findElement(By.id("asc-bulk-upload-users-form")));
-                TestContext.getDriver().findElement(By.id("asc-bulk-upload-users-form")).click();
+                Actions actions = new Actions(getDriver());
+                actions.moveToElement(getDriver().findElement(By.id("asc-bulk-upload-users-form")));
+                getDriver().findElement(By.id("asc-bulk-upload-users-form")).click();
                 Thread.sleep(2000);
                 URL resumeUrl = getClass().getClassLoader().getResource("resumes/Records");
                 if (resumeUrl != null) {
@@ -160,32 +162,32 @@ public class PeopleStepDefs {
     public void iMapTheFieldsInTheCSVFileToTheAppropriateFieldsInTheApplication() throws Throwable {
         try {
             for (int i = 0; i <= 10; i++) {
-                WebElement ONE = TestContext.getDriver().findElement(By.xpath("//select[@name='mapfield[" + i + "]']"));
+                WebElement ONE = getDriver().findElement(By.xpath("//select[@name='mapfield[" + i + "]']"));
                 String textInsideONE = ONE.getAttribute("value");
                 if (textInsideONE.isEmpty()) {
                     String selBoxNAME = "'mapfield[" + i + "]'";
-                    String partialText = TestContext.getDriver().findElement(By.xpath("//div[@id='right-system-panel']//tr[" + (i + 2) + "]//td[1]")).getText();
-                    TestContext.getDriver().findElement(By.xpath("//select[@name=" + selBoxNAME + "]")).click();
-                    TestContext.getDriver().findElement(By.xpath("//select[@name=" + selBoxNAME + "]//option[" + (i + 2) + "]")).click();
+                    String partialText = getDriver().findElement(By.xpath("//div[@id='right-system-panel']//tr[" + (i + 2) + "]//td[1]")).getText();
+                    getDriver().findElement(By.xpath("//select[@name=" + selBoxNAME + "]")).click();
+                    getDriver().findElement(By.xpath("//select[@name=" + selBoxNAME + "]//option[" + (i + 2) + "]")).click();
                     Thread.sleep(1000);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")));
-        TestContext.getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")).click();
-        TestContext.getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]//option[contains(text(),'Ascendify')]")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")));
+        getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")).click();
+        getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]//option[contains(text(),'Ascendify')]")).click();
     }
 
     @Then("{string} message is displayed PT")
     public void messageIsDisplayed(String arg0) throws Throwable {
         if (arg0.equalsIgnoreCase("CSV processing")) {
             Thread.sleep(4000);
-            TestContext.getDriver().findElement(By.xpath("//li[contains(text(),'Your file has been queued for processing.  You will get an email when the process is complete.')]")).isDisplayed();
+            getDriver().findElement(By.xpath("//li[contains(text(),'Your file has been queued for processing.  You will get an email when the process is complete.')]")).isDisplayed();
         } else if (arg0.equalsIgnoreCase("Bulk Add processing")) {
             Thread.sleep(2000);
-            TestContext.getDriver().findElement(By.xpath("//li[contains(text(),'New users are being processed.')]")).isDisplayed();
+            getDriver().findElement(By.xpath("//li[contains(text(),'New users are being processed.')]")).isDisplayed();
         }
     }
 
@@ -193,146 +195,176 @@ public class PeopleStepDefs {
     public void iFillInEmptyFields() throws Throwable {
 
         Thread.sleep(2000);
-        WebElement Status = TestContext.getDriver().findElement(By.xpath("//select[@id='asc-client-crm-status-field']"));
+        WebElement Status = getDriver().findElement(By.xpath("//select[@id='asc-client-crm-status-field']"));
         String textInsideStatus = Status.getAttribute("value");
         if (textInsideStatus.isEmpty()) {
-            TestContext.getDriver().findElement(By.xpath("//select[@id='asc-client-crm-status-field']")).click();
-            TestContext.getDriver().findElement(By.xpath("//select[@id='asc-client-crm-status-field']//option[contains(text(),'New')]")).click();
+            getDriver().findElement(By.xpath("//select[@id='asc-client-crm-status-field']")).click();
+            getDriver().findElement(By.xpath("//select[@id='asc-client-crm-status-field']//option[contains(text(),'New')]")).click();
             Thread.sleep(2000);
         }
 
-        TestContext.getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']")).click();
-        TestContext.getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']//input")).sendKeys("Candidate", Keys.ENTER);
+        getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']")).click();
+        getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']//input")).sendKeys("Candidate", Keys.ENTER);
         Thread.sleep(2000);
 
-        WebElement Source = TestContext.getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']"));
+        WebElement Source = getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']"));
         String textInsideSource = Source.getAttribute("value");
         if (textInsideSource.isEmpty()) {
-            TestContext.getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']")).click();
-            TestContext.getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']//option[contains(text(),'Employee Referrals')]")).click();
+            getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']")).click();
+            getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']//option[contains(text(),'Employee Referrals')]")).click();
         }
-        WebElement Recruit = TestContext.getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']"));
+        WebElement Recruit = getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']"));
         String textInsideRecruit = Recruit.getAttribute("value");
         if (textInsideRecruit.isEmpty()) {
-            TestContext.getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']")).click();
-            TestContext.getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']//option[contains(text(),'Alex Selenium1')]")).click();
+            getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']")).click();
+            getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']//option[contains(text(),'Alex Selenium1')]")).click();
             Thread.sleep(2000);
         }
 
-        TestContext.getDriver().findElement(By.xpath("//input[@id='asc-add-user-quick-comment']")).sendKeys("Excellent Candidates");
+        getDriver().findElement(By.xpath("//input[@id='asc-add-user-quick-comment']")).sendKeys("Excellent Candidates");
         Thread.sleep(2000);
 
-        WebElement Org = TestContext.getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']"));
+        WebElement Org = getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']"));
         String textInsideOrg = Org.getAttribute("value");
         if (textInsideOrg.isEmpty()) {
-            TestContext.getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")).click();
-            TestContext.getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]//option[contains(text(),'Test Community!')]")).click();
+            getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")).click();
+            getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]//option[contains(text(),'Test Community!')]")).click();
             Thread.sleep(2000);
-            TestContext.getDriver().findElement(By.xpath("//a[@id='asc-add-new-org-text-box']")).click();
-            TestContext.getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")).click();
-            TestContext.getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]//option[contains(text(),'Tessy's Org')]")).click();
+            getDriver().findElement(By.xpath("//a[@id='asc-add-new-org-text-box']")).click();
+            getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")).click();
+            getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]//option[contains(text(),'Tessy's Org')]")).click();
             Thread.sleep(2000);
         }
-        TestContext.getDriver().findElement(By.xpath("//input[@id='asc-add-user-tag-input']")).sendKeys("Hire");
-        TestContext.getDriver().findElement(By.xpath("//button[@id='asc-asd-user-tag-btn']")).click();
+        getDriver().findElement(By.xpath("//input[@id='asc-add-user-tag-input']")).sendKeys("Hire");
+        getDriver().findElement(By.xpath("//button[@id='asc-asd-user-tag-btn']")).click();
         Thread.sleep(2000);
 
     }
 
     @And("I click on the right arrow of a candidate PT")
     public void iClickOnTheRightArrowOfACandidate() {
-        TestContext.getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).click();
+        getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).click();
     }
 
     @And("I consider for new opportunity PT")
     public void iConsiderForNewOpportunity() throws Throwable {
-
         Thread.sleep(6000);
-        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='right-system-panel']")));
-        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-show-next-opportunity-btn']")));
-        TestContext.getDriver().findElement(By.xpath("//span[@id='asc-show-next-opportunity-btn']")).click();
-        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@id='asc-next-opp-select']")));
-        TestContext.getDriver().findElement(By.xpath("//select[@id='asc-next-opp-select']")).click();
-        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@id='asc-next-opp-select']//option[2]")));
-        TestContext.getDriver().findElement(By.xpath("//select[@id='asc-next-opp-select']//option[2]")).click();
-        TestContext.getDriver().findElement(By.xpath("//a[@id='asc-next-opp-btn']")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='right-system-panel']")));
+        Thread.sleep(5000);
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-show-next-opportunity-btn']")));
+        getDriver().findElement(By.xpath("//span[@id='asc-show-next-opportunity-btn']")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@id='asc-next-opp-select']")));
+        getDriver().findElement(By.xpath("//select[@id='asc-next-opp-select']")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@id='asc-next-opp-select']//option[2]")));
+        getDriver().findElement(By.xpath("//select[@id='asc-next-opp-select']//option[2]")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='asc-next-opp-btn']")));
+        getDriver().findElement(By.xpath("//a[@id='asc-next-opp-btn']")).click();
     }
 
     @Then("candidate has been {string} PT")
     public void candidateHasBeen(String arg0) throws Throwable {
-        Thread.sleep(8000);
-        new WebDriverWait(TestContext.getDriver(), 30).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Move Forward')]")));
-        TestContext.getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).isDisplayed();
+        Thread.sleep(4000);
+        try {
+            new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Move Forward')]")));
+            getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).isDisplayed();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        getDriver().findElement(By.xpath("//div[contains(text(),'" + org + "')]/../../../..//i[contains(@class,'fa fa-chevron-circle-right asc-list-more-information-arrow')]")).click();
+        Thread.sleep(6000);
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='right-system-panel']")));
+        Thread.sleep(5000);
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-show-next-opportunity-btn']")));
+        getDriver().findElement(By.xpath("//span[@id='asc-show-next-opportunity-btn']")).click();
+        Thread.sleep(2000);
+        getDriver().findElement(By.xpath("//select[@id='asc-next-opp-select']")).click();
+        Thread.sleep(2000);
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@id='asc-next-opp-select']//option[contains(text(),'" + req + "')]")));
+        getDriver().findElement(By.xpath("//select[@id='asc-next-opp-select']//option[contains(text(),'" + req + "')]")).click();
+        Thread.sleep(2000);
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='asc-next-opp-btn']")));
+        getDriver().findElement(By.xpath("//a[@id='asc-next-opp-btn']")).click();
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Move Forward')]")));
+        getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).isDisplayed();
     }
 
-    @And("I move the candidate through different hiring status PT")
+    @And("I move the candidate through different hiring status to Onsite Interview PT")
     public void iMoveTheCandidateThroughDifferentHiringStatus() throws Throwable {
         Thread.sleep(2000);
-        TestContext.getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).click();
+        getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).click();
         Thread.sleep(2000);
-        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'Preliminary Phone Screen')]")));
-        TestContext.getDriver().findElement(By.xpath("//a[contains(text(),'Preliminary Phone Screen')]")).click();
-        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Current step: Preliminary Phone Screen')]")));
-        TestContext.getDriver().findElement(By.xpath("//span[contains(text(),'Current step: Preliminary Phone Screen')]")).isDisplayed();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'Preliminary Phone Screen')]")));
+        getDriver().findElement(By.xpath("//a[contains(text(),'Preliminary Phone Screen')]")).click();
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Current step: Preliminary Phone Screen')]")));
+        getDriver().findElement(By.xpath("//span[contains(text(),'Current step: Preliminary Phone Screen')]")).isDisplayed();
         Thread.sleep(2000);
 
-        TestContext.getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).click();
+        getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).click();
         Thread.sleep(2000);
-        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'In-Person Meeting')]")));
-        TestContext.getDriver().findElement(By.xpath("//a[contains(text(),'In-Person Meeting')]")).click();
-        new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Current step: In-Person Meeting')]")));
-        TestContext.getDriver().findElement(By.xpath("//span[contains(text(),'Current step: In-Person Meeting')]")).isDisplayed();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'Onsite Interview')]")));
+        getDriver().findElement(By.xpath("//a[contains(text(),'Onsite Interview')]")).click();
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Current step: Onsite Interview')]")));
+        getDriver().findElement(By.xpath("//span[contains(text(),'Current step: Onsite Interview')]")).isDisplayed();
+        Thread.sleep(2000);
+        try {
+            if (getDriver().findElement(By.xpath("//button[@id='asc-cancel-msg-btn']")).isDisplayed()) {
+                getDriver().findElement(By.xpath("//button[@id='asc-cancel-msg-btn']")).click();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Thread.sleep(2000);
     }
 
     @And("I drag and drop candidates to folder PT")
     public void iDragAndDropCandidatesToFolder() throws Throwable {
         try {
-            String BefCount = TestContext.getDriver().findElement(By.xpath("(//a[@class='link clearfix  ui-droppable'])[1]/..//span[@class='link-count']")).getText();
+            String BefCount = getDriver().findElement(By.xpath("(//a[@class='link clearfix  ui-droppable'])[1]/..//span[@class='link-count']")).getText();
             int InitialCount = Integer.parseInt(BefCount);
 
-            String FirstCount = TestContext.getDriver().findElement(By.xpath("(//a[@class='link clearfix  ui-droppable'])[1]/..//span[@class='link-count']")).getText();
+            String FirstCount = getDriver().findElement(By.xpath("(//a[@class='link clearfix  ui-droppable'])[1]/..//span[@class='link-count']")).getText();
             System.out.println("Initial Count = " + FirstCount);
 
-            TestContext.getDriver().findElement(By.xpath("(//div[@class='asc-list-middle-inner-div'])[1]")).click();
-            TestContext.getDriver().findElement(By.xpath("(//div[@class='asc-list-move-tab ui-draggable-handle']//span[@class='asc-multi-box'])[1]")).click();
-            TestContext.getDriver().findElement(By.xpath("(//div[@class='asc-list-middle-inner-div'])[2]")).click();
-            TestContext.getDriver().findElement(By.xpath("(//div[@class='asc-list-move-tab ui-draggable-handle']//span[@class='asc-multi-box'])[2]")).click();
-            TestContext.getDriver().findElement(By.xpath("//span[contains(@class,'asc-multi-box')]//i[contains(@class,'fa fa-check')]")).isDisplayed();
+            getDriver().findElement(By.xpath("(//div[@class='asc-list-middle-inner-div'])[1]")).click();
+            getDriver().findElement(By.xpath("(//div[@class='asc-list-move-tab ui-draggable-handle']//span[@class='asc-multi-box'])[1]")).click();
+            getDriver().findElement(By.xpath("(//div[@class='asc-list-middle-inner-div'])[2]")).click();
+            getDriver().findElement(By.xpath("(//div[@class='asc-list-move-tab ui-draggable-handle']//span[@class='asc-multi-box'])[2]")).click();
+            getDriver().findElement(By.xpath("//span[contains(@class,'asc-multi-box')]//i[contains(@class,'fa fa-check')]")).isDisplayed();
 
-            WebElement From = TestContext.getDriver().findElement(By.xpath("(//i[@class='fa fa-ellipsis-v'])[2]"));
-            WebElement To = TestContext.getDriver().findElement(By.xpath("(//a[@class='link clearfix  ui-droppable'])[1]"));
-            Actions act = new Actions(TestContext.getDriver());
+            WebElement From = getDriver().findElement(By.xpath("(//i[@class='fa fa-ellipsis-v'])[2]"));
+            WebElement To = getDriver().findElement(By.xpath("(//a[@class='link clearfix  ui-droppable'])[1]"));
+            Actions act = new Actions(getDriver());
             act.dragAndDrop(From, To).build().perform();
 
             Thread.sleep(8000);
-            TestContext.getDriver().navigate().refresh();
-            String AftCount = TestContext.getDriver().findElement(By.xpath("(//a[@class='link clearfix  ui-droppable'])[1]/..//span[@class='link-count']")).getText();
+            getDriver().navigate().refresh();
+            String AftCount = getDriver().findElement(By.xpath("(//a[@class='link clearfix  ui-droppable'])[1]/..//span[@class='link-count']")).getText();
             int UpdatedCount = Integer.parseInt(AftCount);
-            TestContext.getDriver().navigate().refresh();
+            getDriver().navigate().refresh();
             System.out.println("Updated Count = " + AftCount);
 
 //        Cleanup
             if (UpdatedCount != InitialCount) {
-                TestContext.getDriver().findElement(By.xpath("(//a[@class='link clearfix  ui-droppable'])[1]")).click();
+                getDriver().findElement(By.xpath("(//a[@class='link clearfix  ui-droppable'])[1]")).click();
                 Thread.sleep(2000);
-                TestContext.getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
+                getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
                 Thread.sleep(2000);
-                TestContext.getDriver().findElement(By.xpath("//a[@data-field='client_users.created DESC']")).click();
+                getDriver().findElement(By.xpath("//a[@data-field='client_users.created DESC']")).click();
                 Thread.sleep(2000);
-                TestContext.getDriver().findElement(By.xpath("(//div[@class='asc-list-middle-inner-div'])[1]")).click();
-                TestContext.getDriver().findElement(By.xpath("(//div[@class='asc-list-move-tab ui-draggable-handle']//span[@class='asc-multi-box'])[1]")).click();
-                TestContext.getDriver().findElement(By.xpath("(//div[@class='asc-list-middle-inner-div'])[2]")).click();
-                TestContext.getDriver().findElement(By.xpath("(//div[@class='asc-list-move-tab ui-draggable-handle']//span[@class='asc-multi-box'])[2]")).click();
-                TestContext.getDriver().findElement(By.xpath("//span[contains(@class,'asc-multi-box')]//i[contains(@class,'fa fa-check')]")).isDisplayed();
-                new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@id='asc-action-div']")));
-                TestContext.getDriver().findElement(By.xpath("//span[@id='asc-action-div']")).click();
-                TestContext.getDriver().findElement(By.xpath("//a[@class='ascbulk-remove-from-list']")).click();
+                getDriver().findElement(By.xpath("(//div[@class='asc-list-middle-inner-div'])[1]")).click();
+                getDriver().findElement(By.xpath("(//div[@class='asc-list-move-tab ui-draggable-handle']//span[@class='asc-multi-box'])[1]")).click();
+                getDriver().findElement(By.xpath("(//div[@class='asc-list-middle-inner-div'])[2]")).click();
+                getDriver().findElement(By.xpath("(//div[@class='asc-list-move-tab ui-draggable-handle']//span[@class='asc-multi-box'])[2]")).click();
+                getDriver().findElement(By.xpath("//span[contains(@class,'asc-multi-box')]//i[contains(@class,'fa fa-check')]")).isDisplayed();
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@id='asc-action-div']")));
+                getDriver().findElement(By.xpath("//span[@id='asc-action-div']")).click();
+                getDriver().findElement(By.xpath("//a[@class='ascbulk-remove-from-list']")).click();
                 Robot robot = new Robot();
                 robot.keyPress(KeyEvent.VK_ENTER);
                 robot.keyRelease(KeyEvent.VK_ENTER);
                 Thread.sleep(8000);
-                new WebDriverWait(TestContext.getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'Your records are being removed and your changes will be reflected soon')]")));
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'Your records are being removed and your changes will be reflected soon')]")));
             } else {
                 System.out.println("Those candidates are already present in this folder");
             }
@@ -344,24 +376,24 @@ public class PeopleStepDefs {
     @And("I edit and save all questions PT")
     public void iEditAndSaveAllQuestions() throws Throwable {
 
-        int sections = TestContext.getDriver().findElements(By.xpath("//ul[@id='asc-responses-expanded-tabs-sub']//li")).size();
+        int sections = getDriver().findElements(By.xpath("//ul[@id='asc-responses-expanded-tabs-sub']//li")).size();
         for (int a = 1; a <= sections; a = a + 2) {
             try {
                 Thread.sleep(200);
-                TestContext.getDriver().findElement(By.xpath("(//ul[@id='asc-responses-expanded-tabs-sub']//li)[" + a + "]")).click();
+                getDriver().findElement(By.xpath("(//ul[@id='asc-responses-expanded-tabs-sub']//li)[" + a + "]")).click();
                 Thread.sleep(2000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             try {
-                TestContext.getDriver().findElement(By.xpath("//body/div[@id='wrap']/div[@id='container']/div[@id='right-system-panel']/div[@id='inner-right-system-panel']/div[@id='asc-app-record-profile-view']/div[@id='asc-job-maindata']/div[@id='asc-extended-tabs-output-holder']/div[@id='asc-staff-aboutme-one']/div[@id='personal-sub-tab']/div[@id='asc-user-custom-data']/div[@class='asc-edit-block-inner']/div[@class='asc-edit-div']/div[@class='asc-edit-readonly']/div[1]")).click();
+                getDriver().findElement(By.xpath("//body/div[@id='wrap']/div[@id='container']/div[@id='right-system-panel']/div[@id='inner-right-system-panel']/div[@id='asc-app-record-profile-view']/div[@id='asc-job-maindata']/div[@id='asc-extended-tabs-output-holder']/div[@id='asc-staff-aboutme-one']/div[@id='personal-sub-tab']/div[@id='asc-user-custom-data']/div[@class='asc-edit-block-inner']/div[@class='asc-edit-div']/div[@class='asc-edit-readonly']/div[1]")).click();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             try {
-                List<WebElement> radio = TestContext.getDriver().findElements(By.xpath("//div[@class='asc-survey-question-answer-radio'][1]//input[@type='radio']"));
+                List<WebElement> radio = getDriver().findElements(By.xpath("//div[@class='asc-survey-question-answer-radio'][1]//input[@type='radio']"));
                 for (WebElement element : radio) {
                     element.click();
                     Thread.sleep(1000);
@@ -371,7 +403,7 @@ public class PeopleStepDefs {
             }
 
             try {
-                List<WebElement> text = TestContext.getDriver().findElements(By.xpath("//input[@class='asc-survey-question-answer']"));
+                List<WebElement> text = getDriver().findElements(By.xpath("//input[@class='asc-survey-question-answer']"));
                 for (WebElement element : text) {
                     String uuid = UUID.randomUUID().toString();
                     element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -384,7 +416,7 @@ public class PeopleStepDefs {
             }
 
             try {
-                List<WebElement> text = TestContext.getDriver().findElements(By.xpath("//input[@class='asc-survey-question-answer required']"));
+                List<WebElement> text = getDriver().findElements(By.xpath("//input[@class='asc-survey-question-answer required']"));
                 for (WebElement element : text) {
                     String uuid = UUID.randomUUID().toString();
                     element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -397,10 +429,10 @@ public class PeopleStepDefs {
             }
 
             try {
-                int j = TestContext.getDriver().findElements(By.xpath("//a[contains(@class,'chosen-single chosen-default')]")).size();
+                int j = getDriver().findElements(By.xpath("//a[contains(@class,'chosen-single chosen-default')]")).size();
                 for (int i = 1; i <= j; i++) {
-                    if (TestContext.getDriver().findElement(By.xpath("(//a[contains(@class,'chosen-single chosen-default')])[" + i + "]")).isDisplayed()) {
-                        TestContext.getDriver().findElement(By.xpath("(//a[contains(@class,'chosen-single chosen-default')])[" + i + "]")).click();
+                    if (getDriver().findElement(By.xpath("(//a[contains(@class,'chosen-single chosen-default')])[" + i + "]")).isDisplayed()) {
+                        getDriver().findElement(By.xpath("(//a[contains(@class,'chosen-single chosen-default')])[" + i + "]")).click();
                         Robot robot = new Robot();
                         robot.keyPress(KeyEvent.VK_BACK_SPACE);
                         robot.keyRelease(KeyEvent.VK_BACK_SPACE);
@@ -418,9 +450,9 @@ public class PeopleStepDefs {
 
             try {
                 int l = 0;
-                l = TestContext.getDriver().findElements(By.xpath("//div[contains(@id,'asc_question_csvq_')]")).size();
+                l = getDriver().findElements(By.xpath("//div[contains(@id,'asc_question_csvq_')]")).size();
                 for (int k = 1; k <= l; k++) {
-                    TestContext.getDriver().findElement(By.xpath("(//div[contains(@id,'asc_question_csvq_')])[" + k + "]")).click();
+                    getDriver().findElement(By.xpath("(//div[contains(@id,'asc_question_csvq_')])[" + k + "]")).click();
                     Robot robot = new Robot();
                     robot.keyPress(KeyEvent.VK_BACK_SPACE);
                     robot.keyRelease(KeyEvent.VK_BACK_SPACE);
@@ -436,14 +468,14 @@ public class PeopleStepDefs {
             }
 
             try {
-                if (TestContext.getDriver().findElement(By.xpath("//textarea[@class='asc-survey-question-answer']")).isDisplayed()) {
-                    int l = TestContext.getDriver().findElements(By.xpath("//textarea[@class='asc-survey-question-answer']")).size();
+                if (getDriver().findElement(By.xpath("//textarea[@class='asc-survey-question-answer']")).isDisplayed()) {
+                    int l = getDriver().findElements(By.xpath("//textarea[@class='asc-survey-question-answer']")).size();
                     for (int k = 1; k <= l; k++) {
                         String uuid = UUID.randomUUID().toString();
-                        TestContext.getDriver().findElement(By.xpath("(//textarea[@class='asc-survey-question-answer'])[" + k + "]")).click();
-                        TestContext.getDriver().findElement(By.xpath("(//textarea[@class='asc-survey-question-answer'])[" + k + "]")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
-                        TestContext.getDriver().findElement(By.xpath("(//textarea[@class='asc-survey-question-answer'])[" + k + "]")).sendKeys(Keys.BACK_SPACE);
-                        TestContext.getDriver().findElement(By.xpath("(//textarea[@class='asc-survey-question-answer'])[" + k + "]")).sendKeys(uuid);
+                        getDriver().findElement(By.xpath("(//textarea[@class='asc-survey-question-answer'])[" + k + "]")).click();
+                        getDriver().findElement(By.xpath("(//textarea[@class='asc-survey-question-answer'])[" + k + "]")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+                        getDriver().findElement(By.xpath("(//textarea[@class='asc-survey-question-answer'])[" + k + "]")).sendKeys(Keys.BACK_SPACE);
+                        getDriver().findElement(By.xpath("(//textarea[@class='asc-survey-question-answer'])[" + k + "]")).sendKeys(uuid);
                     }
                 }
             } catch (Exception e) {
@@ -451,8 +483,8 @@ public class PeopleStepDefs {
             }
 
             try {
-                if (TestContext.getDriver().findElement(By.xpath("//input[@class='asc-survey-question-answer asc-survey-question-answer-date  hasDatepicker']")).isDisplayed()) {
-                    TestContext.getDriver().findElement(By.xpath("//input[@class='asc-survey-question-answer asc-survey-question-answer-date  hasDatepicker']")).click();
+                if (getDriver().findElement(By.xpath("//input[@class='asc-survey-question-answer asc-survey-question-answer-date  hasDatepicker']")).isDisplayed()) {
+                    getDriver().findElement(By.xpath("//input[@class='asc-survey-question-answer asc-survey-question-answer-date  hasDatepicker']")).click();
                     Robot robot = new Robot();
                     robot.keyPress(KeyEvent.VK_ENTER);
                     robot.keyRelease(KeyEvent.VK_ENTER);
@@ -463,9 +495,9 @@ public class PeopleStepDefs {
 
             try {
                 int x = 0;
-                x = TestContext.getDriver().findElements(By.xpath("//div[contains(@id,'asc_question_csvq_')]")).size();
+                x = getDriver().findElements(By.xpath("//div[contains(@id,'asc_question_csvq_')]")).size();
                 for (int y = 1; y <= x; y++) {
-                    TestContext.getDriver().findElement(By.xpath("(//div[contains(@id,'asc_question_csvq_')])[" + y + "]")).click();
+                    getDriver().findElement(By.xpath("(//div[contains(@id,'asc_question_csvq_')])[" + y + "]")).click();
                     Robot robot = new Robot();
                     robot.keyPress(KeyEvent.VK_BACK_SPACE);
                     robot.keyRelease(KeyEvent.VK_BACK_SPACE);
@@ -481,7 +513,7 @@ public class PeopleStepDefs {
             }
 
             try {
-                List<WebElement> me = TestContext.getDriver().findElements(By.xpath("//div[@id='asc-staff-aboutme-one']//label[1]"));
+                List<WebElement> me = getDriver().findElements(By.xpath("//div[@id='asc-staff-aboutme-one']//label[1]"));
                 for (WebElement element : me) {
                     String uuid = UUID.randomUUID().toString();
                     element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -493,10 +525,10 @@ public class PeopleStepDefs {
             }
 
             try {
-                if (TestContext.getDriver().findElement(By.xpath("//div[@id='asc-staff-aboutme-one']")).isDisplayed()) {
-                    int b = TestContext.getDriver().findElements(By.xpath("//div[@id='asc-staff-aboutme-one']")).size();
+                if (getDriver().findElement(By.xpath("//div[@id='asc-staff-aboutme-one']")).isDisplayed()) {
+                    int b = getDriver().findElements(By.xpath("//div[@id='asc-staff-aboutme-one']")).size();
                     for (int c = 1; c <= b; c++) {
-                        TestContext.getDriver().findElement(By.xpath("(//div[@id='asc-staff-aboutme-one']//label[3])[" + c + "]")).click();
+                        getDriver().findElement(By.xpath("(//div[@id='asc-staff-aboutme-one']//label[3])[" + c + "]")).click();
                         Thread.sleep(1000);
                     }
                 }
@@ -505,28 +537,28 @@ public class PeopleStepDefs {
             }
 
             try {
-                int f = TestContext.getDriver().findElements(By.xpath("//iframe[contains(@title,'Rich Text Editor')]")).size();
+                int f = getDriver().findElements(By.xpath("//iframe[contains(@title,'Rich Text Editor')]")).size();
                 for (int g = 1; g <= f; g++) {
-                    new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("(//iframe[contains(@title,'Rich Text Editor')])[" + g + "]")));
+                    new WebDriverWait(getDriver(), 20).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("(//iframe[contains(@title,'Rich Text Editor')])[" + g + "]")));
                     String uuid = UUID.randomUUID().toString();
-                    TestContext.getDriver().findElement(By.cssSelector("body")).click();
-                    TestContext.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+                    getDriver().findElement(By.cssSelector("body")).click();
+                    getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
                     Thread.sleep(1000);
                     Robot robot = new Robot();
                     robot.keyPress(KeyEvent.VK_BACK_SPACE);
                     robot.keyRelease(KeyEvent.VK_BACK_SPACE);
-                    TestContext.getDriver().findElement(By.cssSelector("body")).sendKeys(uuid);
+                    getDriver().findElement(By.cssSelector("body")).sendKeys(uuid);
                     Thread.sleep(1000);
-                    TestContext.getDriver().switchTo().defaultContent();
+                    getDriver().switchTo().defaultContent();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             try {
-                TestContext.getDriver().switchTo().defaultContent();
-                new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='asc-dynamic-save-button']")));
-                TestContext.getDriver().findElement(By.xpath("//button[@id='asc-dynamic-save-button']")).click();
+                getDriver().switchTo().defaultContent();
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='asc-dynamic-save-button']")));
+                getDriver().findElement(By.xpath("//button[@id='asc-dynamic-save-button']")).click();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -554,7 +586,7 @@ public class PeopleStepDefs {
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(2000);
-            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
 
             getDriver().findElement(By.xpath("//input[@id='user-search']")).click();
             robot.keyPress(KeyEvent.VK_CONTROL);
@@ -573,7 +605,7 @@ public class PeopleStepDefs {
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(2000);
-            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
         } else if (arg0.equalsIgnoreCase("Bulk")) {
             getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Donald Trump");
             Thread.sleep(4000);
@@ -589,7 +621,7 @@ public class PeopleStepDefs {
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(2000);
-            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
 
             getDriver().findElement(By.xpath("//input[@id='user-search']")).click();
             robot.keyPress(KeyEvent.VK_CONTROL);
@@ -608,7 +640,322 @@ public class PeopleStepDefs {
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(2000);
-            new WebDriverWait(TestContext.getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+        }
+    }
+
+    String org;
+
+    @And("I go to my profile to find my organization PT")
+    public void iGoToMyProfileToFindMyOrganization() throws Throwable {
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-caret-down']")));
+        getDriver().findElement(By.xpath("//i[@class='fa fa-caret-down']")).click();
+        Thread.sleep(2000);
+        getDriver().findElement(By.xpath("//a[contains(text(),'View Profile')]")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@id='tab-personal']")));
+        getDriver().findElement(By.xpath("//li[@id='tab-personal']")).click();
+        String organization = getDriver().findElement(By.xpath("(//div[@class='asc-read-org'])[1]")).getText();
+        org = organization.replace(" *", "");
+        System.out.println("Organization is " + org);
+    }
+
+    String req;
+
+    @And("I find an opportunity associated with my organization PT")
+    public void iFindAnOpportunityAssociatedWithMyOrganization() {
+        getDriver().get("https://testcommunity.ascendify.com/requisitions");
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+        getDriver().findElement(By.xpath("//div[contains(text(),'" + org + "')]/..//div[@class='asc-job-status'][contains(text(),'Open')]/../../../..//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).click();
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-candidate-expanded-header-outer-info']")));
+        req = getDriver().findElement(By.xpath("//div[@id='asc-job-name']")).getText();
+        System.out.println("Requisition is " + req);
+    }
+
+    @And("I make sure interview is setup for this opportunity PT")
+    public void iMakeSureInterviewIsSetupForThisOpportunityPT() throws Throwable {
+        getDriver().findElement(By.xpath("//li[@id='tab-team']")).click();
+        getDriver().findElement(By.xpath("//li[@id='tab-team']")).click();
+        String handle = getDriver().getWindowHandle();
+        System.out.println(handle);
+
+        Thread.sleep(3000);
+        WebElement title = getDriver().findElement(By.xpath("//strong[@class='jrt-interview-tab--title']"));
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("arguments[0].click()", title);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", title);
+        getDriver().findElement(By.xpath("//strong[@class='jrt-interview-tab--title']")).isDisplayed();
+//            new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h5[@class='setup-title']")));
+        try {
+            if (getDriver().findElement(By.xpath("//ul[@class='interview-team team-list asc-list-tile scheduling']")).isDisplayed()) {
+                System.out.println("Interview Team is already setup for this opportunity");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if (getDriver().findElement(By.xpath("//h5[contains(text(),'Set up the interview for Test Req')]")).isDisplayed()) {
+//                String handle = getDriver().getWindowHandle();
+//                System.out.println(handle);
+
+                getDriver().findElement(By.xpath("//button[@id='asc-interview-setup-btn']")).click();
+
+//            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='schedule-interview-btn']")));
+//            getDriver().findElement(By.xpath("//button[@id='schedule-interview-btn']")).click();
+
+                Set handles = getDriver().getWindowHandles();
+                System.out.println(handles);
+
+                for (String handle1 : getDriver().getWindowHandles()) {
+                    System.out.println(handle1);
+                    getDriver().switchTo().window(handle1);
+                }
+
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[@class='title']")));
+                Thread.sleep(5000);
+
+                getDriver().findElement(By.xpath("//div[@id='mui-component-select-Interview Location']")).click();
+                getDriver().findElement(By.xpath("(//li)[5]")).click();
+                getDriver().findElement(By.xpath("//div[@id='mui-component-select-Room']")).click();
+                getDriver().findElement(By.xpath("(//li)[1]")).click();
+                WebElement interview = getDriver().findElement(By.xpath("//div[contains(text(),'No Interview Type Selected')]"));
+                jse.executeScript("arguments[0].click()", interview);
+                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", interview);
+                getDriver().findElement(By.xpath("//div[contains(text(),'No Interview Type Selected')]")).click();
+                Thread.sleep(2000);
+                Robot robot = new Robot();
+                robot.keyPress(KeyEvent.VK_DOWN);
+                robot.keyRelease(KeyEvent.VK_DOWN);
+                robot.keyPress(KeyEvent.VK_ENTER);
+                robot.keyRelease(KeyEvent.VK_ENTER);
+                getDriver().findElement(By.xpath("//input[contains(@id,'autocomplete-input')]")).sendKeys("Bahu Bali");
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@id,'autocomplete-input')]/../../../../..//div[contains(text(),'Bahu Bali')]")));
+                getDriver().findElement(By.xpath("//input[contains(@id,'autocomplete-input')]/../../../../..//div[contains(text(),'Bahu Bali')]")).click();
+                Thread.sleep(4000);
+                getDriver().findElement(By.xpath("//p[contains(text(),'Save')]")).click();
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Data has been saved')]")));
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(),'Close')]")));
+                getDriver().findElement(By.xpath("//p[contains(text(),'Close')]")).click();
+                getDriver().switchTo().window(handle);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    String candidate;
+
+    @And("I choose a person who is associated with the same organization as mine PT")
+    public void iChooseAPersonWhoIsAssociatedWithTheSameOrganizationAsMine() throws Throwable {
+        getDriver().get("https://testcommunity.ascendify.com/people");
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+        getDriver().findElement(By.xpath("//div[contains(text(),'" + org + "')]/../../../..//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).click();
+        Thread.sleep(6000);
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='right-system-panel']")));
+        Thread.sleep(5000);
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-show-next-opportunity-btn']")));
+        candidate = getDriver().findElement(By.xpath("//div[@id='asc-candidate-expanded-name']")).getText();
+        System.out.println("Candidate is " + candidate);
+    }
+
+    @And("I consider for same opportunity PT")
+    public void iConsiderForSameOpportunityPT() throws Throwable {
+        getDriver().findElement(By.xpath("//span[@id='asc-show-next-opportunity-btn']")).click();
+        Thread.sleep(2000);
+        try {
+            if (getDriver().findElement(By.xpath("//select[@id='asc-next-opp-select']")).isDisplayed()) {
+                getDriver().findElement(By.xpath("//select[@id='asc-next-opp-select']")).click();
+                Thread.sleep(2000);
+            } else {
+                getDriver().findElement(By.xpath("//div[contains(text(),'" + org + "')]/../../../..//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).click();
+                Thread.sleep(6000);
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='right-system-panel']")));
+                Thread.sleep(5000);
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-show-next-opportunity-btn']")));
+                getDriver().findElement(By.xpath("//span[@id='asc-show-next-opportunity-btn']")).click();
+                Thread.sleep(2000);
+                getDriver().findElement(By.xpath("//select[@id='asc-next-opp-select']")).click();
+                Thread.sleep(2000);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//select[@id='asc-next-opp-select']//option[contains(text(),'" + req + "')]")));
+        getDriver().findElement(By.xpath("//select[@id='asc-next-opp-select']//option[contains(text(),'" + req + "')]")).click();
+        Thread.sleep(2000);
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@id='asc-next-opp-btn']")));
+        getDriver().findElement(By.xpath("//a[@id='asc-next-opp-btn']")).click();
+    }
+
+    @And("I go to Interview tab to set up Interview kit PT")
+    public void iGoToInterviewTabToSetUpInterviewKit() throws Throwable {
+        getDriver().findElement(By.xpath("//li[@id='tab-interview']")).click();
+        Thread.sleep(9000);
+        String handle = getDriver().getWindowHandle();
+        System.out.println(handle);
+        try {
+            if (getDriver().findElement(By.xpath("//a[contains(text(),'opportunity.')]")).isDisplayed()) {
+                getDriver().findElement(By.xpath("//a[contains(text(),'opportunity.')]")).click();
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+                getDriver().findElement(By.xpath("//div[contains(text(),'" + org + "')]/../../../..//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).click();
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@id='tab-team']")));
+                getDriver().findElement(By.xpath("//li[@id='tab-team']")).click();
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='asc-interview-setup-btn']")));
+                getDriver().findElement(By.xpath("//button[@id='asc-interview-setup-btn']")).click();
+
+                Set handles = getDriver().getWindowHandles();
+                System.out.println(handles);
+
+                for (String handle1 : getDriver().getWindowHandles()) {
+                    System.out.println(handle1);
+                    getDriver().switchTo().window(handle1);
+                }
+
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[@class='title']")));
+                Thread.sleep(5000);
+
+                getDriver().findElement(By.xpath("//div[@id='mui-component-select-Interview Location']")).click();
+                getDriver().findElement(By.xpath("(//li)[5]")).click();
+                getDriver().findElement(By.xpath("//div[@id='mui-component-select-Room']")).click();
+                getDriver().findElement(By.xpath("(//li)[1]")).click();
+                WebElement interview = getDriver().findElement(By.xpath("//div[contains(text(),'No Interview Type Selected')]"));
+                JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+                jse.executeScript("arguments[0].click()", interview);
+                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", interview);
+                getDriver().findElement(By.xpath("//div[contains(text(),'No Interview Type Selected')]")).click();
+                Thread.sleep(2000);
+                Robot robot = new Robot();
+                robot.keyPress(KeyEvent.VK_DOWN);
+                robot.keyRelease(KeyEvent.VK_DOWN);
+                robot.keyPress(KeyEvent.VK_ENTER);
+                robot.keyRelease(KeyEvent.VK_ENTER);
+                getDriver().findElement(By.xpath("//input[contains(@id,'autocomplete-input')]")).sendKeys("Bahu Bali");
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@id,'autocomplete-input')]/../../../../..//div[contains(text(),'Bahu Bali')]")));
+                getDriver().findElement(By.xpath("//input[contains(@id,'autocomplete-input')]/../../../../..//div[contains(text(),'Bahu Bali')]")).click();
+                Thread.sleep(4000);
+                getDriver().findElement(By.xpath("//p[contains(text(),'Save')]")).click();
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Data has been saved')]")));
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(),'Close')]")));
+                getDriver().findElement(By.xpath("//p[contains(text(),'Close')]")).click();
+                getDriver().switchTo().window(handle);
+            } else if (getDriver().findElement(By.xpath("//button[@id='schedule-interview-btn']")).isDisplayed()) {
+                Thread.sleep(4000);
+                getDriver().findElement(By.xpath("//button[@id='schedule-interview-btn']")).click();
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Interview')]")));
+                Thread.sleep(2000);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @And("I do the Interview setup PT")
+    public void iDoTheInterviewSetupPT() throws Throwable {
+        String handle = getDriver().getWindowHandle();
+        System.out.println(handle);
+
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='schedule-interview-btn']")));
+        getDriver().findElement(By.xpath("//button[@id='schedule-interview-btn']")).click();
+
+        Set handles = getDriver().getWindowHandles();
+        System.out.println(handles);
+
+        for (String handle1 : getDriver().getWindowHandles()) {
+            System.out.println(handle1);
+            getDriver().switchTo().window(handle1);
+        }
+
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[@class='title']")));
+        Thread.sleep(5000);
+        try {
+            if (getDriver().findElement(By.xpath("//p[contains(text(),'EDIT')]")).isDisplayed()) {
+                WebElement edit = getDriver().findElement(By.xpath("//p[contains(text(),'EDIT')]"));
+                JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+                jse.executeScript("arguments[0].click()", edit);
+                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", edit);
+                Thread.sleep(500);
+                getDriver().findElement(By.xpath("//p[contains(text(),'Add Interview')]")).click();
+                Thread.sleep(2000);
+                getDriver().findElement(By.xpath("//div[contains(text(),'No Interview Type Selected')]")).click();
+                Robot robot = new Robot();
+                robot.keyPress(KeyEvent.VK_DOWN);
+                robot.keyRelease(KeyEvent.VK_DOWN);
+                robot.keyPress(KeyEvent.VK_ENTER);
+                robot.keyRelease(KeyEvent.VK_ENTER);
+                int size = 0;
+                size = getDriver().findElements(By.xpath("//input[contains(@id,'autocomplete-input')]")).size();
+                getDriver().findElement(By.xpath("(//input[contains(@id,'autocomplete-input')])[" + size + "]")).sendKeys("Chandler Bing");
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//input[contains(@id,'autocomplete-input')])[" + size + "]/../../../../..//div[contains(text(),'Chandler Bing')]")));
+                getDriver().findElement(By.xpath("(//input[contains(@id,'autocomplete-input')])[" + size + "]/../../../../..//div[contains(text(),'Chandler Bing')]")).click();
+                Thread.sleep(4000);
+                getDriver().findElement(By.xpath("//p[contains(text(),'NEXT')]")).click();
+                new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Data has been saved')]")));
+            } else if (getDriver().findElement(By.xpath("//span[contains(text(),'Reschedule')]")).isDisplayed()) {
+                getDriver().findElement(By.xpath("//span[contains(text(),'Reschedule')]")).click();
+                getDriver().findElement(By.xpath("//p[contains(text(),'Accept')]")).click();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class, 'MuiAvatar-root MuiAvatar-circle MuiAvatar-colorDefault asc-prod')]")));
+        getDriver().findElement(By.xpath("(//div[contains(@class, 'MuiAvatar-root MuiAvatar-circle MuiAvatar-colorDefault asc-prod')])[1]")).click();
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(),'Schedule Now')]")));
+        WebElement schedule = getDriver().findElement(By.xpath("//p[contains(text(),'Schedule Now')]"));
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("arguments[0].click()", schedule);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", schedule);
+        getDriver().findElement(By.xpath("//p[contains(text(),'Schedule Now')]")).click();
+        getDriver().findElement(By.xpath("//p[contains(text(),'Schedule Now')]")).click();
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(),'Send')]")));
+        getDriver().findElement(By.xpath("//p[contains(text(),'Send')]")).click();
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Email sent to candidate')]")));
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='MuiIconButton-label']")));
+        WebElement checkbox = getDriver().findElement(By.xpath("//span[@class='MuiIconButton-label']"));
+        jse.executeScript("arguments[0].click()", checkbox);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", checkbox);
+        int size = 0;
+        size = getDriver().findElements(By.xpath("//span[@class='MuiIconButton-label']")).size();
+        for (int i = 1; i <= size; i++) {
+            getDriver().findElement(By.xpath("(//span[@class='MuiIconButton-label'])[" + i + "]")).click();
+        }
+        getDriver().findElement(By.xpath("//p[contains(text(),'NEXT')]")).click();
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Data has been saved')]")));
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Scheduled Interview')]")));
+        WebElement resend = getDriver().findElement(By.xpath("//p[contains(text(),'Resend')]"));
+        jse.executeScript("arguments[0].click()", resend);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", resend);
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(text(),'Resend')]")));
+        Thread.sleep(2000);
+        getDriver().findElement(By.xpath("//p[contains(text(),'Send')]")).click();
+        Thread.sleep(2000);
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Interview information has been sent')]")));
+        Thread.sleep(2000);
+        getDriver().findElement(By.xpath("//p[contains(text(),'CLOSE')]")).click();
+        Thread.sleep(2000);
+        getDriver().switchTo().window(handle);
+    }
+
+    int interviewers;
+    int newInterviewers;
+
+    @Then("I make sure the new interviewers are added as Team Members PT")
+    public void iMakeSureTheNewInterviewersAreAddedAsTeamMembersPT() throws Throwable {
+        Thread.sleep(2000);
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[contains(@class,'interview-team team-list asc-list-tile scheduling')]")));
+        interviewers = getDriver().findElements(By.xpath("//ul[contains(@class,'interview-team team-list asc-list-tile scheduling')]")).size();
+        System.out.println("No. of Interviewers = " + interviewers);
+        getDriver().findElement(By.xpath("//div[contains(text(),'" + candidate + "')]/../../../../..//i[contains(@class,'fa fa-chevron-circle-right asc-list-more-information-arrow')]")).click();
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@id='tab-interview']")));
+        getDriver().findElement(By.xpath("//li[@id='tab-interview']")).click();
+        getDriver().findElement(By.xpath("//li[@id='tab-interview']")).click();
+        getDriver().findElement(By.xpath("//li[@id='tab-interview']")).click();
+        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[contains(@class,'interview-team approved-interviewers-list')]")));
+        newInterviewers = getDriver().findElements(By.xpath("//ul[contains(@class,'interview-team approved-interviewers-list')]")).size();
+        System.out.println("Number of Updated Interviewers = " + newInterviewers);
+        if (newInterviewers > interviewers) {
+            System.out.println("New Interviewers are added to the Team Members List");
+        } else {
+            System.out.println("New Interviewers are NOT added to the Team Members List");
         }
     }
 }
