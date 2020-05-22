@@ -1,13 +1,9 @@
 package cucumber.definitions;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,26 +13,16 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.UUID;
 
-import static cucumber.support.TestContext.*;
+import static cucumber.support.TestContext.getDriver;
 
 public class TCStepdefs<session> {
 
     private static String randomEmail() {
         return "tessymathew+" + UUID.randomUUID().toString() + "@gmail.com";
-    }
-
-    @Given("I navigate to {string} page TC")
-    public void iNavigateToPage(String arg0) {
-        if (arg0.equalsIgnoreCase("TC Login")) {
-            getDriver().get("https://master.ascendify.net/");
-        } else if (arg0.equalsIgnoreCase("LinkedIn")) {
-            getDriver().get("https://www.linkedin.com/");
-        }
     }
 
     @When("I click on {string} button TC")
@@ -68,27 +54,29 @@ public class TCStepdefs<session> {
             new WebDriverWait(getDriver(), 200).until(ExpectedConditions.elementToBeClickable(By.xpath("//button")));
             getDriver().findElement(By.xpath("//button[@name='awli-button-member']")).click();
             Thread.sleep(2000);
-            Robot robot = new Robot();
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
+            Alert alert = getDriver().switchTo().alert();
+            Thread.sleep(2000);
+            alert.accept();
             Thread.sleep(2000);
             getDriver().switchTo().defaultContent();
             Thread.sleep(16000);
 
-            try {
-                while (getDriver().findElement(By.xpath("//iframe[contains(@src,'https://www.linkedin.com')]")).isDisplayed()) {
-                    new WebDriverWait(getDriver(), 20).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[contains(@src,'https://www.linkedin.com')]")));
-                    getDriver().findElement(By.xpath("//button[@name='awli-button-member']")).click();
-                    Thread.sleep(2000);
-                    robot.keyPress(KeyEvent.VK_ENTER);
-                    robot.keyRelease(KeyEvent.VK_ENTER);
-//                Thread.sleep(2000);
-                    getDriver().switchTo().defaultContent();
-                    Thread.sleep(16000);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                while (getDriver().findElement(By.xpath("//iframe[contains(@src,'https://www.linkedin.com')]")).isDisplayed()) {
+//                    new WebDriverWait(getDriver(), 20).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[contains(@src,'https://www.linkedin.com')]")));
+//                    getDriver().findElement(By.xpath("//button[@name='awli-button-member']")).click();
+//                    Thread.sleep(3000);
+//                    alert = getDriver().switchTo().alert();
+//                    Thread.sleep(3000);
+//                    alert.accept();
+////                    robot.keyPress(KeyEvent.VK_ENTER);
+////                    robot.keyRelease(KeyEvent.VK_ENTER);
+//                    getDriver().switchTo().defaultContent();
+//                    Thread.sleep(16000);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
     }
 
@@ -114,10 +102,8 @@ public class TCStepdefs<session> {
     public void pageIsDisplayed(String arg0) throws Throwable {
         if (arg0.equalsIgnoreCase("Application")) {
             Thread.sleep(2000);
-            getDriver().findElement(By.xpath("//h2[contains(text(),'Profile Information')]")).isDisplayed();
+            getDriver().findElement(By.xpath("//h2[contains(text(),'Information')]")).isDisplayed();
         } else if (arg0.equalsIgnoreCase("Dashboard")) {
-//            Thread.sleep(2000);
-//            Thread.sleep(6000);
             try {
                 if (getDriver().findElement(By.xpath("//input[@id='id_username']")).isDisplayed()) {
                     getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys("tessy@gmail.com");
@@ -137,6 +123,8 @@ public class TCStepdefs<session> {
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.id("asc-signin-container")));
         }
     }
+
+    String email;
 
     @And("I fill in {string} fields TC")
     public void iFillInFields(String arg0) throws Throwable {
@@ -158,17 +146,11 @@ public class TCStepdefs<session> {
             if (textInsideEM.isEmpty()) {
                 final String randomEmail = randomEmail();
                 getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).sendKeys(randomEmail);
-                getDriver().findElement(By.xpath("//input[@id='asc-signup-email1']")).sendKeys(randomEmail);
-                getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).click();
-
-                Robot robot = new Robot();
-                robot.keyPress(KeyEvent.VK_CONTROL);
-                robot.keyPress(KeyEvent.VK_A);
-                robot.keyRelease(KeyEvent.VK_A);
-                Thread.sleep(2000);
-                robot.keyPress(KeyEvent.VK_C);
-                robot.keyRelease(KeyEvent.VK_C);
-                robot.keyRelease(KeyEvent.VK_CONTROL);
+                if (getDriver().findElements(By.xpath("//input[@id='asc-signup-email1']")).size() != 0) {
+                    getDriver().findElement(By.xpath("//input[@id='asc-signup-email1']")).sendKeys(randomEmail);
+                }
+                email = randomEmail;
+                System.out.println("Email = " + randomEmail);
             }
 
             Thread.sleep(2000);
@@ -201,6 +183,28 @@ public class TCStepdefs<session> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            if (getDriver().findElements(By.xpath("//select")).size() != 0) {
+                int select = getDriver().findElements(By.xpath("//select")).size();
+                for (int i = 1; i <= select; i++) {
+                    try {
+                        getDriver().findElement(By.xpath("(//select)[" + i + "]")).click();
+                        getDriver().findElement(By.xpath("(//select)[" + i + "]//option[2]")).click();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Thread.sleep(3000);
+                }
+            }
+            if (getDriver().findElements(By.xpath("//textarea")).size() != 0) {
+                int textarea = getDriver().findElements(By.xpath("//textarea")).size();
+                for (int i = 1; i <= textarea; i++) {
+                    try {
+                        getDriver().findElement(By.xpath("(//textarea)[" + i + "]")).sendKeys("Textarea");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         } else if (arg0.equalsIgnoreCase("Profile Information")) {
             try {
                 getDriver().findElement(By.xpath("//input[@id='ct_sms']")).click();
@@ -208,17 +212,31 @@ public class TCStepdefs<session> {
                 getDriver().findElement(By.xpath("//input[@name='ascendify[communication_preference][receive_email_news_info_career_event]']")).click();
                 getDriver().findElement(By.xpath("//a[@class='chosen-single chosen-default']//div//b")).click();
                 getDriver().findElement(By.xpath("//div[@class='chosen-search']//input")).sendKeys("Masters Degree", Keys.ENTER);
-                getDriver().findElement(By.xpath("//input[@id='asc-question-csvq_f5c1390946'][@value='Yes']")).click();
-                getDriver().findElement(By.xpath("//input[@id='asc-question-csvq_26b1390947'][@value='Yes']")).click();
-                getDriver().findElement(By.xpath("//input[@id='asc-question-csvq_b761390948'][@value='Yes']")).click();
-                //getDriver().findElement(By.xpath("//ul[contains(@class,'chosen-choices')]")).click();
                 getDriver().findElement(By.xpath("//li[contains(@class,'search-field')]")).click();
                 getDriver().findElement(By.xpath("//li[contains(@class,'search-field')]//input")).sendKeys("California", Keys.ENTER);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            if (getDriver().findElements(By.xpath("//input[@type='radio']")).size() != 0) {
+                int yes = getDriver().findElements(By.xpath("//input[contains(@id,'asc-question-csvq')][@type='radio']")).size();
+                for (int i = 1; i <= yes; i++) {
+                    try {
+                        WebElement radio = getDriver().findElement(By.xpath("(//input[contains(@id,'asc-question-csvq')][@type='radio']/../..//div[1])[" + i + "]//input"));
+                        Actions actions = new Actions(getDriver());
+                        actions.moveToElement(radio).click().perform();
+                        Thread.sleep(2000);
+                        getDriver().findElement(By.xpath("(//input[contains(@id,'asc-question-csvq')][@type='radio']/../..//div[1])[" + i + "]//input")).click();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
         } else if (arg0.equalsIgnoreCase("Automatic Routing to Pipelines")) {
-            getDriver().findElement(By.xpath("//div//div//div//div//div//div//div//div//div//div[4]//div[1]//input[1]")).click();
+            if (getDriver().findElements(By.xpath("//div//div//div//div//div//div//div//div//div//div[4]//div[1]//input[1]")).size() != 0) {
+                getDriver().findElement(By.xpath("//div//div//div//div//div//div//div//div//div//div[4]//div[1]//input[1]")).click();
+            }
         }
     }
 
@@ -242,15 +260,7 @@ public class TCStepdefs<session> {
             getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).sendKeys(randomEmail);
             getDriver().findElement(By.xpath("//input[@id='asc-signup-email1']")).sendKeys(randomEmail);
             getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).click();
-
-            Robot robot = new Robot();
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_A);
-            robot.keyRelease(KeyEvent.VK_A);
-            Thread.sleep(2000);
-            robot.keyPress(KeyEvent.VK_C);
-            robot.keyRelease(KeyEvent.VK_C);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
+            email = randomEmail;
         }
         WebElement PWD = getDriver().findElement(By.xpath("//input[@id='password1']"));
         String textInsidePWD = PWD.getAttribute("value");
@@ -306,10 +316,8 @@ public class TCStepdefs<session> {
             if (textInsideDeg.isEmpty()) {
                 getDriver().findElement(By.xpath("//input[@id='asc-signup-degree']")).sendKeys("MBA");
             }
-//        try {
             getDriver().findElement(By.xpath("//input[@id='ct_sms']")).click();
             getDriver().findElement(By.xpath("//input[@name='ascendify[communication_preference][automated_sms_sys_msg]']")).click();
-            //getDriver().findElement(By.xpath("//input[@name='ascendify[communication_preference][receive_email_news_info_career_event]']")).click();
             getDriver().findElement(By.xpath("//a[@class='chosen-single chosen-default']")).click();
             getDriver().findElement(By.xpath("//div[@class='chosen-search']//input")).sendKeys("abc", Keys.ENTER);
             Thread.sleep(3000);
@@ -320,15 +328,10 @@ public class TCStepdefs<session> {
 
     @And("I type {string} as {string} TC")
     public void iType(String arg0, String arg1) throws Throwable {
-        if (arg0.equalsIgnoreCase("email")) {
-            getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys(arg1);
-        } else if (arg0.equalsIgnoreCase("Degree Type")) {
+        if (arg0.equalsIgnoreCase("Degree Type")) {
             getDriver().findElement(By.xpath("//input[@id='asc-signup-degree-type']")).sendKeys(arg1);
         } else if (arg0.equalsIgnoreCase("Degree")) {
             getDriver().findElement(By.xpath("//input[@id='asc-signup-degree']")).sendKeys(arg1);
-        } else if (arg0.equalsIgnoreCase("LinkedIn email")) {
-            Thread.sleep(2000);
-            getDriver().findElement(By.xpath("//input[@id='username']")).sendKeys(arg1);
         }
     }
 
@@ -338,18 +341,14 @@ public class TCStepdefs<session> {
             Thread.sleep(2000);
             getDriver().findElement(By.xpath("//input[@id='password1']")).sendKeys(arg0);
             getDriver().findElement(By.xpath("//input[@id='password2']")).sendKeys(arg0);
-        } else if (arg1.equalsIgnoreCase("Sign In")) {
-            Thread.sleep(2000);
-            getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys(arg0);
-        } else if (arg1.equalsIgnoreCase("LinkedIn Sign In")) {
-            Thread.sleep(2000);
-            getDriver().findElement(By.xpath("//input[@id='password']")).sendKeys(arg0);
         }
     }
 
     @And("I click and agree to Privacy Policy TC")
     public void iClickAndAgreeToPrivacyPolicy() throws Throwable {
-        getDriver().findElement(By.xpath("//input[@id='asc-signup-disclosure-ck']")).click();
+        if (getDriver().findElements(By.xpath("//input[@id='asc-signup-disclosure-ck']")).size() != 0) {
+            getDriver().findElement(By.xpath("//input[@id='asc-signup-disclosure-ck']")).click();
+        }
         Thread.sleep(2000);
     }
 
@@ -397,8 +396,6 @@ public class TCStepdefs<session> {
         try {
             WebElement canvasElement = getDriver().findElement(By.id("asc-esign__canvas"));
             Actions builder = new Actions(getDriver());
-//        int getTopLeftY = ((canvasElement.getSize().getHeight()/2) - canvasElement.getSize().getHeight());
-//        int getTopLeftX =  (canvasElement.getSize().getWidth()/2) - canvasElement.getSize().getWidth();
             Action drawAction = builder.moveToElement(canvasElement, 20, 20)
                     .clickAndHold()
                     .moveByOffset(100, 100)
@@ -555,7 +552,6 @@ public class TCStepdefs<session> {
             getDriver().findElement(By.xpath("//div[@class='clearfix asc-memberships-dates']//div//select[@name='ascendify[start_year]']/option[contains(text(),'2015')]")).click();
             getDriver().findElement(By.xpath("//div[@id='asc-membership-enddate']//div//select[@name='ascendify[end_month]']/option[contains(text(),'May')]")).click();
             getDriver().findElement(By.xpath("//div[@id='asc-membership-enddate']//div//select[@name='ascendify[end_year]']/option[contains(text(),'2017')]")).click();
-            //getDriver().findElement(By.xpath("//form[@id='asc-add-memberships-form']//textarea[@id='asc-detail']")).click();
             getDriver().findElement(By.xpath("//form[@id='asc-add-memberships-form']//textarea[@id='asc-detail']")).sendKeys("Served in several leadership positions for this all-volunteer association.");
             getDriver().findElement(By.xpath("//button[@id='asc-add-memberships-btn']")).click();
 
@@ -710,46 +706,26 @@ public class TCStepdefs<session> {
 
     @And("I clean up TC")
     public void iCleanUp() throws Throwable {
-        getDriver().get("https://testcommunity.ascendify.com/");
-        Thread.sleep(4000);
-        getDriver().findElement(By.xpath("//i[contains(@class,'fa fa-caret-down')]")).click();
-        Thread.sleep(1000);
-        getDriver().findElement(By.xpath("//li[@id='asc-sign-out-button']")).click();
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='id_username']")));
-        getDriver().findElement(By.xpath("//input[@id='id_username']")).click();
-        getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys("tessy.anicattumathew@ascendify.com");
-        getDriver().findElement(By.xpath("//input[@id='id_password']")).click();
-        getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys("Mac123q!");
-        getDriver().findElement(By.xpath("//button[@id='asc-signin-btn']")).click();
-        Thread.sleep(8000);
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu tab')]")));
-        getDriver().findElement(By.xpath("//span[contains(text(),'Main Menu tab')]")).isDisplayed();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[contains(@class,'fa fa-caret-down')]")));
         getDriver().findElement(By.xpath("//i[contains(@class,'fa fa-caret-down')]")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.xpath("//li[contains(text(),'Admin Console')]")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='user-search']")));
-        getDriver().findElement(By.xpath("//input[@id='user-search']")).click();
-        Robot robot = new Robot();
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_V);
-        robot.keyRelease(KeyEvent.VK_V);
+        getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(email, Keys.ENTER);
         Thread.sleep(2000);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-        Thread.sleep(4000);
         getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-down']")).click();
         Thread.sleep(2000);
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='action-call-deleteUser']")));
         getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
-        robot.keyPress(KeyEvent.VK_ENTER);
-        robot.keyRelease(KeyEvent.VK_ENTER);
-        Thread.sleep(2000);
+        Thread.sleep(3000);
+        Alert alert = getDriver().switchTo().alert();
+        Thread.sleep(3000);
+        alert.accept();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
     }
 
     @And("I answer the survey questions TC")
-    public void iAnswerTheSurveyQuestions() {
+    public void iAnswerTheSurveyQuestions() throws InterruptedException {
         try {
             List<WebElement> radio = getDriver().findElements(By.xpath("//div[@class='asc-survey-question-answer-radio'][1]//input[@type='radio']"));
             for (WebElement element : radio) {
@@ -782,43 +758,69 @@ public class TCStepdefs<session> {
             e.printStackTrace();
         }
 
-
-        int j = getDriver().findElements(By.xpath("//a[contains(@class,'chosen-single chosen-default')]")).size();
-        for (int i = 1; i <= j; i++) {
-            try {
-                if (getDriver().findElement(By.xpath("(//a[contains(@class,'chosen-single chosen-default')])[" + i + "]")).isDisplayed()) {
-                    getDriver().findElement(By.xpath("(//a[contains(@class,'chosen-single chosen-default')])[" + i + "]")).click();
-                    Robot robot = new Robot();
-                    robot.keyPress(KeyEvent.VK_DOWN);
-                    robot.keyRelease(KeyEvent.VK_DOWN);
-                    robot.keyPress(KeyEvent.VK_DOWN);
-                    robot.keyRelease(KeyEvent.VK_DOWN);
-                    robot.keyPress(KeyEvent.VK_ENTER);
-                    robot.keyRelease(KeyEvent.VK_ENTER);
-                    Thread.sleep(1000);
-                } else {
-                    System.out.println("element click intercepted");
+        if (getDriver().findElements(By.xpath("//a[@class='chosen-single chosen-default']//div//b")).size() != 0) {
+            int x = 0;
+            x = getDriver().findElements(By.xpath("//a[@class='chosen-single chosen-default']//div//b")).size();
+            for (int y = 1; y <= x; y++) {
+                try {
+                    WebElement select = getDriver().findElement(By.xpath("(//a[@class='chosen-single chosen-default']//div//b)[" + y + "]"));
+                    Actions actions = new Actions(getDriver());
+                    actions.moveToElement(select).click().perform();
+                    Thread.sleep(2000);
+                    getDriver().findElement(By.xpath("(//a[@class='chosen-single chosen-default']//div//b)[" + y + "]")).click();
+                    getDriver().findElement(By.xpath("(//a[@class='chosen-single chosen-default']//div//b)[" + y + "]/../../../../../..//li[2]")).click();
+                    Thread.sleep(2000);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
 
-        try {
-            int l = 0;
-            l = getDriver().findElements(By.xpath("//div[contains(@id,'asc_question_csvq_')]")).size();
-            for (int k = 1; k <= l; k++) {
-                getDriver().findElement(By.xpath("(//div[contains(@id,'asc_question_csvq_')])[" + k + "]")).click();
-                Robot robot = new Robot();
-                robot.keyPress(KeyEvent.VK_DOWN);
-                robot.keyRelease(KeyEvent.VK_DOWN);
-                robot.keyPress(KeyEvent.VK_DOWN);
-                robot.keyRelease(KeyEvent.VK_DOWN);
-                robot.keyPress(KeyEvent.VK_ENTER);
-                robot.keyRelease(KeyEvent.VK_ENTER);
+        if (getDriver().findElements(By.xpath("//span[contains(text(),'Please Select')]")).size() != 0) {
+            int select = getDriver().findElements(By.xpath("//span[contains(text(),'Please Select')]")).size();
+            for (int i = 1; i <= select; i++) {
+                try {
+
+                    WebElement drop = getDriver().findElement(By.xpath("(//span[contains(text(),'Please Select')])[" + i + "]"));
+                    Actions actions = new Actions(getDriver());
+                    actions.moveToElement(drop).click().perform();
+                    Thread.sleep(2000);
+                    getDriver().findElement(By.xpath("(//span[contains(text(),'Please Select')])[" + i + "]")).click();
+                    getDriver().findElement(By.xpath("(//span[contains(text(),'Please Select')])[" + i + "]/../../..//option[2]")).click();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+
+        if (getDriver().findElements(By.xpath("//span[contains(text(),'Please Select')]")).size() != 0) {
+            int select = getDriver().findElements(By.xpath("//span[contains(text(),'Please Select')]")).size();
+            for (int i = 1; i <= select; i++) {
+                try {
+
+                    WebElement choose = getDriver().findElement(By.xpath("(//span[contains(text(),'Please Select')])[" + i + "]"));
+                    Actions actions = new Actions(getDriver());
+                    actions.moveToElement(choose).click().perform();
+                    Thread.sleep(2000);
+                    getDriver().findElement(By.xpath("(//span[contains(text(),'Please Select')])[" + i + "]")).click();
+                    getDriver().findElement(By.xpath("(//span[contains(text(),'Please Select')])[" + i + "]/../../..//li[2]")).click();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        int j = getDriver().findElements(By.xpath("//select")).size();
+        for (int i = 1; i <= j; i++) {
+            if (getDriver().findElement(By.xpath("(//select)[" + i + "]")).isDisplayed()) {
+                try {
+
+                    getDriver().findElement(By.xpath("(//select)[" + i + "]")).click();
+                    getDriver().findElement(By.xpath("(//select)[" + i + "]//option[2]")).click();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         try {
@@ -837,26 +839,7 @@ public class TCStepdefs<session> {
         try {
             if (getDriver().findElement(By.xpath("//input[@class='asc-survey-question-answer asc-survey-question-answer-date  hasDatepicker']")).isDisplayed()) {
                 getDriver().findElement(By.xpath("//input[@class='asc-survey-question-answer asc-survey-question-answer-date  hasDatepicker']")).click();
-                Robot robot = new Robot();
-                robot.keyPress(KeyEvent.VK_ENTER);
-                robot.keyRelease(KeyEvent.VK_ENTER);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            int x = 0;
-            x = getDriver().findElements(By.xpath("//div[contains(@id,'asc_question_csvq_')]")).size();
-            for (int y = 1; y <= x; y++) {
-                getDriver().findElement(By.xpath("(//div[contains(@id,'asc_question_csvq_')])[" + y + "]")).click();
-                Robot robot = new Robot();
-                robot.keyPress(KeyEvent.VK_DOWN);
-                robot.keyRelease(KeyEvent.VK_DOWN);
-                robot.keyPress(KeyEvent.VK_DOWN);
-                robot.keyRelease(KeyEvent.VK_DOWN);
-                robot.keyPress(KeyEvent.VK_ENTER);
-                robot.keyRelease(KeyEvent.VK_ENTER);
+                getDriver().findElement(By.xpath("//input[@class='asc-survey-question-answer asc-survey-question-answer-date  hasDatepicker']")).sendKeys(Keys.ENTER);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -867,18 +850,6 @@ public class TCStepdefs<session> {
             for (WebElement element : me) {
                 String uuid = UUID.randomUUID().toString();
                 element.sendKeys(uuid);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            if (getDriver().findElement(By.xpath("//div[@id='asc-staff-aboutme-one']")).isDisplayed()) {
-                int b = getDriver().findElements(By.xpath("//div[@id='asc-staff-aboutme-one']")).size();
-                for (int c = 1; c <= b; c++) {
-                    getDriver().findElement(By.xpath("(//div[@id='asc-staff-aboutme-one']//label[3])[" + c + "]")).click();
-                    Thread.sleep(1000);
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -902,15 +873,7 @@ public class TCStepdefs<session> {
 
     @And("I copy the LinkedIn email TC")
     public void iCopyTheLinkedInEmail() throws Throwable {
-        getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).click();
-
-        Robot robot = new Robot();
-        robot.keyPress(KeyEvent.VK_CONTROL);
-        robot.keyPress(KeyEvent.VK_A);
-        robot.keyRelease(KeyEvent.VK_A);
-        Thread.sleep(1000);
-        robot.keyPress(KeyEvent.VK_C);
-        robot.keyRelease(KeyEvent.VK_C);
-        robot.keyRelease(KeyEvent.VK_CONTROL);
+        getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).getAttribute("email");
     }
+
 }

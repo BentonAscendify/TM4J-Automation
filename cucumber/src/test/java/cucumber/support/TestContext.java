@@ -32,6 +32,7 @@ public class TestContext {
     public static void initialize() {
         String cucumberHeadlessProp = System.getProperty("cucumber.headless");
         boolean isHeadless = cucumberHeadlessProp != null && !cucumberHeadlessProp.isEmpty() ? Boolean.valueOf(cucumberHeadlessProp): false;
+//        boolean isHeadless = true;
         System.out.println("Automation running in headless mode ? " + isHeadless);
         initialize("chrome", isHeadless);
     }

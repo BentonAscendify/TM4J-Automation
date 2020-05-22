@@ -2,8 +2,8 @@
 Feature: Main Menu Tab
 
   Scenario: Check whether all tabs are loading properly
-    Given I navigate to "Test Community login" page MM
-    When I sign in as super admin with credentials "hiral@ascendify.com" and "Arm$tr0ng!" MM
+    Given I navigate to "Test Community login" page
+    When I sign in as super admin
     And I check whether "Main Menu Tab" is loading properly MM
     And I check whether "Admin Console" is loading properly MM
     And I check whether "Talent Matching Tab" is loading properly MM
