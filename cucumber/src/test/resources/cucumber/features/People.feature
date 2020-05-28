@@ -1,6 +1,19 @@
 @End-to-End
 Feature: People Tab
 
+  Scenario: Add new user manually
+    Given I navigate to "Test Community login" page
+    When I sign in to TestCommunity
+    Then "Main Menu" page is displayed PT
+    And I click on "People" tab PT
+    And I click on "New" button PT
+    And I navigate to "Add Manually" PT
+    Then I manually add new user's profile PT
+    And I click on "Add Profile" button PT
+    Then "New user was added" message is displayed PT
+    And I make sure that Organize functions in the form are working as expected PT
+    And I clean up "Manual User" PT
+
   Scenario: Add new user by uploading a CSV file
     Given I navigate to "Test Community login" page
     When I sign in to TestCommunity
@@ -24,7 +37,7 @@ Feature: People Tab
     And I navigate to "Bulk Add" PT
     And I choose my file to be uploaded by clicking "Drop Files" button PT
     And I fill in empty fields PT
-    And I click on "Add Profiles" button PT
+    And I click on "Add Profile" button PT
     Then "Bulk Add processing" message is displayed PT
     And I clean up "Bulk" PT
 
@@ -53,8 +66,8 @@ Feature: People Tab
     Then "Main Menu" page is displayed PT
     And I click on "People" tab PT
     And I click on the right arrow of a candidate PT
-    And I consider for new opportunity PT
-    Then candidate has been "Applied to Opportunity" PT
+#    And I consider for new opportunity PT
+#    Then candidate has been "Applied to Opportunity" PT
     And I click on "Responses" tab PT
     And I edit and save all questions PT
 

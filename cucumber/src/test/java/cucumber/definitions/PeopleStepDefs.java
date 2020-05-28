@@ -2,7 +2,6 @@ package cucumber.definitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.ht.E;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,6 +21,10 @@ import static cucumber.support.TestContext.getDriver;
 
 public class PeopleStepDefs {
 
+    private static String randomEmail() {
+        return "tessymathew+" + UUID.randomUUID().toString() + "@gmail.com";
+    }
+
     @And("I click on {string} button PT")
     public void iClickOnButton(String arg0) throws Throwable {
         if (arg0.equalsIgnoreCase("New")) {
@@ -29,7 +32,7 @@ public class PeopleStepDefs {
         } else if (arg0.equalsIgnoreCase("Import")) {
             Thread.sleep(2000);
             getDriver().findElement(By.xpath("//button[contains(text(),'Import')]")).click();
-        } else if (arg0.equalsIgnoreCase("Add Profiles")) {
+        } else if (arg0.equalsIgnoreCase("Add Profile")) {
             getDriver().findElement(By.xpath("//button[@id='asc-add-user-btn']")).click();
         }
     }
@@ -87,6 +90,136 @@ public class PeopleStepDefs {
             getDriver().findElement(By.xpath("//a[@id='asc-add-candidate-csv']")).click();
         } else if (arg0.equalsIgnoreCase("Bulk Add")) {
             getDriver().findElement(By.xpath("//a[@id='asc-add-bulk-candidate-manually']")).click();
+        } else if (arg0.equalsIgnoreCase("Add Manually")) {
+            getDriver().findElement(By.xpath("//a[@id='asc-add-candidate-manually']")).click();
+        }
+    }
+
+    String email;
+
+    @Then("I manually add new user's profile PT")
+    public void iManuallyAddNewUserSProfilePT() throws Throwable {
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h4[contains(text(),'Add New Profile')]")));
+        getDriver().findElement(By.xpath("//input[@id='asc-firstname']")).sendKeys("Manual");
+        getDriver().findElement(By.xpath("//input[@id='asc-lastname']")).sendKeys("User");
+        final String randomEmail = randomEmail();
+        getDriver().findElement(By.xpath("//input[@id='asc-email']")).sendKeys(randomEmail);
+        email = randomEmail;
+        System.out.println("Manual Added User Email = " + randomEmail);
+        getDriver().findElement(By.xpath("//input[@id='asc-cellphone']")).sendKeys("610-852-8288");
+        getDriver().findElement(By.xpath("//input[@id='asc-phone']")).sendKeys("609-602-2709");
+        getDriver().findElement(By.xpath("//input[@id='user-address1']")).sendKeys("4144  Filbert Street");
+        getDriver().findElement(By.xpath("//input[@id='user-address2']")).sendKeys("877  Westfall Avenue");
+        getDriver().findElement(By.xpath("//input[@id='user-city']")).sendKeys("WILDWOOD");
+        getDriver().findElement(By.xpath("//input[@id='user-state']")).sendKeys("New Jersey");
+        getDriver().findElement(By.xpath("//input[@id='user-zipcode']")).sendKeys("08260");
+        getDriver().findElement(By.xpath("//div[@id='asc_personal_country_chosen']//a[@class='chosen-single chosen-default']")).click();
+        while (getDriver().findElement(By.xpath("//div[@id='asc_personal_country_chosen']//a[@class='chosen-single chosen-default']/..//li[2]")).isDisplayed() == false) {
+            getDriver().findElement(By.xpath("//div[@id='asc_personal_country_chosen']//a[@class='chosen-single chosen-default']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='asc_personal_country_chosen']//a[@class='chosen-single chosen-default']/..//li[2]")));
+        }
+        getDriver().findElement(By.xpath("//div[@id='asc_personal_country_chosen']//a[@class='chosen-single chosen-default']/..//li[2]")).click();
+        getDriver().findElement(By.xpath("//input[@id='asc-site-site_linkedin']")).sendKeys("https://www.linkedin.com/in/tessy-anicattu-mathew-4b407119a/");
+        getDriver().findElement(By.xpath("//select[@id='asc-client-crm-status-field']")).click();
+        getDriver().findElement(By.xpath("//select[@id='asc-client-crm-status-field']//option[2]")).click();
+        getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']//input")).click();
+        getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']//ul[@class='chosen-results']//li[2]")).click();
+        getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']")).click();
+        getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']//optgroup[2]//option[1]")).click();
+        getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']")).click();
+        getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']//option[2]")).click();
+        getDriver().findElement(By.xpath("//input[@id='asc-add-user-quick-comment']")).sendKeys("This is a quick comment");
+        getDriver().findElement(By.xpath("//a[@id='asc-add-new-org-text-box']")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("(//select[contains(@name,'ascendify[client_user_partner_org]')])[2]")));
+        getDriver().findElement(By.xpath("(//select[contains(@name,'ascendify[client_user_partner_org]')])[2]")).click();
+        getDriver().findElement(By.xpath("(//select[contains(@name,'ascendify[client_user_partner_org]')])[2]//option[2]")).click();
+        getDriver().findElement(By.xpath("//span[@class='trash-can']")).click();
+        getDriver().findElement(By.xpath("//button[@class='btn btn-xs btn-danger asc-del-confirm']")).click();
+        getDriver().findElement(By.xpath("//input[@id='asc-add-user-tag-input']")).sendKeys("Tag One");
+        getDriver().findElement(By.xpath("//button[@id='asc-asd-user-tag-btn']")).click();
+        getDriver().findElement(By.xpath("//i[@class='link asc-skills-close asc-icons-close fa fa-times']")).click();
+
+        getDriver().findElement(By.xpath("//a[@class='asc-add-user-summary-link'][contains(text(),'My List')]")).click();
+        if (getDriver().findElements(By.xpath("//select[@id='folder-list']//option[1]")).size() != 0) {
+            getDriver().findElement(By.xpath("//select[@id='folder-list']//option[1]")).click();
+            getDriver().findElement(By.xpath("//span//a[@class='reset-select'][contains(text(),'Clear')]")).click();
+            getDriver().findElement(By.xpath("//select[@id='folder-list']//option[1]")).click();
+        }
+        getDriver().findElement(By.xpath("//div[@class='asc-new-user-new-folder']//a[contains(text(),'New')]")).click();
+        getDriver().findElement(By.xpath("//div[@class='asc-new-user-new-folder-text-div']//input[@placeholder='Name your list']")).sendKeys("New List");
+
+        getDriver().findElement(By.xpath("//a[contains(text(),'My Open Requisitions')]")).click();
+        if (getDriver().findElements(By.xpath("//select[@id='asc-add-user-to-req-select']//option[1]")).size() != 0) {
+            getDriver().findElement(By.xpath("//select[@id='asc-add-user-to-req-select']//option[1]")).click();
+            getDriver().findElement(By.xpath("//a[contains(text(),'My Open Requisitions')]/../..//a[@class='reset-select'][contains(text(),'Clear')]")).click();
+            getDriver().findElement(By.xpath("//select[@id='asc-add-user-to-req-select']//option[1]")).click();
+        }
+
+        if (getDriver().findElements(By.xpath("//a[contains(text(),'My Open Resume Collections')]")).size() != 0) {
+            getDriver().findElement(By.xpath("//a[contains(text(),'My Open Resume Collections')]")).click();
+            if (getDriver().findElements(By.xpath("//a[contains(text(),'My Open Resume Collections')]/../..//select//option[1]")).size() != 0) {
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Open Resume Collections')]/../..//select//option[1]")).click();
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Open Resume Collections')]/../..//a[@class='reset-select'][contains(text(),'Clear')]")).click();
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Open Resume Collections')]/../..//select//option[1]")).click();
+            }
+        }
+
+        if (getDriver().findElements(By.xpath("//a[contains(text(),'My Pipeline')]")).size() != 0) {
+            getDriver().findElement(By.xpath("//a[contains(text(),'My Pipeline')]")).click();
+            if (getDriver().findElements(By.xpath("//a[contains(text(),'My Pipeline')]/../..//select//optgroup[1]//option[1]")).size() != 0) {
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Pipeline')]/../..//select//optgroup[1]//option[1]")).click();
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Pipeline')]/../..//a[@class='reset-select'][contains(text(),'Clear')]")).click();
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Pipeline')]/../..//select//optgroup[1]//option[1]")).click();
+            }
+        }
+    }
+
+    @And("I make sure that Organize functions in the form are working as expected PT")
+    public void iMakeSureThatOrganizeFunctionsInTheFormAreWorkingAsExpected() {
+        if (getDriver().findElements(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).size() != 0) {
+            getDriver().findElement(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).click();
+        }
+        getDriver().findElement(By.xpath("//div[contains(@class,'link-text')][contains(text(),'New List')]")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-sort-by-div']")));
+        getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
+        getDriver().findElement(By.xpath("//*[@data-field='client_users.created DESC']")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+        getDriver().findElement(By.xpath("(//div[@class='asc-list-inner-div'])[1]//div[@class='link asc-list-name highlight'][contains(text(),'Manual User')]")).isDisplayed();
+
+        if (getDriver().findElements(By.xpath("//span[contains(text(),'My List')]/../..//li[1]//a[1]")).size() != 0) {
+            getDriver().findElement(By.xpath("//span[contains(text(),'My List')]/../..//li[1]//a[1]")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-sort-by-div']")));
+            getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
+            getDriver().findElement(By.xpath("//*[@data-field='client_users.created DESC']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+            getDriver().findElement(By.xpath("(//div[@class='asc-list-inner-div'])[1]//div[@class='link asc-list-name highlight'][contains(text(),'Manual User')]")).isDisplayed();
+        }
+
+        if (getDriver().findElements(By.xpath("//span[contains(text(),'My Open Requisitions')]/../..//li[1]//a[1]")).size() != 0) {
+            getDriver().findElement(By.xpath("//span[contains(text(),'My Open Requisitions')]/../..//li[1]//a[1]")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-sort-by-div']")));
+            getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
+            getDriver().findElement(By.xpath("//a[@id='asc-sort-folder-created']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+            getDriver().findElement(By.xpath("(//div[@class='asc-list-inner-div'])[1]//div[@class='link asc-list-name highlight'][contains(text(),'Manual User')]")).isDisplayed();
+        }
+
+        if (getDriver().findElements(By.xpath("//span[contains(text(),'My Open Resume Collections')]/../..//li[1]//a[1]")).size() != 0) {
+            getDriver().findElement(By.xpath("//span[contains(text(),'My Open Resume Collections')]/../..//li[1]//a[1]")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-sort-by-div']")));
+            getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
+            getDriver().findElement(By.xpath("//a[@id='asc-sort-folder-created']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+            getDriver().findElement(By.xpath("(//div[@class='asc-list-inner-div'])[1]//div[@class='link asc-list-name highlight'][contains(text(),'Manual User')]")).isDisplayed();
+        }
+
+        if (getDriver().findElements(By.xpath("(//span[contains(text(),'My Pipeline')]/../..//a[1]/..//ul[1]//li[1]//a[1])[1]")).size() != 0) {
+            getDriver().findElement(By.xpath("(//span[contains(text(),'My Pipeline')]/../..//a[1]/..//ul[1]//li[1]//a[1])[1]")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+            getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
+            getDriver().findElement(By.xpath("//*[@data-field='client_users.created DESC']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+            getDriver().findElement(By.xpath("(//div[@class='asc-list-inner-div'])[1]//div[@class='link asc-list-name highlight'][contains(text(),'Manual User')]")).isDisplayed();
         }
     }
 
@@ -178,7 +311,10 @@ public class PeopleStepDefs {
         }
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")));
         getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")).click();
-        getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]//option[contains(text(),'Test Community!')]")).click();
+//        while(getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]//option[1]")).isDisplayed()==false){
+//            getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]")).click();
+//        }
+        getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]//option[2]")).click();
     }
 
     @Then("{string} message is displayed PT")
@@ -187,8 +323,27 @@ public class PeopleStepDefs {
             Thread.sleep(4000);
             getDriver().findElement(By.xpath("//li[contains(text(),'Your file has been queued for processing.  You will get an email when the process is complete.')]")).isDisplayed();
         } else if (arg0.equalsIgnoreCase("Bulk Add processing")) {
-            Thread.sleep(2000);
+            new WebDriverWait(getDriver(), 100).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'New users are being processed.')]")));
             getDriver().findElement(By.xpath("//li[contains(text(),'New users are being processed.')]")).isDisplayed();
+        } else if (arg0.equalsIgnoreCase("New user was added")) {
+            new WebDriverWait(getDriver(), 100).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[contains(text(),'New user was added.')]")));
+            getDriver().findElement(By.xpath("//a[@class='view-all btn btn-primary btn-block']")).click();
+            try {
+                new WebDriverWait(getDriver(), 100).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (getDriver().findElements(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).size() == 0) {
+                getDriver().findElement(By.xpath("//button[@id='candidate-status-filter-btn']")).click();
+                getDriver().findElement(By.xpath("//input[@id='asc-all']")).click();
+                getDriver().findElement(By.xpath("//div[@id='asc-show-all']")).click();
+            }
+            while (getDriver().findElements(By.xpath("//div[@class='link asc-list-name highlight'][contains(text(),'Manual User')]")).size() == 0) {
+                Thread.sleep(1000);
+                getDriver().findElement(By.xpath("//a[@class='view-all btn btn-primary btn-block']")).click();
+                new WebDriverWait(getDriver(), 100).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+                Thread.sleep(1000);
+            }
         }
     }
 
@@ -274,18 +429,6 @@ public class PeopleStepDefs {
         Thread.sleep(2000);
         getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).click();
         Thread.sleep(2000);
-//        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'Phone')]")));
-//        getDriver().findElement(By.xpath("//a[contains(text(),'Phone')]")).click();
-//        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Current step:')]")));
-//        getDriver().findElement(By.xpath("//span[contains(text(),'Current step:')]")).isDisplayed();
-//        Thread.sleep(2000);
-//        new WebDriverWait(getDriver(), 40).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Move Forward')]")));
-//        getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).click();
-//        Thread.sleep(2000);
-//        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(),'Onsite Interview')]")));
-//        getDriver().findElement(By.xpath("//a[contains(text(),'Onsite Interview')]")).click();
-//        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Current step: Onsite Interview')]")));
-//        getDriver().findElement(By.xpath("//span[contains(text(),'Current step: Onsite Interview')]")).isDisplayed();
 
         int size = getDriver().findElements(By.xpath("//a[@class='asc-move-forward-status']/../..//li")).size();
         getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).click();
@@ -308,59 +451,16 @@ public class PeopleStepDefs {
             }
             Thread.sleep(500);
             new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),\"Current step: " + text + "\")]")));
-//            getDriver().findElement(By.xpath("//span[contains(text(),\"Current step: " + text + "\")]")).isDisplayed();
-
-//            Thread.sleep(2000);
-//            if (getDriver().findElements(By.xpath("//button[@id='asc-cancel-msg-btn']")).size() != 0) {
-//                getDriver().findElement(By.xpath("//button[@id='asc-cancel-msg-btn']")).click();
-//            }
-//            Thread.sleep(2000);
             try {
                 if (getDriver().findElement(By.xpath("//li[@id='tab-interview']")).isDisplayed()) {
                     i = size + 1;
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             System.out.println("Total number of workflow statuses = " + size);
             System.out.println("I am on Workflow status no. " + i);
         }
-
-//        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='asc-move-forward-status']/../..//li[1]")));
-//        getDriver().findElement(By.xpath("//a[@class='asc-move-forward-status']/../..//li[1]")).click();
-//        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Current step:')]")));
-//        getDriver().findElement(By.xpath("//span[contains(text(),'Current step:')]")).isDisplayed();
-//        Thread.sleep(2000);
-//        if (getDriver().findElements(By.xpath("//button[@id='asc-cancel-msg-btn']")).size() != 0) {
-//            getDriver().findElement(By.xpath("//button[@id='asc-cancel-msg-btn']")).click();
-//        }
-//        Thread.sleep(2000);
-//        new WebDriverWait(getDriver(), 40).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Move Forward')]")));
-//        getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).click();
-
-
-//        Thread.sleep(2000);
-//        if (getDriver().findElements(By.xpath("//button[@id='asc-cancel-msg-btn']")).size() != 0) {
-//            getDriver().findElement(By.xpath("//button[@id='asc-cancel-msg-btn']")).click();
-//        }
-//        Thread.sleep(2000);
-//        if (getDriver().findElements(By.xpath("//ul[@id='asc-candidate-status-accept']")).size() == 0) {
-//            new WebDriverWait(getDriver(), 40).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Move Forward')]")));
-//            getDriver().findElement(By.xpath("//span[contains(text(),'Move Forward')]")).click();
-//        }
-
-
-//        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='asc-move-forward-status']/../..//li[2]")));
-//        String text = getDriver().findElement(By.xpath("//a[@class='asc-move-forward-status']/../..//li[2]")).getText();
-//        getDriver().findElement(By.xpath("//a[@class='asc-move-forward-status']/../..//li[2]")).click();
-//        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Current step: " + text + "')]")));
-//        getDriver().findElement(By.xpath("//span[contains(text(),'Current step: " + text + "')]")).isDisplayed();
-//
-//        Thread.sleep(2000);
-//        if (getDriver().findElements(By.xpath("//button[@id='asc-cancel-msg-btn']")).size() != 0) {
-//            getDriver().findElement(By.xpath("//button[@id='asc-cancel-msg-btn']")).click();
-//        }
-//        Thread.sleep(2000);
     }
 
     @And("I drag and drop candidates to folder PT")
@@ -433,6 +533,31 @@ public class PeopleStepDefs {
                 e.printStackTrace();
             }
 
+            while (getDriver().findElements(By.xpath("//body/div[@id='wrap']/div[@id='container']/div[@id='right-system-panel']/div[@id='inner-right-system-panel']/div[@id='asc-app-record-profile-view']/div[@id='asc-job-maindata']/div[@id='asc-extended-tabs-output-holder']/div[@id='asc-staff-aboutme-one']/div[@id='personal-sub-tab']/div[@id='asc-user-custom-data']/div[@class='asc-edit-block-inner']/div[@class='asc-edit-div']/div[@class='asc-edit-readonly']/div[1]")).size() == 0) {
+                a = a + 2;
+                if (a <= sections) {
+                    new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("(//ul[@id='asc-responses-expanded-tabs-sub']//li)[" + a + "]")));
+                    getDriver().findElement(By.xpath("(//ul[@id='asc-responses-expanded-tabs-sub']//li)[" + a + "]")).click();
+                    try {
+                        getDriver().findElement(By.xpath("//body/div[@id='wrap']/div[@id='container']/div[@id='right-system-panel']/div[@id='inner-right-system-panel']/div[@id='asc-app-record-profile-view']/div[@id='asc-job-maindata']/div[@id='asc-extended-tabs-output-holder']/div[@id='asc-staff-aboutme-one']/div[@id='personal-sub-tab']/div[@id='asc-user-custom-data']/div[@class='asc-edit-block-inner']/div[@class='asc-edit-div']/div[@class='asc-edit-readonly']/div[1]")).click();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        break;
+                    }
+                }
+            }
+
+            if (getDriver().findElements(By.xpath("//div[@id='asc-staff-aboutme-one']")).size() != 0) {
+                int x = getDriver().findElements(By.xpath("//div[@id='asc-staff-aboutme-one']")).size();
+                for (int y = 1; y <= x; y++) {
+                    try {
+                        getDriver().findElement(By.xpath("//div[@id='asc-staff-aboutme-one']//li[" + y + "]//a[1]")).click();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
             try {
                 List<WebElement> radio = getDriver().findElements(By.xpath("//div[@class='asc-survey-question-answer-radio'][1]//input[@type='radio']"));
                 for (WebElement element : radio) {
@@ -441,6 +566,17 @@ public class PeopleStepDefs {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+
+            if (getDriver().findElements(By.xpath("//a[@class='search-choice-close']")).size() != 0) {
+                int i = getDriver().findElements(By.xpath("//a[@class='search-choice-close']")).size();
+                for (int j = 1; j <= i; j++) {
+                    try {
+                        getDriver().findElement(By.xpath("(//a[@class='search-choice-close'])[" + j + "]")).click();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             try {
@@ -487,7 +623,7 @@ public class PeopleStepDefs {
                 for (int k = 1; k <= l; k++) {
                     try {
                         getDriver().findElement(By.xpath("(//div[contains(@id,'asc_question_csvq_')])[" + k + "]")).click();
-                        getDriver().findElement(By.xpath("(//div[contains(@id,'asc_question_csvq_')])[" + k + "]//li[3]")).click();
+                        getDriver().findElement(By.xpath("(//div[contains(@id,'asc_question_csvq_')])[" + k + "]//li[2]")).click();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -560,10 +696,21 @@ public class PeopleStepDefs {
 
             try {
                 getDriver().switchTo().defaultContent();
-                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='asc-dynamic-save-button']")));
-                getDriver().findElement(By.xpath("//button[@id='asc-dynamic-save-button']")).click();
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+
+            try {
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='asc-dynamic-save-button']")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (getDriver().findElements(By.xpath("//button[@id='asc-dynamic-save-button']")).size() != 0) {
+                getDriver().findElement(By.xpath("//button[@id='asc-dynamic-save-button']")).click();
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-user-custom-data']//button[@class='btn btn-primary asc-edit-icon btn-sm'][contains(text(),'Edit')]")));
+            } else if (getDriver().findElements(By.xpath("//div[contains(@class,'no-question-message')]")).size() != 0) {
+                System.out.println("No Screening questions are associated with this opportunity.");
             }
         }
 
@@ -574,7 +721,28 @@ public class PeopleStepDefs {
         getDriver().findElement(By.xpath("//i[contains(@class,'fa fa-caret-down')]")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.xpath("//li[contains(text(),'Admin Console')]")).click();
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='user-search']")));
+        Thread.sleep(2000);
+        try {
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='user-search']")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (getDriver().findElements(By.xpath("//input[@id='user-search']")).size() == 0) {
+            getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
+            while (getDriver().findElement(By.xpath("//div[@id='sections-dropdown']")).isDisplayed() == false) {
+                getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
+            }
+            getDriver().findElement(By.xpath("//a[@href='/main_menu']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//i[contains(@class,'fa fa-caret-down')]")));
+            getDriver().findElement(By.xpath("//i[contains(@class,'fa fa-caret-down')]")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//li[contains(text(),'Admin Console')]")));
+            getDriver().findElement(By.xpath("//li[contains(text(),'Admin Console')]")).click();
+            try {
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='user-search']")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         if (arg0.equalsIgnoreCase("CSV")) {
             Thread.sleep(180000);
@@ -585,9 +753,13 @@ public class PeopleStepDefs {
                 getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(Keys.CONTROL, "a", Keys.BACK_SPACE);
                 getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("donald@gmail.com", Keys.ENTER);
                 Thread.sleep(4000);
+                long startTime = System.currentTimeMillis();
+                if ((System.currentTimeMillis() - startTime) == 200000)
+                    System.out.println("Error: CSV Files are not uploaded");
+                break;
             }
 
-            getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-down']")).click();
+            getDriver().findElement(By.xpath("//a[contains(text(),'Megan Terry')]/../..//i[@class='fa fa-chevron-down']")).click();
             Thread.sleep(2000);
             getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
             Thread.sleep(2000);
@@ -598,8 +770,8 @@ public class PeopleStepDefs {
             getDriver().findElement(By.xpath("//input[@id='user-search']")).click();
             getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(Keys.CONTROL, "a", Keys.BACK_SPACE);
             getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("trump@gmail.com", Keys.ENTER);
-            Thread.sleep(4000);
-            getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-down']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Grayson Martin')]/../..//i[@class='fa fa-chevron-down']")));
+            getDriver().findElement(By.xpath("//a[contains(text(),'Grayson Martin')]/../..//i[@class='fa fa-chevron-down']")).click();
             Thread.sleep(2000);
             getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
             alert.accept();
@@ -609,8 +781,22 @@ public class PeopleStepDefs {
             getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Donald Trump", Keys.ENTER);
             Thread.sleep(4000);
             getDriver().findElement(By.xpath("//th[contains(text(),'Created Date')]")).click();
-            Thread.sleep(2000);
-            getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-down']")).click();
+            try {
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Donald Trump')]/../..//i[@class='fa fa-chevron-down']")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            while (getDriver().findElements(By.xpath("//i[@class='fa fa-chevron-down']")).size() == 0) {
+                getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(Keys.CONTROL, "a", Keys.BACK_SPACE);
+                getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Donald Trump", Keys.ENTER);
+                Thread.sleep(4000);
+                long startTime = System.currentTimeMillis();
+                if ((System.currentTimeMillis() - startTime) == 200000)
+                    System.out.println("Error: Bulk Files are not uploaded");
+                break;
+            }
+
+            getDriver().findElement(By.xpath("//a[contains(text(),'Donald Trump')]/../..//i[@class='fa fa-chevron-down']")).click();
             Thread.sleep(2000);
             getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
             Thread.sleep(2000);
@@ -622,14 +808,53 @@ public class PeopleStepDefs {
             getDriver().findElement(By.xpath("//input[@id='user-search']")).click();
             getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(Keys.CONTROL, "a", Keys.BACK_SPACE);
             getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Narendra Modi", Keys.ENTER);
-            Thread.sleep(4000);
-            getDriver().findElement(By.xpath("//i[@class='fa fa-chevron-down']")).click();
+            try {
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Narendra Modi')]/../..//i[@class='fa fa-chevron-down']")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            while (getDriver().findElements(By.xpath("//i[@class='fa fa-chevron-down']")).size() == 0) {
+                getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(Keys.CONTROL, "a", Keys.BACK_SPACE);
+                getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Narendra Modi", Keys.ENTER);
+                Thread.sleep(4000);
+                long startTime = System.currentTimeMillis();
+                if ((System.currentTimeMillis() - startTime) == 200000)
+                    System.out.println("Error: Bulk Files are not uploaded");
+                break;
+            }
+
+            getDriver().findElement(By.xpath("//a[contains(text(),'Narendra Modi')]/../..//i[@class='fa fa-chevron-down']")).click();
             Thread.sleep(2000);
             getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
             Thread.sleep(2000);
             alert.accept();
             Thread.sleep(2000);
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+        } else if (arg0.equalsIgnoreCase("Manual User")) {
+            getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(email, Keys.ENTER);
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Manual User')]/../..//i[@class='fa fa-chevron-down']")));
+            getDriver().findElement(By.xpath("//a[contains(text(),'Manual User')]/../..//i[@class='fa fa-chevron-down']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='action-call-deleteUser']")));
+            getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
+            Thread.sleep(500);
+            Alert alert = getDriver().switchTo().alert();
+            alert.accept();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+
+            getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
+            while (getDriver().findElements(By.xpath("//ul[@class='header_menu__sections-menu nav navbar-nav']")).size() == 0) {
+                getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
+            }
+            getDriver().findElement(By.xpath("//a[@href='/people']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+            if (getDriver().findElements(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).size() != 0) {
+                getDriver().findElement(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).click();
+            }
+            getDriver().findElement(By.xpath("//div[contains(@class,'link-text')][contains(text(),'New List')]")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-del-folder-del']")));
+            getDriver().findElement(By.xpath("//div[@id='asc-del-folder-del']")).click();
+            getDriver().findElement(By.xpath("//button[@id='asc-del-collection']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
         }
     }
 
@@ -708,7 +933,6 @@ public class PeopleStepDefs {
             System.out.println("Interview Team is already setup for this opportunity");
         }
 
-//        try {
         if (getDriver().findElements(By.xpath("//ul[@class='interview-team team-list asc-list-tile scheduling']")).size() == 0) {
             getDriver().findElement(By.xpath("//button[@id='asc-interview-setup-btn']")).click();
 
@@ -725,7 +949,6 @@ public class PeopleStepDefs {
             if (getDriver().findElements(By.xpath("//div[@id='mui-component-select-Interview Location']")).size() != 0) {
                 getDriver().findElement(By.xpath("//div[@id='mui-component-select-Interview Location']")).click();
                 getDriver().findElement(By.xpath("//div[contains(@class,'Component-menuDropdown')]//li[1]")).click();
-//                getDriver().findElement(By.xpath("//li[contains(text(),'Phone Interview')]")).click();
                 if (getDriver().findElements(By.xpath("//textarea[@id='webLocation-']")).size() != 0) {
                     getDriver().findElement(By.xpath("//textarea[@id='webLocation-']")).sendKeys("Text Area");
                 }
@@ -756,9 +979,6 @@ public class PeopleStepDefs {
                 getDriver().switchTo().window(handle);
             }
         }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     String candidate;
@@ -839,7 +1059,6 @@ public class PeopleStepDefs {
         Thread.sleep(9000);
         String handle = getDriver().getWindowHandle();
         System.out.println(handle);
-//        try {
         if (getDriver().findElements(By.xpath("//a[contains(text(),'opportunity.')]")).size() != 0) {
             getDriver().findElement(By.xpath("//a[contains(text(),'opportunity.')]")).click();
             new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
@@ -855,6 +1074,11 @@ public class PeopleStepDefs {
                 getDriver().findElement(By.xpath("//li[@id='tab-team']")).click();
             }
             new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='asc-interview-setup-btn']")));
+            if (getDriver().findElements(By.xpath("//button[@id='archive-interview-btn']")).size() != 0) {
+                getDriver().findElement(By.xpath("//button[@id='archive-interview-btn']")).click();
+                Thread.sleep(2000);
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='schedule-interview-btn']")));
+            }
             getDriver().findElement(By.xpath("//button[@id='asc-interview-setup-btn']")).click();
 
             Set handles = getDriver().getWindowHandles();
@@ -888,16 +1112,6 @@ public class PeopleStepDefs {
             getDriver().findElement(By.xpath("//p[contains(text(),'Close')]")).click();
             getDriver().switchTo().window(handle);
         }
-
-//        else if (getDriver().findElement(By.xpath("//button[@id='schedule-interview-btn']")).isDisplayed()) {
-//            Thread.sleep(4000);
-//            getDriver().findElement(By.xpath("//button[@id='schedule-interview-btn']")).click();
-//            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Interview')]")));
-//            Thread.sleep(2000);
-//        }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     @And("I do the Interview setup PT")
@@ -978,24 +1192,11 @@ public class PeopleStepDefs {
             e.printStackTrace();
         }
         if (getDriver().findElements(By.xpath("//span[contains(text(),'Select All')]")).size() != 0) {
-//            int size = 0;
-//            size = getDriver().findElements(By.xpath("//span[@class='MuiIconButton-label']")).size();
-//            for (int i = 1; i <= size; i++) {
-                WebElement button = getDriver().findElement(By.xpath("//span[contains(text(),'Select All')]"));
-                JavascriptExecutor jse = (JavascriptExecutor) getDriver();
-                jse.executeScript("arguments[0].click()", button);
-                ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
-                getDriver().findElement(By.xpath("//span[contains(text(),'Select All')]")).click();
-//                try {
-//                    new WebDriverWait(getDriver(), 60).until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[@class='MuiIconButton-label'])[" + i + "]")));
-//                    getDriver().findElement(By.xpath("(//span[@class='MuiIconButton-label'])[" + i + "]")).click();
-//                } catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//                if (getDriver().findElements(By.xpath("//span[contains(text(),'Please assign skills for each interviewer to evaluate.')]")).size() != 0) {
-//                    i = 0;
-//                }
-//            }
+            WebElement button = getDriver().findElement(By.xpath("//span[contains(text(),'Select All')]"));
+            JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+            jse.executeScript("arguments[0].click()", button);
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", button);
+            getDriver().findElement(By.xpath("//span[contains(text(),'Select All')]")).click();
             getDriver().findElement(By.xpath("//p[contains(text(),'NEXT')]")).click();
             new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Data has been saved')]")));
             if (getDriver().findElements(By.xpath("//p[contains(text(),'NEXT')]")).size() != 0) {
@@ -1005,7 +1206,6 @@ public class PeopleStepDefs {
             }
             if (getDriver().findElements(By.xpath("//p[contains(text(),'Resend')]")).size() != 0) {
                 WebElement resend = getDriver().findElement(By.xpath("//p[contains(text(),'Resend')]"));
-//                JavascriptExecutor jse = (JavascriptExecutor) getDriver();
                 jse.executeScript("arguments[0].click()", resend);
                 ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", resend);
                 new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(text(),'Resend')]")));
@@ -1022,7 +1222,6 @@ public class PeopleStepDefs {
             JavascriptExecutor jse = (JavascriptExecutor) getDriver();
             jse.executeScript("arguments[0].click()", send);
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", send);
-//            getDriver().findElement(By.xpath("//p[contains(text(),'Send')]")).click();
             try {
                 new WebDriverWait(getDriver(), 100).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='MuiDialogActions-root MuiDialogActions-spacing']//p[contains(text(),'Send')]")));
                 getDriver().findElement(By.xpath("//div[@class='MuiDialogActions-root MuiDialogActions-spacing']//p[contains(text(),'Send')]")).click();
@@ -1037,21 +1236,7 @@ public class PeopleStepDefs {
             }
         }
 
-//        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(text(),'Send')]")));
-//        getDriver().findElement(By.xpath("//p[contains(text(),'Send')]")).click();
-//        try {
-//            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Interview information has been sent')]")));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        Thread.sleep(2000);
         getDriver().findElement(By.xpath("//p[contains(text(),'CLOSE')]")).click();
-//        Thread.sleep(2000);
         getDriver().switchTo().window(handle);
     }
 
@@ -1070,7 +1255,6 @@ public class PeopleStepDefs {
         new WebDriverWait(getDriver(), 200).until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@id='tab-interview']")));
         getDriver().findElement(By.xpath("//i[@class='fa fa-tag']")).click();
         getDriver().findElement(By.xpath("//li[@id='tab-interview']")).click();
-//        getDriver().findElement(By.xpath("//li[@id='tab-interview']")).click();
         try {
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[contains(@class,'interview-team approved-interviewers-list')]")));
         } catch (Exception e) {
@@ -1089,8 +1273,10 @@ public class PeopleStepDefs {
         } else {
             System.out.println("New Interviewers are NOT added to the Team Members List");
         }
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='archive-interview-btn']")));
-        getDriver().findElement(By.xpath("//button[@id='archive-interview-btn']")).click();
+        WebElement archive = getDriver().findElement(By.xpath("//button[@id='archive-interview-btn']"));
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+        jse.executeScript("arguments[0].click()", archive);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", archive);
         Thread.sleep(2000);
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='schedule-interview-btn']")));
     }

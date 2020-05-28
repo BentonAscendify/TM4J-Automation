@@ -26,6 +26,7 @@ Feature: Talent Community
     And I choose my file to be uploaded by clicking "Upload Your Resume" button TC
     Then "Application" page is displayed TC
     And I fill in empty fields TC
+    And I click and agree to Privacy Policy TC
     And I sign to confirm TC
     And I click on "Submit" button TC
     Then "Dashboard" page is displayed TC
@@ -65,6 +66,7 @@ Feature: Talent Community
     And I click on link text "email address" TC
     Then "Application" page is displayed TC
     And I fill in empty fields TC
+    And I click and agree to Privacy Policy TC
     And I sign to confirm TC
     And I click on "Submit" button TC
     Then "Dashboard" page is displayed TC
@@ -99,6 +101,7 @@ Feature: Talent Community
     And I make sure I haven't applied to that job already TC
     And I click on link text "Tessy QA" TC
     And I click on "Apply Now" button TC
+    And I click and agree to Privacy Policy TC
     And I sign to confirm TC
     And I click on "Submit Application" button TC
     Then success message is displayed TC
@@ -125,6 +128,7 @@ Feature: Talent Community
     And I fill in "Profile Information" fields TC
     And I fill in empty fields TC
     And I answer the survey questions TC
+    And I click and agree to Privacy Policy TC
     And I sign to confirm TC
     And I click on "Submit" button TC
     Then "Dashboard" page is displayed TC

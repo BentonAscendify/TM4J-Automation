@@ -26,14 +26,25 @@ public class MainMenuStepDefs {
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='user-accounts']")));
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sections-toggle']")));
             getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
+            while (getDriver().findElement(By.xpath("//ul[@class='header_menu__sections-menu nav navbar-nav']")).isDisplayed() == false) {
+                getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
+                Thread.sleep(50);
+            }
         } else if (arg0.equalsIgnoreCase("Talent Matching Tab")) {
-            Thread.sleep(1000);
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/talent-matching']")));
-            WebElement TM = getDriver().findElement(By.xpath("//a[@href='/talent-matching']"));
-            JavascriptExecutor jse = (JavascriptExecutor) getDriver();
-            jse.executeScript("arguments[0].scrollIntoView();", TM);
-            getDriver().findElement(By.xpath("//a[@href='/talent-matching']")).click();
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='DefaultFilter']")));
+            try {
+                getDriver().findElement(By.xpath("//a[@href='/talent-matching']")).click();
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='DefaultFilter']")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (getDriver().findElements(By.xpath("//div[@id='DefaultFilter']")).size() == 0) {
+                WebElement TM = getDriver().findElement(By.xpath("//a[@href='/talent-matching']"));
+                JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+                jse.executeScript("arguments[0].scrollIntoView();", TM);
+                getDriver().findElement(By.xpath("//a[@href='/talent-matching']")).click();
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='DefaultFilter']")));
+            }
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='main-content clearfix']")));
             getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
         } else if (arg0.equalsIgnoreCase("Dashboard Tab")) {
@@ -57,14 +68,20 @@ public class MainMenuStepDefs {
             }
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='main-content clearfix']")));
             getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
+            while (getDriver().findElement(By.xpath("//div[@class='sections-dropdown']")).isDisplayed() == false) {
+                getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
+                Thread.sleep(50);
+            }
         } else if (arg0.equalsIgnoreCase("Analytics Tab")) {
-            WebElement element = getDriver().findElement(By.xpath("//ul[contains(@class,'sections-menu nav navbar-nav')]"));
-            JavascriptExecutor jse = (JavascriptExecutor) getDriver();
-            jse.executeScript("arguments[0].scrollIntoView();", element);
-            getDriver().findElement(By.xpath("//a[@href='/analytics']")).click();
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='left-system-panel']")));
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-system-report']")));
-            getDriver().findElement(By.xpath("//div[@class='section-tab']")).click();
+            if (getDriver().findElements(By.xpath("//a[@href='/analytics']")).size() != 0) {
+                WebElement element = getDriver().findElement(By.xpath("//a[@href='/analytics']"));
+                JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+                jse.executeScript("arguments[0].scrollIntoView();", element);
+                getDriver().findElement(By.xpath("//a[@href='/analytics']")).click();
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='left-system-panel']")));
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-system-report']")));
+                getDriver().findElement(By.xpath("//div[@class='section-tab']")).click();
+            }
         } else if (arg0.equalsIgnoreCase("Collections Tab")) {
             Thread.sleep(2000);
             WebElement element = getDriver().findElement(By.xpath("//ul[contains(@class,'sections-menu nav navbar-nav')]"));
@@ -239,6 +256,7 @@ public class MainMenuStepDefs {
             getDriver().findElement(By.xpath("//a[@href='/insights']")).click();
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='insights__menu']")));
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='insights__container']/div[@class='insights__view']")));
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sections-toggle']")));
             getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
         } else if (arg0.equalsIgnoreCase("Marketplace Tab")) {
             Thread.sleep(2000);
