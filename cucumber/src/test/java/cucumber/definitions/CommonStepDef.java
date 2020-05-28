@@ -1,4 +1,4 @@
-package cucumber.CommonStepDefs;
+package cucumber.definitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -8,18 +8,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static cucumber.support.TestContext.getDriver;
+import static cucumber.support.TestContext.getConfig;
 
-public class PROD {
+
+public class CommonStepDef {
 
     @Given("I navigate to {string} page")
     public void iNavigateToPage(String arg0) {
 
         if (arg0.equalsIgnoreCase("Test Community login")) {
-            getDriver().get("https://testcommunity.ascendify.com/");
+            getDriver().get(getConfig().get("testCommunityLogin").toString());
         } else if (arg0.equalsIgnoreCase("TC Login")) {
-            getDriver().get("https://master.ascendify.net/");
+            getDriver().get(getConfig().get("talentCommunityLogin").toString());
         } else if (arg0.equalsIgnoreCase("LinkedIn")) {
-            getDriver().get("https://www.linkedin.com/");
+            getDriver().get(getConfig().get("linkedInLogin").toString());
         }
 
     }
@@ -35,9 +37,9 @@ public class PROD {
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='id_username']")));
         getDriver().findElement(By.xpath("//input[@id='id_username']")).click();
 
-        getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys("tessy.anicattumathew@ascendify.com");
+        getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys(getConfig().get("superAdminUsername").toString());
         getDriver().findElement(By.xpath("//input[@id='id_password']")).click();
-        getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys("Mac123q!");
+        getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys(getConfig().get("superAdminPassword").toString());
 
         getDriver().findElement(By.xpath("//button[@id='asc-signin-btn']")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu')]")));
@@ -48,8 +50,8 @@ public class PROD {
     public void iSignInToTest() {
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='id_username']")));
 
-        getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys("tessy.anicattumathew@ascendify.com");
-        getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys("Mac123q!");
+        getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys(getConfig().get("superAdminUsername").toString());
+        getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys(getConfig().get("superAdminPassword").toString());
 
         getDriver().findElement(By.xpath("//button[@id='asc-signin-btn']")).click();
     }
@@ -58,15 +60,16 @@ public class PROD {
     public void iSignInToTalent() {
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='id_username']")));
 
-        getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys("tessy@gmail.com");
-        getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys("Ascendify246!");
+        getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys(getConfig().get("candidateUsername").toString());
+        getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys(getConfig().get("candidatePassword").toString());
     }
 
     @And("I sign in to LinkedIn")
     public void iSignInToLinkedIn() throws Throwable {
         Thread.sleep(2000);
-        getDriver().findElement(By.xpath("//input[@id='username']")).sendKeys("tessy.anicattumathew+26@ascendify.com");
+        getDriver().findElement(By.xpath("//input[@id='username']")).sendKeys(getConfig().get("linkedInUsername").toString());
         Thread.sleep(2000);
-        getDriver().findElement(By.xpath("//input[@id='password']")).sendKeys("Mac123q!");
+        getDriver().findElement(By.xpath("//input[@id='password']")).sendKeys(getConfig().get("linkedInPassword").toString());
     }
+
 }

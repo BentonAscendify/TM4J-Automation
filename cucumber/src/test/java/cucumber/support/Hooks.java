@@ -6,10 +6,12 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import java.net.MalformedURLException;
+
 public class Hooks {
 
     @Before(order = 0)
-    public void scenarioStart() {
+    public void scenarioStart() throws Exception {
         TestContext.initialize();
         TestContext.getDriver().manage().deleteAllCookies();
     }

@@ -66,8 +66,6 @@ Feature: People Tab
     Then "Main Menu" page is displayed PT
     And I click on "People" tab PT
     And I click on the right arrow of a candidate PT
-#    And I consider for new opportunity PT
-#    Then candidate has been "Applied to Opportunity" PT
     And I click on "Responses" tab PT
     And I edit and save all questions PT
 
