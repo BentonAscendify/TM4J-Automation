@@ -1,5 +1,7 @@
 package cucumber.support;
 
+import groovy.util.ConfigObject;
+import groovy.util.ConfigSlurper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -14,25 +16,44 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 public class TestContext {
 
     private static WebDriver driver;
+    private static ConfigObject config;
 
     public static WebDriver getDriver() {
         return driver;
     }
 
-    public static void initialize() {
-        String cucumberHeadlessProp = System.getProperty("cucumber.headless");
-        boolean isHeadless = cucumberHeadlessProp != null && !cucumberHeadlessProp.isEmpty() ? Boolean.valueOf(cucumberHeadlessProp): false;
+    public static ConfigObject getConfig() {
+        return config;
+    }
+
+    public static void initialize() throws MalformedURLException {
+        String cucumberHeadlessProp = getProperty("cucumber.headless", "false");
+        boolean isHeadless = Boolean.valueOf(cucumberHeadlessProp);
         System.out.println("Automation running in headless mode ? " + isHeadless);
+
+        String environment = getProperty("cucumber.config.env", "uat");
+        String configPath = getProperty("cucumber.config.path", "config.groovy");
+        File configFile = new File(configPath);
+        URL configFileUrl = null;
+        if (!configFile.exists()) {
+            System.out.println("Checking file in classpath as config object is missing in given path");
+            configFileUrl = TestContext.class.getClassLoader().getResource("config.groovy");
+            System.out.println("Checking file in classpath: " + configFileUrl);
+        } else {
+            configFileUrl = configFile.toURI().toURL();
+        }
+
+        config = new ConfigSlurper(environment).parse(configFileUrl);
+
         initialize("chrome", isHeadless);
     }
 
@@ -94,6 +115,16 @@ public class TestContext {
                 break;
             default:
                 throw new RuntimeException("Driver is not implemented for: " + browser);
+        }
+    }
+
+    private static String getProperty(String name, String defaultValue) {
+        if (System.getProperties().containsKey(name)) {
+            return System.getProperty(name);
+        } else if (System.getenv().containsKey(name)) {
+            return System.getenv().get(name);
+        } else {
+            return defaultValue;
         }
     }
 }
