@@ -2,7 +2,7 @@
 Feature: Main Menu Tab
 
   Scenario: Check whether all tabs are loading properly
-    Given I navigate to "Test Community login" page
+    Given I navigate to "CRM login" page
     When I sign in as super admin
     And I check whether "Main Menu Tab" is loading properly MM
     And I check whether "Admin Console" is loading properly MM

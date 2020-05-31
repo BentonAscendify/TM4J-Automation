@@ -16,7 +16,7 @@ public class CommonStepDef {
     @Given("I navigate to {string} page")
     public void iNavigateToPage(String arg0) {
 
-        if (arg0.equalsIgnoreCase("Test Community login")) {
+        if (arg0.equalsIgnoreCase("CRM login")) {
             getDriver().get(getConfig().get("testCommunityLogin").toString());
         } else if (arg0.equalsIgnoreCase("TC Login")) {
             getDriver().get(getConfig().get("talentCommunityLogin").toString());
@@ -46,7 +46,7 @@ public class CommonStepDef {
         getDriver().findElement(By.xpath("//span[contains(text(),'Main Menu')]")).isDisplayed();
     }
 
-    @When("I sign in to TestCommunity")
+    @When("I sign in to CRM")
     public void iSignInToTest() {
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='id_username']")));
 

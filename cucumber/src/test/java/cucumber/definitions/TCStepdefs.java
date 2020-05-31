@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
@@ -31,13 +29,7 @@ public class TCStepdefs<session> {
             getDriver().findElement(By.xpath("//a[contains(text(),'Join Our Team »')]")).click();
         } else if (arg0.equalsIgnoreCase("Submit")) {
             getDriver().findElement(By.xpath("//button[@id='asc-signup-main-button']")).click();
-            Thread.sleep(2000);
-            Thread.sleep(2000);
-            Thread.sleep(2000);
-            Thread.sleep(2000);
-            Thread.sleep(2000);
-            Thread.sleep(2000);
-            Thread.sleep(2000);
+            Thread.sleep(4000);
         } else if (arg0.equalsIgnoreCase("Apply Now")) {
             new WebDriverWait(getDriver(), 200).until(ExpectedConditions.elementToBeClickable(By.id("asc-job-apply-btn")));
             getDriver().findElement(By.xpath("//button[@id='asc-job-apply-btn']")).click();
@@ -88,7 +80,7 @@ public class TCStepdefs<session> {
     @Then("{string} page is displayed TC")
     public void pageIsDisplayed(String arg0) throws Throwable {
         if (arg0.equalsIgnoreCase("Application")) {
-            Thread.sleep(2000);
+            new WebDriverWait(getDriver(), 200).until(ExpectedConditions.elementToBeClickable(By.xpath("//h2[contains(text(),'Information')]")));
             getDriver().findElement(By.xpath("//h2[contains(text(),'Information')]")).isDisplayed();
         } else if (arg0.equalsIgnoreCase("Dashboard")) {
             try {
@@ -159,6 +151,8 @@ public class TCStepdefs<session> {
                 WebElement PN = getDriver().findElement(By.xpath("//input[@id='asc-signup-phonenumber']"));
                 String textInsidePN = PN.getAttribute("value");
                 if (textInsidePN.isEmpty()) {
+                    getDriver().findElement(By.xpath("//input[@id='asc-signup-phonenumber']")).sendKeys(Keys.CONTROL, "a");
+                    getDriver().findElement(By.xpath("//input[@id='asc-signup-phonenumber']")).sendKeys(Keys.BACK_SPACE);
                     getDriver().findElement(By.xpath("//input[@id='asc-signup-phonenumber']")).sendKeys("609-602-2709");
                 }
 
@@ -265,6 +259,8 @@ public class TCStepdefs<session> {
         }
 
         if (getDriver().findElements(By.xpath("//input[@id='asc-signup-phonenumber']")).size() != 0) {
+            getDriver().findElement(By.xpath("//input[@id='asc-signup-phonenumber']")).sendKeys(Keys.CONTROL, "a");
+            getDriver().findElement(By.xpath("//input[@id='asc-signup-phonenumber']")).sendKeys(Keys.BACK_SPACE);
             getDriver().findElement(By.xpath("//input[@id='asc-signup-phonenumber']")).sendKeys("202-555-0184");
         }
 
@@ -336,7 +332,11 @@ public class TCStepdefs<session> {
         }
 
         if (getDriver().findElements(By.xpath("//input[@id='ct_sms']")).size() != 0) {
-            getDriver().findElement(By.xpath("//input[@id='ct_sms']")).click();
+            try {
+                getDriver().findElement(By.xpath("//input[@id='ct_sms']")).click();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         if (getDriver().findElements(By.xpath("//input[@name='ascendify[communication_preference][automated_sms_sys_msg]']")).size() != 0) {
@@ -414,6 +414,7 @@ public class TCStepdefs<session> {
     public void iSearchForInSearchBox(String arg0) throws Throwable {
         getDriver().findElement(By.xpath("//input[@id='asc-map-primary-search']")).click();
         getDriver().findElement(By.xpath("//input[@id='asc-map-primary-search']")).sendKeys(arg0);
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all']")));
         getDriver().findElement(By.xpath("//i[@class='header-search-action-btn fa fa-search header-icon highlight-bg fa fa-search']")).click();
         Thread.sleep(2000);
     }
@@ -455,38 +456,14 @@ public class TCStepdefs<session> {
         try {
             Actions actions = new Actions(getDriver());
             actions.moveToElement(getDriver().findElement(By.id("asc-alt-upload-resume")));
-            getDriver().findElement(By.id("asc-alt-upload-resume")).click();
-            Thread.sleep(2000);
             URL resumeUrl = getClass().getClassLoader().getResource("resumes/Profile.pdf");
             if (resumeUrl != null) {
                 File resumeFile = new File(resumeUrl.getFile());
-                uploadFile(resumeFile.getAbsolutePath());
+                getDriver().findElement(By.xpath("//input[@name='asc_resume']")).sendKeys(resumeFile.getAbsolutePath());
                 Thread.sleep(2000);
             } else {
                 throw new Exception("Failed to find resume absolute path");
             }
-        } catch (Exception exp) {
-            exp.printStackTrace();
-        }
-    }
-
-    private static void setClipboardData(String string) {
-        StringSelection stringSelection = new StringSelection(string);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-    }
-
-    private static void uploadFile(String fileLocation) {
-        try {
-            setClipboardData(fileLocation);
-            Robot robot = new Robot();
-
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_V);
-            Thread.sleep(2000);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
         } catch (Exception exp) {
             exp.printStackTrace();
         }
@@ -514,10 +491,6 @@ public class TCStepdefs<session> {
                     getDriver().findElement(By.xpath("//button[contains(text(),'Remove')]")).click();
                     Thread.sleep(4000);
                 }
-//                getDriver().navigate().refresh();
-//                JavascriptExecutor jse = (JavascriptExecutor) getDriver();
-//                jse.executeScript("window.scrollBy(0,-250)");
-//                getDriver().findElement(By.xpath("//li[@id='tab-profile']")).click();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -535,7 +508,7 @@ public class TCStepdefs<session> {
 
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='asc-summary']//button[contains(text(),'Add')]")));
             getDriver().findElement(By.xpath("//div[@id='asc-summary']//button[contains(text(),'Add')]")).click();
-            ;
+
             getDriver().findElement(By.xpath("//div[@id='asc-summary']//textarea[@id='asc_blurb']")).sendKeys("Accomplished search engine optimization specialist with over 12 years of experience in digital marketing.");
             getDriver().findElement(By.xpath("//button[@id='asc-dynamic-save-button']")).click();
 
@@ -654,11 +627,6 @@ public class TCStepdefs<session> {
             getDriver().findElement(By.xpath("//form[@id='asc-add-trainings-form']//textarea[@id='asc-detail']")).sendKeys("Senior training professionals partnering with top leadership on workforce development and skill-up strategies.");
             getDriver().findElement(By.xpath("//button[@id='asc-add-trainings-btn']")).click();
 
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='asc-abilities']")));
-            getDriver().findElement(By.xpath("//div[@id='asc-abilities']")).click();
-            getDriver().findElement(By.xpath("//div[@id='asc-abilities']//textarea[@id='asc_blurb']")).sendKeys("Communication", Keys.ENTER, "Teamwork", Keys.ENTER, "Adaptability", Keys.ENTER, "Problem Solving", Keys.ENTER, "Creativity");
-            getDriver().findElement(By.xpath("//button[@id='asc-dynamic-save-button']")).click();
-
             try {
                 new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='asc-additional']//button[contains(text(),'Add')]")));
                 getDriver().findElement(By.xpath("//div[@id='asc-additional']//button[contains(text(),'Add')]")).click();
@@ -667,6 +635,11 @@ public class TCStepdefs<session> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='asc-abilities']")));
+            getDriver().findElement(By.xpath("//div[@id='asc-abilities']")).click();
+            getDriver().findElement(By.xpath("//div[@id='asc-abilities']//textarea[@id='asc_blurb']")).sendKeys("Communication", Keys.ENTER, "Teamwork", Keys.ENTER, "Adaptability", Keys.ENTER, "Problem Solving", Keys.ENTER, "Creativity");
+            getDriver().findElement(By.xpath("//button[@id='asc-dynamic-save-button']")).click();
 
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='asc-volunteer']")));
             getDriver().findElement(By.xpath("//div[@id='asc-volunteer']")).click();
@@ -724,6 +697,18 @@ public class TCStepdefs<session> {
                         try {
                             getDriver().findElement(By.xpath("(//h4[contains(text(),'Profile Information')]/../..//div[contains(@id,'asc_question_csvq')])[" + y + "]")).click();
                             getDriver().findElement(By.xpath("(//h4[contains(text(),'Profile Information')]/../..//div[contains(@id,'asc_question_csvq')])[" + y + "]/..//option[2]")).click();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                if (getDriver().findElements(By.xpath("//h4[contains(text(),'Profile Information')]/../..//div[contains(@id,'asc_question_csvq')]")).size() != 0) {
+                    int x = getDriver().findElements(By.xpath("//h4[contains(text(),'Profile Information')]/../..//div[contains(@id,'asc_question_csvq')]")).size();
+                    for (int y = 1; y <= x; y++) {
+                        try {
+                            getDriver().findElement(By.xpath("(//h4[contains(text(),'Profile Information')]/../..//div[contains(@id,'asc_question_csvq')])[" + y + "]")).click();
+                            getDriver().findElement(By.xpath("(//h4[contains(text(),'Profile Information')]/../..//div[contains(@id,'asc_question_csvq')])[" + y + "]//ul[@class='chosen-results']//li[2]")).click();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -812,14 +797,12 @@ public class TCStepdefs<session> {
             }
 
             if (getDriver().findElements(By.xpath("//div[@id='asc-user-cc305-data']")).size() != 0) {
-//            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='asc-user-cc305-data']//button[contains(text(),'Edit')]")));
                 getDriver().findElement(By.xpath("//div[@id='asc-user-cc305-data']")).click();
 
                 if (getDriver().findElements(By.xpath("//div[@id='asc-user-cc305-data']//div[contains(@id,'asc_question_csvq')]")).size() != 0) {
                     int x = getDriver().findElements(By.xpath("//div[@id='asc-user-cc305-data']//div[contains(@id,'asc_question_csvq')]")).size();
                     for (int y = 1; y <= x; y++) {
                         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@id='asc-user-cc305-data']//div[contains(@id,'asc_question_csvq')])[" + y + "]")));
-                        getDriver().findElement(By.xpath("//div[@id='asc-user-cc305-data']")).click();
                         getDriver().findElement(By.xpath("(//div[@id='asc-user-cc305-data']//div[contains(@id,'asc_question_csvq')])[" + y + "]")).click();
                         if (getDriver().findElements(By.xpath("(//div[@id='asc-user-cc305-data']//div[contains(@id,'asc_question_csvq')])[" + y + "]/..//li[2]")).size() != 0) {
                             try {
@@ -850,9 +833,21 @@ public class TCStepdefs<session> {
                 }
             }
 
+            if (getDriver().findElements(By.xpath("//h4[contains(text(),'Account Management')]")).size() != 0) {
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[contains(text(),'Account Management')]")));
+                getDriver().findElement(By.xpath("//span[contains(text(),'Change Password')]")).click();
+                if (getDriver().findElements(By.xpath("//span[@id='asc-btn-reset-cancel']")).size() != 0) {
+                    new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@id='asc-btn-reset-cancel']")));
+                    getDriver().findElement(By.xpath("//span[@id='asc-btn-reset-cancel']")).click();
+                } else if (getDriver().findElement(By.xpath("//button[@class='btn btn-default asc-cancel']")).isDisplayed() == true) {
+                    new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[contains(text(),'Account Management')]/../..//button[@class='btn btn-default asc-cancel']")));
+                    getDriver().findElement(By.xpath("//h4[contains(text(),'Account Management')]/../..//button[@class='btn btn-default asc-cancel']")).click();
+                }
+            }
+
             if (getDriver().findElements(By.xpath("//h4[contains(text(),'EEO Information')]")).size() != 0) {
                 new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[contains(text(),'EEO Information')]")));
-                getDriver().findElement(By.xpath("//div[@id='asc-user-eeoc-data']//button[@class='btn btn-primary asc-edit-icon btn-sm'][contains(text(),'Edit')]")).click();
+                getDriver().findElement(By.xpath("//div[@id='asc-personal']/div[@id='asc-user-eeoc-data']/div[@class='asc-edit-block-inner']/div[@class='asc-edit-div']/div[1]")).click();
 
                 if (getDriver().findElements(By.xpath("//h4[contains(text(),'EEO Information')]/../..//div[contains(@id,'asc_question_csvq')]")).size() != 0) {
                     int x = getDriver().findElements(By.xpath("//h4[contains(text(),'EEO Information')]/../..//div[contains(@id,'asc_question_csvq')]")).size();
@@ -862,6 +857,18 @@ public class TCStepdefs<session> {
                             getDriver().findElement(By.xpath("(//h4[contains(text(),'EEO Information')]/../..//div[contains(@id,'asc_question_csvq')])[" + y + "]/..//option[2]")).click();
                         } catch (Exception e) {
                             e.printStackTrace();
+                        }
+                    }
+                }
+
+                if (getDriver().findElements(By.xpath("//div[@id='asc-user-vevraa-data']")).size() != 0) {
+                    getDriver().findElement(By.xpath("//div[@id='asc-user-vevraa-data']")).click();
+                    if (getDriver().findElements(By.xpath("//div[@id='asc-user-vevraa-data']//div[contains(@id,'asc_question_csvq')]//a[@class='chosen-single']")).size() != 0) {
+                        int g = getDriver().findElements(By.xpath("//div[@id='asc-user-vevraa-data']//div[contains(@id,'asc_question_csvq')]//a[@class='chosen-single']")).size();
+                        for (int f = 1; f <= g; f++) {
+                            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@id='asc-user-vevraa-data']//div[contains(@id,'asc_question_csvq')]//a[@class='chosen-single'])[" + f + "]")));
+                            getDriver().findElement(By.xpath("(//div[@id='asc-user-vevraa-data']//div[contains(@id,'asc_question_csvq')]//a[@class='chosen-single'])[" + f + "]")).click();
+                            getDriver().findElement(By.xpath("(//div[@id='asc-user-vevraa-data']//div[contains(@id,'asc_question_csvq')]//a[@class='chosen-single'])[" + f + "]/..//li[2]")).click();
                         }
                     }
                 }
@@ -879,27 +886,8 @@ public class TCStepdefs<session> {
                     }
                 }
 
-//                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='asc_question_csvq_ddd1121493_chosen']")));
-//                getDriver().findElement(By.xpath("//div[@id='asc_question_csvq_ddd1121493_chosen']")).click();
-//                getDriver().findElement(By.xpath("//div[@id='asc_question_csvq_ddd1121493_chosen']//input")).sendKeys("Asian", Keys.ENTER);
-//                getDriver().findElement(By.xpath("//div[@id='asc_question_csvq_d621121492_chosen']")).click();
-//                getDriver().findElement(By.xpath("//div[@id='asc_question_csvq_d621121492_chosen']//input")).sendKeys("Female", Keys.ENTER);
-//                getDriver().findElement(By.xpath("//div[@id='asc_question_csvq_fb71121491_chosen']")).click();
-//                getDriver().findElement(By.xpath("//div[@id='asc_question_csvq_fb71121491_chosen']//input")).sendKeys("I identify as one or more of the classifications of protected veteran listed above", Keys.ENTER);
                 getDriver().findElement(By.xpath("//div[@id='asc-user-eeoc-data']")).click();
                 getDriver().findElement(By.xpath("//div[@id='asc-user-eeoc-data']//button[@id='asc-dynamic-save-button']")).click();
-            }
-
-            if (getDriver().findElements(By.xpath("//h4[contains(text(),'Account Management')]")).size() != 0) {
-                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[contains(text(),'Account Management')]")));
-                getDriver().findElement(By.xpath("//span[contains(text(),'Change Password')]")).click();
-                if (getDriver().findElements(By.xpath("//span[@id='asc-btn-reset-cancel']")).size() != 0) {
-                    new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@id='asc-btn-reset-cancel']")));
-                    getDriver().findElement(By.xpath("//span[@id='asc-btn-reset-cancel']")).click();
-                } else if (getDriver().findElements(By.xpath("//button[@class='btn btn-default asc-cancel']")).size() != 0) {
-                    new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='btn btn-default asc-cancel']")));
-                    (getDriver().findElement(By.xpath("//button[@class='btn btn-default asc-cancel']"))).click();
-                }
             }
 
             if (getDriver().findElements(By.xpath("//h4[contains(text(),'Pipelines')]")).size() != 0) {

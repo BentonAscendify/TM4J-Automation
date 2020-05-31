@@ -2,8 +2,8 @@
 Feature: Admin Console
 
   Scenario: Add new user via User Accounts
-    Given I navigate to "Test Community login" page
-    When I sign in to TestCommunity
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
     Then "Main Menu" page is displayed AC
     And I go to Admin Console AC
     And I click on "New" button AC

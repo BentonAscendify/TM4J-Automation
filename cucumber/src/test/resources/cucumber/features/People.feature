@@ -2,8 +2,8 @@
 Feature: People Tab
 
   Scenario: Add new user manually
-    Given I navigate to "Test Community login" page
-    When I sign in to TestCommunity
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
     Then "Main Menu" page is displayed PT
     And I click on "People" tab PT
     And I click on "New" button PT
@@ -12,11 +12,12 @@ Feature: People Tab
     And I click on "Add Profile" button PT
     Then "New user was added" message is displayed PT
     And I make sure that Organize functions in the form are working as expected PT
+    Then I search for user by email in the global bar at top PT
     And I clean up "Manual User" PT
 
   Scenario: Add new user by uploading a CSV file
-    Given I navigate to "Test Community login" page
-    When I sign in to TestCommunity
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
     Then "Main Menu" page is displayed PT
     And I click on "People" tab PT
     And I click on "New" button PT
@@ -29,8 +30,8 @@ Feature: People Tab
     And I clean up "CSV" PT
 
   Scenario: Bulk Add People
-    Given I navigate to "Test Community login" page
-    When I sign in to TestCommunity
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
     Then "Main Menu" page is displayed PT
     And I click on "People" tab PT
     And I click on "New" button PT
@@ -42,8 +43,8 @@ Feature: People Tab
     And I clean up "Bulk" PT
 
   Scenario: Consider candidates for an opportunity
-    Given I navigate to "Test Community login" page
-    When I sign in to TestCommunity
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
     Then "Main Menu" page is displayed PT
     And I click on "People" tab PT
     And I click on the right arrow of a candidate PT
@@ -51,8 +52,8 @@ Feature: People Tab
     Then candidate has been "Applied to Opportunity" PT
 
   Scenario: Moving candidates through different hiring status
-    Given I navigate to "Test Community login" page
-    When I sign in to TestCommunity
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
     Then "Main Menu" page is displayed PT
     And I click on "People" tab PT
     And I click on the right arrow of a candidate PT
@@ -61,8 +62,8 @@ Feature: People Tab
     And I move the candidate through different hiring status to Onsite Interview PT
 
   Scenario: Edit/save responses
-    Given I navigate to "Test Community login" page
-    When I sign in to TestCommunity
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
     Then "Main Menu" page is displayed PT
     And I click on "People" tab PT
     And I click on the right arrow of a candidate PT
@@ -70,15 +71,15 @@ Feature: People Tab
     And I edit and save all questions PT
 
   Scenario: Drag n Drop candidates to folder
-    Given I navigate to "Test Community login" page
-    When I sign in to TestCommunity
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
     Then "Main Menu" page is displayed PT
     And I click on "People" tab PT
     And I drag and drop candidates to folder PT
 
   Scenario: Set up Interview kit
-    Given I navigate to "Test Community login" page
-    When I sign in to TestCommunity
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
     Then "Main Menu" page is displayed PT
     And I go to my profile to find my organization PT
     And I find an opportunity associated with my organization PT

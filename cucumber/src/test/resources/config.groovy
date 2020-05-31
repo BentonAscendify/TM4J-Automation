@@ -10,7 +10,7 @@ environments {
         superAdminUsername = "tessy.mathew@ascendify.com"
         superAdminPassword = "Ascendify246!"
 
-        candidateUsername = "tessy.anicattumathew+4@ascendify.com"
+        candidateUsername = "tessy@gmail.com"
         candidatePassword = "Ascendify246!"
     }
 
@@ -41,11 +41,10 @@ environments {
         testCommunityLogin = "https://webdriver.ascendify.works/"
         talentCommunityLogin = "http://webdriver.client.ascendify.works/"
 
-        superAdminUsername = "admin@ascendify.com"
-        superAdminPassword = "&G3tty"
+        superAdminUsername = "tessy.anicattumathew@ascendify.com"
+        superAdminPassword = "Mac123q!"
 
         candidateUsername = "tessy@gmail.com"
         candidatePassword = "Ascendify246!"
     }
-
 }

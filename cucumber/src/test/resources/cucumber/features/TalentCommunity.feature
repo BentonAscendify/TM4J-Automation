@@ -13,7 +13,7 @@ Feature: Talent Community
     And I click and agree to Privacy Policy TC
     And I click on "Submit" button TC
     And "Dashboard" page is displayed TC
-    Then I navigate to "Test Community login" page
+    Then I navigate to "CRM login" page
     And I sign in as super admin
     And I clean up TC
 
@@ -30,7 +30,7 @@ Feature: Talent Community
     And I sign to confirm TC
     And I click on "Submit" button TC
     Then "Dashboard" page is displayed TC
-    Then I navigate to "Test Community login" page
+    Then I navigate to "CRM login" page
     And I sign in as super admin
     And I clean up TC
 
@@ -53,7 +53,7 @@ Feature: Talent Community
     And I click and agree to Privacy Policy TC
     And I click on "Submit" button TC
     Then "Dashboard" page is displayed TC
-    Then I navigate to "Test Community login" page
+    Then I navigate to "CRM login" page
     And I sign in as super admin
     And I clean up TC
 
@@ -70,7 +70,7 @@ Feature: Talent Community
     And I sign to confirm TC
     And I click on "Submit" button TC
     Then "Dashboard" page is displayed TC
-    Then I navigate to "Test Community login" page
+    Then I navigate to "CRM login" page
     And I sign in as super admin
     And I clean up TC
 
@@ -132,7 +132,7 @@ Feature: Talent Community
     And I sign to confirm TC
     And I click on "Submit" button TC
     Then "Dashboard" page is displayed TC
-    Then I navigate to "Test Community login" page
+    Then I navigate to "CRM login" page
     And I sign in as super admin
     And I clean up TC
 
