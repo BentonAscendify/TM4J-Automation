@@ -52,6 +52,7 @@ public class ACStepDefs {
     }
 
     String email;
+    String list;
 
     @Then("I manually add new user's profile AC")
     public void iManuallyAddNewUserSProfilePT() throws Throwable {
@@ -118,7 +119,9 @@ public class ACStepDefs {
             getDriver().findElement(By.xpath("//div[@id='mylist']//div[@class='Organize_Folder']//select[contains(@name,'ascendify[folders]')]//option[1]")).click();
         }
         getDriver().findElement(By.xpath("//a[@class='pull-right addToList']")).click();
-        getDriver().findElement(By.xpath("//input[@placeholder='Name your list']")).sendKeys("New List");
+        String uuid = UUID.randomUUID().toString();
+        getDriver().findElement(By.xpath("//input[@placeholder='Name your list']")).sendKeys(uuid);
+        list = uuid;
 
         getDriver().findElement(By.xpath("//a[contains(text(),'My Open Requisitions')]")).click();
         if (getDriver().findElements(By.xpath("//div[@id='openRequisitions']//div[@class='Organize_Folder']//select[contains(@name,'ascendify[folders]')]//option[1]")).size() != 0) {
@@ -184,8 +187,8 @@ public class ACStepDefs {
         if (getDriver().findElements(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).size() != 0) {
             getDriver().findElement(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).click();
         }
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'link-text')][contains(text(),'New List')]")));
-        getDriver().findElement(By.xpath("//div[contains(@class,'link-text')][contains(text(),'New List')]")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'link-text')][contains(text(),'" + list + "')]")));
+        getDriver().findElement(By.xpath("//div[contains(@class,'link-text')][contains(text(),'" + list + "')]")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-sort-by-div']")));
         getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
         getDriver().findElement(By.xpath("//*[@data-field='client_users.created DESC']")).click();
@@ -333,7 +336,7 @@ public class ACStepDefs {
             if (getDriver().findElements(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).size() != 0) {
                 getDriver().findElement(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).click();
             }
-            getDriver().findElement(By.xpath("//div[contains(@class,'link-text')][contains(text(),'New List')]")).click();
+            getDriver().findElement(By.xpath("//div[contains(@class,'link-text')][contains(text(),'" + list + "')]")).click();
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-del-folder-del']")));
             getDriver().findElement(By.xpath("//div[@id='asc-del-folder-del']")).click();
             getDriver().findElement(By.xpath("//button[@id='asc-del-collection']")).click();

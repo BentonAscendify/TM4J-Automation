@@ -2,8 +2,8 @@
 Feature: Organizations
 
   Scenario: Add new user via Hiring Team
-    Given I navigate to "Test Community login" page
-    When I sign in to TestCommunity
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
     Then "Main Menu" page is displayed ORG
     And I go to "Organizations" Tab ORG
     And I choose an organization ORG

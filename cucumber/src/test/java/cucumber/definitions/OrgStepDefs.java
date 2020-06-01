@@ -129,7 +129,10 @@ public class OrgStepDefs {
     @And("I click on {string} button ORG")
     public void iClickOnButton(String arg0) throws Throwable {
         if (arg0.equalsIgnoreCase("Add Profile")) {
-            getDriver().findElement(By.xpath("//button[@id='asc-add-user-btn']")).click();
+            while(getDriver().findElements(By.xpath("//button[@id='asc-add-user-btn']")).size()!=0) {
+                getDriver().findElement(By.xpath("//button[@id='asc-add-user-btn']")).click();
+                Thread.sleep(500);
+            }
         }
     }
 
@@ -186,6 +189,18 @@ public class OrgStepDefs {
         if (getDriver().findElements(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).size() != 0) {
             getDriver().findElement(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).click();
         }
+        int retry = 0;
+        while (getDriver().findElements(By.xpath("//div[contains(@class,'link-text')][contains(text(),'" + list + "')]")).size()!=0) {
+            getDriver().navigate().refresh();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+            if (getDriver().findElements(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).size() != 0) {
+                getDriver().findElement(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).click();
+            }
+            if (retry < 10) {
+                break;
+            }
+            retry++;
+        }
         getDriver().findElement(By.xpath("//div[contains(@class,'link-text')][contains(text(),'" + list + "')]")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-sort-by-div']")));
         getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
@@ -195,9 +210,15 @@ public class OrgStepDefs {
 
         if (getDriver().findElements(By.xpath("//span[contains(text(),'My List')]/../..//li[1]//a[1]")).size() != 0) {
             getDriver().findElement(By.xpath("//span[contains(text(),'My List')]/../..//li[1]//a[1]")).click();
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-sort-by-div']")));
-            getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
-            getDriver().findElement(By.xpath("//*[@data-field='client_users.created DESC']")).click();
+            try {
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-sort-by-div']")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).isDisplayed() == true) {
+                getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
+                getDriver().findElement(By.xpath("//*[@data-field='client_users.created DESC']")).click();
+            }
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
             getDriver().findElement(By.xpath("(//div[@class='asc-list-inner-div'])[1]//div[@class='link asc-list-name highlight'][contains(text(),'Manual User')]")).isDisplayed();
         }
@@ -223,8 +244,14 @@ public class OrgStepDefs {
         if (getDriver().findElements(By.xpath("(//span[contains(text(),'My Pipeline')]/../..//a[1]/..//ul[1]//li[1]//a[1])[1]")).size() != 0) {
             getDriver().findElement(By.xpath("(//span[contains(text(),'My Pipeline')]/../..//a[1]/..//ul[1]//li[1]//a[1])[1]")).click();
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
-            getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
-            getDriver().findElement(By.xpath("//*[@data-field='client_users.created DESC']")).click();
+            if (getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).isDisplayed() == true) {
+                try {
+                    getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();
+                    getDriver().findElement(By.xpath("//*[@data-field='client_users.created DESC']")).click();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
             getDriver().findElement(By.xpath("(//div[@class='asc-list-inner-div'])[1]//div[@class='link asc-list-name highlight'][contains(text(),'Manual User')]")).isDisplayed();
         }
@@ -262,6 +289,9 @@ public class OrgStepDefs {
             getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(email, Keys.ENTER);
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Manual User')]/../..//i[@class='fa fa-chevron-down']")));
             getDriver().findElement(By.xpath("//a[contains(text(),'Manual User')]/../..//i[@class='fa fa-chevron-down']")).click();
+            while (getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).isDisplayed() == false) {
+                getDriver().findElement(By.xpath("//a[contains(text(),'Manual User')]/../..//i[@class='fa fa-chevron-down']")).click();
+            }
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='action-call-deleteUser']")));
             getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
             Thread.sleep(500);
@@ -269,6 +299,7 @@ public class OrgStepDefs {
             alert.accept();
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
 
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sections-toggle']")));
             getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
             while (getDriver().findElements(By.xpath("//ul[@class='header_menu__sections-menu nav navbar-nav']")).size() == 0) {
                 getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
