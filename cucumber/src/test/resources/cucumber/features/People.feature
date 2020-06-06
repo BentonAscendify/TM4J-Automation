@@ -15,6 +15,17 @@ Feature: People Tab
     Then I search for user by email in the global bar at top PT
     And I clean up "Manual User" PT
 
+  Scenario: Upload resume to upper right cloud icon
+    Given I navigate to "CRM login" page
+    When I sign in to CRM
+    Then "Main Menu" page is displayed PT
+    And I click on "People" tab PT
+    And I choose my file to be uploaded by clicking "Cloud Icon" button PT
+    Then I fill in empty fields for the profile PT
+    And I click on "Add Profile" button PT
+    Then "New user was added" message is displayed PT
+    And I clean up "Cloud User" PT
+
   Scenario: Add new user by uploading a CSV file
     Given I navigate to "CRM login" page
     When I sign in to CRM

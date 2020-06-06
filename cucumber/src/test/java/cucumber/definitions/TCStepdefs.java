@@ -1,6 +1,7 @@
 package cucumber.definitions;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.*;
@@ -13,6 +14,7 @@ import java.awt.*;
 import java.io.File;
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import static cucumber.support.TestContext.getDriver;
@@ -236,6 +238,7 @@ public class TCStepdefs<session> {
         }
         WebElement Email = getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']"));
         String textInsideEmail = Email.getAttribute("value");
+        email = textInsideEmail;
         if (textInsideEmail.isEmpty()) {
             final String randomEmail = randomEmail();
             getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).sendKeys(randomEmail);
@@ -245,6 +248,7 @@ public class TCStepdefs<session> {
             getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).click();
             email = randomEmail;
         }
+
         WebElement PWD = getDriver().findElement(By.xpath("//input[@id='password1']"));
         String textInsidePWD = PWD.getAttribute("value");
         if (textInsidePWD.isEmpty()) {
@@ -340,7 +344,12 @@ public class TCStepdefs<session> {
         }
 
         if (getDriver().findElements(By.xpath("//input[@name='ascendify[communication_preference][automated_sms_sys_msg]']")).size() != 0) {
-            getDriver().findElement(By.xpath("//input[@name='ascendify[communication_preference][automated_sms_sys_msg]']")).click();
+            try {
+                getDriver().findElement(By.xpath("//input[@name='ascendify[communication_preference][automated_sms_sys_msg]']")).click();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
 
         if (getDriver().findElements(By.xpath("//a[@class='chosen-single chosen-default']")).size() != 0) {
@@ -404,9 +413,7 @@ public class TCStepdefs<session> {
             getDriver().findElement(By.xpath("//a[contains(text(),'Sign in')]")).click();
         } else if (arg1.equalsIgnoreCase("LinkedIn 2nd Sign In")) {
             getDriver().findElement(By.xpath("//button[contains(text(),'Sign in')]")).click();
-            Thread.sleep(2000);
-            Thread.sleep(2000);
-            Thread.sleep(2000);
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Search']")));
         }
     }
 
@@ -453,7 +460,7 @@ public class TCStepdefs<session> {
 
     @And("I choose my file to be uploaded by clicking {string} button TC")
     public void iChooseMyFileToBeUploadedByClickingButton(String arg0) throws AWTException, Throwable, InterruptedException {
-        try {
+        if (arg0.equalsIgnoreCase("Upload Your Resume")) {
             Actions actions = new Actions(getDriver());
             actions.moveToElement(getDriver().findElement(By.id("asc-alt-upload-resume")));
             URL resumeUrl = getClass().getClassLoader().getResource("resumes/Profile.pdf");
@@ -464,8 +471,30 @@ public class TCStepdefs<session> {
             } else {
                 throw new Exception("Failed to find resume absolute path");
             }
-        } catch (Exception exp) {
-            exp.printStackTrace();
+        } else if (arg0.equalsIgnoreCase("Google Drive")) {
+            String handle = getDriver().getWindowHandle();
+            System.out.println(handle);
+            getDriver().findElement(By.xpath("//img[@class='social-icons-image']")).click();
+            Set handles = getDriver().getWindowHandles();
+            System.out.println(handles);
+
+            for (String handle1 : getDriver().getWindowHandles()) {
+                System.out.println(handle1);
+                getDriver().switchTo().window(handle1);
+            }
+
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='identifierId']")));
+            getDriver().findElement(By.xpath("//input[@id='identifierId']")).sendKeys("ascendifyautomation@gmail.com");
+            getDriver().findElement(By.xpath("//div[@id='identifierNext']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='password']")));
+            getDriver().findElement(By.xpath("//input[@name='password']")).sendKeys("Ascendify246!");
+            getDriver().findElement(By.xpath("//div[@id='passwordNext']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.xpath("//iframe[@class='picker-frame picker-dialog-frame']")));
+            getDriver().findElement(By.xpath("//input[@type='text']")).sendKeys("Resume");
+            Thread.sleep(4000);
+            getDriver().findElement(By.xpath("//span[contains(text(),'Resume')]")).click();
+            getDriver().findElement(By.xpath("//div[@role='button'][contains(text(),'Select')]")).click();
+            getDriver().switchTo().window(handle);
         }
     }
 
@@ -1072,5 +1101,4 @@ public class TCStepdefs<session> {
     public void iCopyTheLinkedInEmail() throws Throwable {
         email = getDriver().findElement(By.xpath("//input[@id='asc-signup-email2']")).getAttribute("value");
     }
-
 }

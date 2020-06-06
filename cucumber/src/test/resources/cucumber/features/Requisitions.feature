@@ -83,6 +83,7 @@ Feature: Requisitions Tab
     When I sign in as super admin
     And I navigate to "Approvals" tab of a requisition REQ
     Then I add and send approval request REQ
+    And I make sure email is received REQ
 
   Scenario: Create and apply for a requisition
     Given I navigate to "CRM login" page

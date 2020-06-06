@@ -15,7 +15,6 @@ public class CommonStepDef {
 
     @Given("I navigate to {string} page")
     public void iNavigateToPage(String arg0) {
-
         if (arg0.equalsIgnoreCase("CRM login")) {
             getDriver().get(getConfig().get("testCommunityLogin").toString());
         } else if (arg0.equalsIgnoreCase("TC Login")) {
@@ -23,7 +22,6 @@ public class CommonStepDef {
         } else if (arg0.equalsIgnoreCase("LinkedIn")) {
             getDriver().get(getConfig().get("linkedInLogin").toString());
         }
-
     }
 
     @When("I sign in as super admin")
@@ -72,4 +70,21 @@ public class CommonStepDef {
         getDriver().findElement(By.xpath("//input[@id='password']")).sendKeys(getConfig().get("linkedInPassword").toString());
     }
 
+    @And("I add the URL of my Ascendify app")
+    public void iAddTheURLOfMyAscendifyApp() {
+        getDriver().findElement(By.xpath("//input[@id='web-address-input']")).sendKeys(getConfig().get("testCommunityLogin").toString());
+        getDriver().findElement(By.xpath("//button//span[contains(text(),'Save')]")).click();
+    }
+
+    @And("sign in to Ascendify Sidekick")
+    public void signInToAscendifySidekick() {
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='email-input']")));
+
+        getDriver().findElement(By.xpath("//input[@id='email-input']")).sendKeys(getConfig().get("superAdminUsername").toString());
+        getDriver().findElement(By.xpath("//input[@id='password-input']")).sendKeys(getConfig().get("superAdminPassword").toString());
+        getDriver().findElement(By.xpath("//button//span[contains(text(),'Sign In')]")).click();
+
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button//span[contains(text(),'Create Record')]")));
+
+    }
 }

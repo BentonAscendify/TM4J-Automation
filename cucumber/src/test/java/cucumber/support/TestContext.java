@@ -3,6 +3,7 @@ package cucumber.support;
 import groovy.util.ConfigObject;
 import groovy.util.ConfigSlurper;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,6 +18,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -27,6 +29,8 @@ public class TestContext {
     private static WebDriver driver;
     private static ConfigObject config;
 
+    private static File downloadDir;
+
     public static WebDriver getDriver() {
         return driver;
     }
@@ -35,12 +39,16 @@ public class TestContext {
         return config;
     }
 
+    public static File getDownloadDir() {
+        return downloadDir;
+    }
+
     public static void initialize() throws MalformedURLException {
         String cucumberHeadlessProp = getProperty("cucumber.headless", "false");
         boolean isHeadless = Boolean.valueOf(cucumberHeadlessProp);
         System.out.println("Automation running in headless mode ? " + isHeadless);
 
-        String environment = getProperty("cucumber.config.env", "uat");
+        String environment = getProperty("cucumber.config.env", "prod");
         String configPath = getProperty("cucumber.config.path", "config.groovy");
         File configFile = new File(configPath);
         URL configFileUrl = null;
@@ -68,7 +76,10 @@ public class TestContext {
                 Map<String, Object> chromePreferences = new HashMap<>();
                 chromePreferences.put("profile.default_content_settings.geolocation", 2);
                 chromePreferences.put("download.prompt_for_download", false);
+                chromePreferences.put("profile.default_content_settings.popups", 0);
                 chromePreferences.put("download.directory_upgrade", true);
+                downloadDir = getDefaultDownloadDirectoryForChrome(true);
+                chromePreferences.put("download.default_directory", downloadDir.getAbsolutePath());
                 chromePreferences.put("credentials_enable_service", false);
                 chromePreferences.put("password_manager_enabled", false);
                 chromePreferences.put("safebrowsing.enabled", "true");
@@ -76,6 +87,13 @@ public class TestContext {
                 chromeOptions.addArguments("--start-maximized");
                 chromeOptions.setExperimentalOption("prefs", chromePreferences);
                 System.setProperty("webdriver.chrome.silentOutput", "true");
+                File ascendifyCrx = getAscendifySidekickForChrome();
+                if (ascendifyCrx != null) {
+                    chromeOptions.addExtensions(ascendifyCrx);
+                    System.out.println("Ascendify Sidekick crx added to chrome extensions");
+                } else {
+                    System.out.println("Ascendify Sidekick crx is not available");
+                }
                 if (isHeadless) {
                     chromeOptions.setHeadless(true);
                     chromeOptions.addArguments("--window-size=1920,1080");
@@ -116,6 +134,33 @@ public class TestContext {
             default:
                 throw new RuntimeException("Driver is not implemented for: " + browser);
         }
+    }
+
+    private static File getDefaultDownloadDirectoryForChrome(boolean clean) {
+        String downloadPath = getProperty("cucumber.download.path", "downloads");
+        File downloadDir = new File(downloadPath);
+        if (clean) {
+            try {
+                FileUtils.forceDelete(downloadDir);
+                downloadDir.mkdirs();
+            } catch (IOException e) {
+                System.err.println("Failed to delete download dir: " + downloadDir.getAbsolutePath());
+                e.printStackTrace();
+            }
+
+        }
+
+        System.out.println("Selected download dir: " + downloadDir.getAbsolutePath());
+        return downloadDir;
+    }
+
+    private static File getAscendifySidekickForChrome() {
+        URL u = TestContext.class.getClassLoader().getResource("chrome/extensions/Ascendify-Sidekick-2.0.1_0.crx");
+        if (u != null) {
+            File f = new File(u.getFile());
+            return f;
+        }
+        return null;
     }
 
     private static String getProperty(String name, String defaultValue) {

@@ -34,6 +34,23 @@ Feature: Talent Community
     And I sign in as super admin
     And I clean up TC
 
+  Scenario: Apply to a job via Google Drive
+    Given I navigate to "TC login" page
+    When I click on link text "Search Careers" TC
+    And I search for "Tessy QA" in search box TC
+    And I click on link text "Tessy QA" TC
+    And I click on "Apply Now" button TC
+    And I choose my file to be uploaded by clicking "Google Drive" button TC
+    Then "Application" page is displayed TC
+    And I fill in empty fields TC
+    And I click and agree to Privacy Policy TC
+    And I sign to confirm TC
+    And I click on "Submit" button TC
+    Then "Dashboard" page is displayed TC
+    Then I navigate to "CRM login" page
+    And I sign in as super admin
+    And I clean up TC
+
   Scenario: Login/SignUp via Social
     Given I navigate to "LinkedIn" page
     When I click on "Sign In" button on "LinkedIn Sign In" page TC

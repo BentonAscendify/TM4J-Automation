@@ -53,7 +53,8 @@ task cucumber(group: "cucumber") {
             systemProperties = [
                     "cucumber.headless": project.property("cucumber.headless"),
                     "cucumber.config.path": project.property("cucumber.config.path"),
-                    "cucumber.config.env": project.property("cucumber.config.env")
+                    "cucumber.config.env": project.property("cucumber.config.env"),
+                    "cucumber.download.path": project.property("cucumber.download.path")
             ]
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [

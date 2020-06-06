@@ -276,6 +276,19 @@ public class PeopleStepDefs {
                 throw new Exception("Failed to find resumes' absolute path");
             }
             Thread.sleep(2000);
+        } else if (arg0.equalsIgnoreCase("Cloud Icon")) {
+            Actions actions = new Actions(getDriver());
+            actions.moveToElement(getDriver().findElement(By.id("asc-add-file-mini-div")));
+
+            URL resumeUrl = getClass().getClassLoader().getResource("resumes/Records/Profile(1).pdf");
+            if (resumeUrl != null) {
+                File resumeFile = new File(resumeUrl.getFile());
+                getDriver().findElement(By.xpath("//input[@name='asc_resume']")).sendKeys(resumeFile.getAbsolutePath());
+                Thread.sleep(2000);
+            } else {
+                throw new Exception("Failed to find resume's absolute path");
+            }
+            Thread.sleep(2000);
         }
     }
 
@@ -322,11 +335,16 @@ public class PeopleStepDefs {
                 getDriver().findElement(By.xpath("//input[@id='asc-all']")).click();
                 getDriver().findElement(By.xpath("//div[@id='asc-show-all']")).click();
             }
-            while (getDriver().findElements(By.xpath("//div[@class='link asc-list-name highlight'][contains(text(),'Manual " + LN + "')]")).size() == 0) {
+            int retry = 0;
+            while ((getDriver().findElements(By.xpath("//div[@class='link asc-list-name highlight'][contains(text(),'Manual " + LN + "')]")).size() == 0) && (getDriver().findElements(By.xpath("//div[@class='link asc-list-name highlight'][contains(text(),'Narendra Modi')]")).size() == 0)) {
                 Thread.sleep(1000);
                 getDriver().findElement(By.xpath("//a[@class='view-all btn btn-primary btn-block']")).click();
                 new WebDriverWait(getDriver(), 100).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
                 Thread.sleep(1000);
+                if (retry > 12) {
+                    break;
+                }
+                retry++;
             }
         }
     }
@@ -881,6 +899,32 @@ public class PeopleStepDefs {
             getDriver().findElement(By.xpath("//div[@id='asc-del-folder-del']")).click();
             getDriver().findElement(By.xpath("//button[@id='asc-del-collection']")).click();
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+        } else if (arg0.equalsIgnoreCase("Cloud User")) {
+            getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(email, Keys.ENTER);
+            Thread.sleep(2000);
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Narendra Modi')]/../..//i[@class='fa fa-chevron-down']")));
+            getDriver().findElement(By.xpath("//a[contains(text(),'Narendra Modi')]/../..//i[@class='fa fa-chevron-down']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='action-call-deleteUser']")));
+            getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
+            Thread.sleep(500);
+            Alert alert = getDriver().switchTo().alert();
+            alert.accept();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
+
+            getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
+            while (getDriver().findElements(By.xpath("//ul[@class='header_menu__sections-menu nav navbar-nav']")).size() == 0) {
+                getDriver().findElement(By.xpath("//div[@id='sections-toggle']")).click();
+            }
+            getDriver().findElement(By.xpath("//a[@href='/people']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+            if (getDriver().findElements(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).size() != 0) {
+                getDriver().findElement(By.xpath("//span[contains(text(),'My List')]/..//span[contains(@class,'show-all link fa fa-ellipsis-h')]")).click();
+            }
+            getDriver().findElement(By.xpath("//div[contains(@class,'link-text')][contains(text(),'" + list + "')]")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-del-folder-del']")));
+            getDriver().findElement(By.xpath("//div[@id='asc-del-folder-del']")).click();
+            getDriver().findElement(By.xpath("//button[@id='asc-del-collection']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
         }
     }
 
@@ -1344,5 +1388,84 @@ public class PeopleStepDefs {
         Thread.sleep(2000);
         getDriver().findElement(By.xpath("//div[@class='link asc-list-name highlight'][contains(text(),'Manual " + LN + "')]/../../../../..//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-candidate-expanded-name'][contains(text(),'Manual " + LN + "')]")));
+    }
+
+    @Then("I fill in empty fields for the profile PT")
+    public void iFillInEmptyFieldsForTheProfilePT() {
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h4[contains(text(),'Add New Profile')]")));
+        final String randomEmail = randomEmail();
+        getDriver().findElement(By.xpath("//input[@id='asc-email']")).sendKeys(randomEmail);
+        email = randomEmail;
+        System.out.println("Manual Added User Email = " + randomEmail);
+        getDriver().findElement(By.xpath("//input[@id='asc-cellphone']")).sendKeys("610-852-8288");
+        getDriver().findElement(By.xpath("//input[@id='asc-phone']")).sendKeys("609-602-2709");
+        getDriver().findElement(By.xpath("//input[@id='user-address1']")).sendKeys("4144  Filbert Street");
+        getDriver().findElement(By.xpath("//input[@id='user-address2']")).sendKeys("877  Westfall Avenue");
+        getDriver().findElement(By.xpath("//input[@id='user-city']")).sendKeys("WILDWOOD");
+        getDriver().findElement(By.xpath("//input[@id='user-state']")).sendKeys("New Jersey");
+        getDriver().findElement(By.xpath("//input[@id='user-zipcode']")).sendKeys("08260");
+        getDriver().findElement(By.xpath("//div[@id='asc_personal_country_chosen']//a[@class='chosen-single chosen-default']")).click();
+        while (getDriver().findElement(By.xpath("//div[@id='asc_personal_country_chosen']//a[@class='chosen-single chosen-default']/..//li[2]")).isDisplayed() == false) {
+            getDriver().findElement(By.xpath("//div[@id='asc_personal_country_chosen']//a[@class='chosen-single chosen-default']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@id='asc_personal_country_chosen']//a[@class='chosen-single chosen-default']/..//li[2]")));
+        }
+        getDriver().findElement(By.xpath("//div[@id='asc_personal_country_chosen']//a[@class='chosen-single chosen-default']/..//li[2]")).click();
+        getDriver().findElement(By.xpath("//input[@id='asc-site-site_linkedin']")).sendKeys("https://www.linkedin.com/in/tessy-anicattu-mathew-4b407119a/");
+        getDriver().findElement(By.xpath("//select[@id='asc-client-crm-status-field']")).click();
+        getDriver().findElement(By.xpath("//select[@id='asc-client-crm-status-field']//option[2]")).click();
+        getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']//input")).click();
+        getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']//ul[@class='chosen-results']//li[2]")).click();
+        getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']")).click();
+        getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']//optgroup[2]//option[1]")).click();
+        getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']")).click();
+        getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']//option[2]")).click();
+        getDriver().findElement(By.xpath("//input[@id='asc-add-user-quick-comment']")).sendKeys("This is a quick comment");
+        getDriver().findElement(By.xpath("//a[@id='asc-add-new-org-text-box']")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("(//select[contains(@name,'ascendify[client_user_partner_org]')])[2]")));
+        getDriver().findElement(By.xpath("(//select[contains(@name,'ascendify[client_user_partner_org]')])[2]")).click();
+        getDriver().findElement(By.xpath("(//select[contains(@name,'ascendify[client_user_partner_org]')])[2]//option[2]")).click();
+        getDriver().findElement(By.xpath("//span[@class='trash-can']")).click();
+        getDriver().findElement(By.xpath("//button[@class='btn btn-xs btn-danger asc-del-confirm']")).click();
+        getDriver().findElement(By.xpath("//input[@id='asc-add-user-tag-input']")).sendKeys("Tag One");
+        getDriver().findElement(By.xpath("//button[@id='asc-asd-user-tag-btn']")).click();
+        getDriver().findElement(By.xpath("//i[@class='link asc-skills-close asc-icons-close fa fa-times']")).click();
+
+        getDriver().findElement(By.xpath("//a[@class='asc-add-user-summary-link'][contains(text(),'My List')]")).click();
+        if (getDriver().findElements(By.xpath("//select[@id='folder-list']//option[1]")).size() != 0) {
+            getDriver().findElement(By.xpath("//select[@id='folder-list']//option[1]")).click();
+            getDriver().findElement(By.xpath("//span//a[@class='reset-select'][contains(text(),'Clear')]")).click();
+            getDriver().findElement(By.xpath("//select[@id='folder-list']//option[1]")).click();
+        }
+        getDriver().findElement(By.xpath("//div[@class='asc-new-user-new-folder']//a[contains(text(),'New')]")).click();
+        String uuid = UUID.randomUUID().toString();
+        getDriver().findElement(By.xpath("//div[@class='asc-new-user-new-folder-text-div']//input[@placeholder='Name your list']")).sendKeys(uuid);
+        list = uuid;
+
+        if (getDriver().findElements(By.xpath("//a[contains(text(),'My Open Requisitions')]")).size() != 0) {
+            getDriver().findElement(By.xpath("//a[contains(text(),'My Open Requisitions')]")).click();
+            if (getDriver().findElements(By.xpath("//select[@id='asc-add-user-to-req-select']//option[1]")).size() != 0) {
+                getDriver().findElement(By.xpath("//select[@id='asc-add-user-to-req-select']//option[1]")).click();
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Open Requisitions')]/../..//a[@class='reset-select'][contains(text(),'Clear')]")).click();
+                getDriver().findElement(By.xpath("//select[@id='asc-add-user-to-req-select']//option[1]")).click();
+            }
+        }
+
+        if (getDriver().findElements(By.xpath("//a[contains(text(),'My Open Resume Collections')]")).size() != 0) {
+            getDriver().findElement(By.xpath("//a[contains(text(),'My Open Resume Collections')]")).click();
+            if (getDriver().findElements(By.xpath("//a[contains(text(),'My Open Resume Collections')]/../..//select//option[1]")).size() != 0) {
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Open Resume Collections')]/../..//select//option[1]")).click();
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Open Resume Collections')]/../..//a[@class='reset-select'][contains(text(),'Clear')]")).click();
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Open Resume Collections')]/../..//select//option[1]")).click();
+            }
+        }
+
+        if (getDriver().findElements(By.xpath("//a[contains(text(),'My Pipeline')]")).size() != 0) {
+            getDriver().findElement(By.xpath("//a[contains(text(),'My Pipeline')]")).click();
+            if (getDriver().findElements(By.xpath("//a[contains(text(),'My Pipeline')]/../..//select//optgroup[1]//option[1]")).size() != 0) {
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Pipeline')]/../..//select//optgroup[1]//option[1]")).click();
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Pipeline')]/../..//a[@class='reset-select'][contains(text(),'Clear')]")).click();
+                getDriver().findElement(By.xpath("//a[contains(text(),'My Pipeline')]/../..//select//optgroup[1]//option[1]")).click();
+            }
+        }
     }
 }

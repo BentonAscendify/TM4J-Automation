@@ -715,11 +715,7 @@ public class ReqStepDefs {
             e.printStackTrace();
         }
 
-        getDriver().
-
-                switchTo().
-
-                defaultContent();
+        getDriver().switchTo().defaultContent();
 
         try {
             WebElement canvasElement = getDriver().findElement(By.id("asc-esign__canvas"));
@@ -1162,6 +1158,8 @@ public class ReqStepDefs {
         Thread.sleep(2000);
     }
 
+    String req;
+
     @And("I navigate to {string} tab of a requisition REQ")
     public void iNavigateToTabOfARequisitionREQ(String arg0) throws Throwable {
         Thread.sleep(2000);
@@ -1298,6 +1296,7 @@ public class ReqStepDefs {
         } else if (arg0.equalsIgnoreCase("Approvals")) {
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@id='tab-approvals']")));
             getDriver().findElement(By.xpath("//li[@id='tab-approvals']")).click();
+            req = getDriver().findElement(By.xpath("//div[@id='asc-job-name']")).getText();
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='add-approver']")));
         }
     }
@@ -1720,18 +1719,14 @@ public class ReqStepDefs {
 
     @Then("I add and send approval request REQ")
     public void iAddAndSendApprovalRequestREQ() throws AWTException, Throwable {
-        try {
-            if (getDriver().findElement(By.xpath("//input[@id='add-approver']")).isDisplayed()) {
-                getDriver().findElement(By.xpath("//input[@id='add-approver']")).sendKeys("Jason Ball");
-                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//li[@class='ui-menu-item'])[1]")));
-                getDriver().findElement(By.xpath("(//li[@class='ui-menu-item'])[1]")).click();
-                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='wrap clearfix']")));
-                getDriver().findElement(By.xpath("//input[@id='seq-routing-chk']")).click();
-                getDriver().findElement(By.xpath("//a[@id='asc-launch-approval-btn']")).click();
-                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='link']")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (getDriver().findElement(By.xpath("//input[@id='add-approver']")).isDisplayed() == true) {
+            getDriver().findElement(By.xpath("//input[@id='add-approver']")).sendKeys("Mailinator Email");
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//li[@class='ui-menu-item'])[1]")));
+            getDriver().findElement(By.xpath("(//li[@class='ui-menu-item'])[1]")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='wrap clearfix']")));
+            getDriver().findElement(By.xpath("//input[@id='seq-routing-chk']")).click();
+            getDriver().findElement(By.xpath("//a[@id='asc-launch-approval-btn']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='link']")));
         }
         Thread.sleep(2000);
         getDriver().findElement(By.xpath("//a[@class='link']")).click();
@@ -1744,5 +1739,24 @@ public class ReqStepDefs {
         getDriver().findElement(By.xpath("//div[@class='asc-trash highlight']")).click();
         getDriver().findElement(By.xpath("//button[@class='btn btn-xs btn-danger asc-del-confirm']")).click();
         Thread.sleep(2000);
+    }
+
+    @And("I make sure email is received REQ")
+    public void iMakeSureEmailIsReceivedREQ() throws Throwable {
+        getDriver().get("https://www.mailinator.com/");
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='addOverlay']")));
+        getDriver().findElement(By.xpath("//input[@id='addOverlay']")).sendKeys("ascendify");
+        getDriver().findElement(By.xpath("//button[@id='go-to-public']")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[contains(text(),'Subject')]")));
+        if ((getDriver().findElement(By.xpath("//a[@class='ng-binding'][contains(text(),'Job Approval Request: " + req + "')]")).isDisplayed() == true) && (getDriver().findElement(By.xpath("//td[contains(text(),'moments ago')]")).isDisplayed() == true)) {
+            System.out.println("Email for job approval request has been received");
+        }
+        getDriver().findElement(By.xpath("//input[contains(@id,'check_ascendify')]")).click();
+        getDriver().findElement(By.xpath("//button[@id='trash_but']")).click();
+        Thread.sleep(2000);
+        Alert alert = getDriver().switchTo().alert();
+        Thread.sleep(3000);
+        alert.accept();
+        Thread.sleep(6000);
     }
 }
