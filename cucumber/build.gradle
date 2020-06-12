@@ -1,5 +1,14 @@
 description = "Cucumber Module"
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.yaml', name: 'snakeyaml', version: '1.19'
+    }
+}
+
 apply plugin: 'groovy'
 apply plugin: 'maven-publish'
 
@@ -54,7 +63,8 @@ task cucumber(group: "cucumber") {
                     "cucumber.headless": project.property("cucumber.headless"),
                     "cucumber.config.path": project.property("cucumber.config.path"),
                     "cucumber.config.env": project.property("cucumber.config.env"),
-                    "cucumber.download.path": project.property("cucumber.download.path")
+                    "cucumber.download.path": project.property("cucumber.download.path"),
+                    "cucumber.browserstack.enabled": project.property("cucumber.browser.enabled")
             ]
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
@@ -66,6 +76,48 @@ task cucumber(group: "cucumber") {
         }
     }
 }
+
+task cucumberBrowserstackYaml() {
+    doLast {
+        //def cfg = new org.yaml.snakeyaml.Yaml().load(new File("cfg.yaml").newInputStream())
+        def yamlParser = new org.yaml.snakeyaml.Yaml()
+        def yaml = yamlParser.load(file("${project.projectDir}/src/test/resources/browserstack.yml").newInputStream())
+        yaml.browserstack.desktop.each { d ->
+
+        }
+
+        //println browserstack['desktop']
+    }
+}
+
+task cucumberBrowserstack(group: "cucumber") {
+    dependsOn assemble, compileTestJava
+    doLast {
+        def r = file("${project.buildDir}/cucumber")
+        def yamlParser = new org.yaml.snakeyaml.Yaml()
+        def yaml = yamlParser.load(file("${project.projectDir}/src/test/resources/browserstack.yml").newInputStream())
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            systemProperties = [
+                    "cucumber.headless": project.property("cucumber.headless"),
+                    "cucumber.config.path": project.property("cucumber.config.path"),
+                    "cucumber.config.env": project.property("cucumber.config.env"),
+                    "cucumber.download.path": project.property("cucumber.download.path"),
+                    "cucumber.browserstack.enabled": project.property("cucumber.browser.enabled")
+
+            ]
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '-p', "json:build/cucumber/json/report.json",
+                    '-p', 'pretty',
+                    '-p', 'html:build/cucumber/html',
+                    'src/test/resources/cucumber/features']
+//            args = ['--help']
+        }
+    }
+
+}
+
 
 publishing {
     publications {

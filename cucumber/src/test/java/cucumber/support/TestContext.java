@@ -1,11 +1,9 @@
 package cucumber.support;
 
-import groovy.util.ConfigObject;
 import groovy.util.ConfigSlurper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -24,31 +22,14 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestContext {
-
-    private static WebDriver driver;
-    private static ConfigObject config;
-
-    private static File downloadDir;
-
-    public static WebDriver getDriver() {
-        return driver;
-    }
-
-    public static ConfigObject getConfig() {
-        return config;
-    }
-
-    public static File getDownloadDir() {
-        return downloadDir;
-    }
+public class TestContext extends AbstractContext {
 
     public static void initialize() throws MalformedURLException {
-        String cucumberHeadlessProp = getProperty("cucumber.headless", "false");
+        String cucumberHeadlessProp = getProperty("cucumber.headless", "true");
         boolean isHeadless = Boolean.valueOf(cucumberHeadlessProp);
         System.out.println("Automation running in headless mode ? " + isHeadless);
 
-        String environment = getProperty("cucumber.config.env", "prod");
+        String environment = getProperty("cucumber.config.env", "uat");
         String configPath = getProperty("cucumber.config.path", "config.groovy");
         File configFile = new File(configPath);
         URL configFileUrl = null;
@@ -163,13 +144,4 @@ public class TestContext {
         return null;
     }
 
-    private static String getProperty(String name, String defaultValue) {
-        if (System.getProperties().containsKey(name)) {
-            return System.getProperty(name);
-        } else if (System.getenv().containsKey(name)) {
-            return System.getenv().get(name);
-        } else {
-            return defaultValue;
-        }
-    }
 }

@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import static cucumber.support.TestContext.getDriver;
+import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class PeopleStepDefs {
 
@@ -63,7 +64,6 @@ public class PeopleStepDefs {
             }
             WebElement cancel = getDriver().findElement(By.xpath("//a[@href='/people']"));
             JavascriptExecutor jse = (JavascriptExecutor) getDriver();
-//            jse.executeScript("arguments[0].click()", cancel);
             ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", cancel);
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/people']")));
             getDriver().findElement(By.xpath("//a[@href='/people']")).click();
@@ -266,16 +266,117 @@ public class PeopleStepDefs {
 
             URL resumeUrl1 = getClass().getClassLoader().getResource("resumes/Records/Profile(1).pdf");
             URL resumeUrl2 = getClass().getClassLoader().getResource("resumes/Records/Profile(2).pdf");
+            URL resumeUrl3 = getClass().getClassLoader().getResource("resumes/Records/Profile(3).pdf");
+            URL resumeUrl4 = getClass().getClassLoader().getResource("resumes/Records/Profile(4).pdf");
+            URL resumeUrl5 = getClass().getClassLoader().getResource("resumes/Records/Profile(5).pdf");
+            URL resumeUrl6 = getClass().getClassLoader().getResource("resumes/Records/Profile(6).pdf");
+            URL resumeUrl7 = getClass().getClassLoader().getResource("resumes/Records/Profile(7).pdf");
+            URL resumeUrl8 = getClass().getClassLoader().getResource("resumes/Records/Profile(8).pdf");
+            URL resumeUrl9 = getClass().getClassLoader().getResource("resumes/Records/Profile(9).pdf");
+            URL resumeUrl10 = getClass().getClassLoader().getResource("resumes/Records/Profile(10).pdf");
+            URL resumeUrl11 = getClass().getClassLoader().getResource("resumes/Records/Profile(11).pdf");
+            URL resumeUrl12 = getClass().getClassLoader().getResource("resumes/Records/Profile(12).pdf");
+            URL resumeUrl13 = getClass().getClassLoader().getResource("resumes/Records/Profile(13).pdf");
+            URL resumeUrl14 = getClass().getClassLoader().getResource("resumes/Records/Profile(14).pdf");
+            URL resumeUrl15 = getClass().getClassLoader().getResource("resumes/Records/Profile(15).pdf");
+            URL resumeUrl16 = getClass().getClassLoader().getResource("resumes/Records/Profile(16).pdf");
+            URL resumeUrl17 = getClass().getClassLoader().getResource("resumes/Records/Profile(17).pdf");
+            URL resumeUrl18 = getClass().getClassLoader().getResource("resumes/Records/Profile(18).pdf");
+            URL resumeUrl19 = getClass().getClassLoader().getResource("resumes/Records/Profile(19).pdf");
+            URL resumeUrl20 = getClass().getClassLoader().getResource("resumes/Records/Profile(20).pdf");
+            URL resumeUrl21 = getClass().getClassLoader().getResource("resumes/Records/Profile(21).pdf");
+            URL resumeUrl22 = getClass().getClassLoader().getResource("resumes/Records/Profile(22).pdf");
+            URL resumeUrl23 = getClass().getClassLoader().getResource("resumes/Records/Profile(23).pdf");
+            URL resumeUrl24 = getClass().getClassLoader().getResource("resumes/Records/Profile(24).pdf");
+            URL resumeUrl25 = getClass().getClassLoader().getResource("resumes/Records/Profile(25).pdf");
+            URL resumeUrl26 = getClass().getClassLoader().getResource("resumes/Records/Profile(26).pdf");
+            URL resumeUrl27 = getClass().getClassLoader().getResource("resumes/Records/Profile(27).pdf");
+            URL resumeUrl28 = getClass().getClassLoader().getResource("resumes/Records/Profile(28).pdf");
+            URL resumeUrl29 = getClass().getClassLoader().getResource("resumes/Records/Profile(29).pdf");
+            URL resumeUrl30 = getClass().getClassLoader().getResource("resumes/Records/Profile(30).pdf");
+            URL resumeUrl31 = getClass().getClassLoader().getResource("resumes/Records/Profile(31).pdf");
+            URL resumeUrl32 = getClass().getClassLoader().getResource("resumes/Records/Profile(32).pdf");
+            URL resumeUrl33 = getClass().getClassLoader().getResource("resumes/Records/Profile(33).pdf");
+            URL resumeUrl34 = getClass().getClassLoader().getResource("resumes/Records/Profile(34).pdf");
+            URL resumeUrl35 = getClass().getClassLoader().getResource("resumes/Records/Profile(35).pdf");
+            URL resumeUrl36 = getClass().getClassLoader().getResource("resumes/Records/Profile(36).pdf");
+            URL resumeUrl37 = getClass().getClassLoader().getResource("resumes/Records/Profile(37).pdf");
+            URL resumeUrl38 = getClass().getClassLoader().getResource("resumes/Records/Profile(38).pdf");
+            URL resumeUrl39 = getClass().getClassLoader().getResource("resumes/Records/Profile(39).pdf");
+            URL resumeUrl40 = getClass().getClassLoader().getResource("resumes/Records/Profile(40).pdf");
+            URL resumeUrl41 = getClass().getClassLoader().getResource("resumes/Records/Profile(41).pdf");
+            URL resumeUrl42 = getClass().getClassLoader().getResource("resumes/Records/Profile(42).pdf");
+            URL resumeUrl43 = getClass().getClassLoader().getResource("resumes/Records/Profile(43).pdf");
+            URL resumeUrl44 = getClass().getClassLoader().getResource("resumes/Records/Profile(44).pdf");
+            URL resumeUrl45 = getClass().getClassLoader().getResource("resumes/Records/Profile(45).pdf");
+            URL resumeUrl46 = getClass().getClassLoader().getResource("resumes/Records/Profile(46).pdf");
+            URL resumeUrl47 = getClass().getClassLoader().getResource("resumes/Records/Profile(47).pdf");
+            URL resumeUrl48 = getClass().getClassLoader().getResource("resumes/Records/Profile(48).pdf");
+            URL resumeUrl49 = getClass().getClassLoader().getResource("resumes/Records/Profile(49).pdf");
+            URL resumeUrl50 = getClass().getClassLoader().getResource("resumes/Records/Profile(50).pdf");
             if (resumeUrl1 != null) {
                 File resumeFile1 = new File(resumeUrl1.getFile());
                 File resumeFile2 = new File(resumeUrl2.getFile());
+                File resumeFile3 = new File(resumeUrl3.getFile());
+                File resumeFile4 = new File(resumeUrl4.getFile());
+                File resumeFile5 = new File(resumeUrl5.getFile());
+                File resumeFile6 = new File(resumeUrl6.getFile());
+                File resumeFile7 = new File(resumeUrl7.getFile());
+                File resumeFile8 = new File(resumeUrl8.getFile());
+                File resumeFile9 = new File(resumeUrl9.getFile());
+                File resumeFile10 = new File(resumeUrl10.getFile());
+                File resumeFile11 = new File(resumeUrl11.getFile());
+                File resumeFile12 = new File(resumeUrl12.getFile());
+                File resumeFile13 = new File(resumeUrl13.getFile());
+                File resumeFile14 = new File(resumeUrl14.getFile());
+                File resumeFile15 = new File(resumeUrl15.getFile());
+                File resumeFile16 = new File(resumeUrl16.getFile());
+                File resumeFile17 = new File(resumeUrl17.getFile());
+                File resumeFile18 = new File(resumeUrl18.getFile());
+                File resumeFile19 = new File(resumeUrl19.getFile());
+                File resumeFile20 = new File(resumeUrl20.getFile());
+                File resumeFile21 = new File(resumeUrl21.getFile());
+                File resumeFile22 = new File(resumeUrl22.getFile());
+                File resumeFile23 = new File(resumeUrl23.getFile());
+                File resumeFile24 = new File(resumeUrl24.getFile());
+                File resumeFile25 = new File(resumeUrl25.getFile());
+                File resumeFile26 = new File(resumeUrl26.getFile());
+                File resumeFile27 = new File(resumeUrl27.getFile());
+                File resumeFile28 = new File(resumeUrl28.getFile());
+                File resumeFile29 = new File(resumeUrl29.getFile());
+                File resumeFile30 = new File(resumeUrl30.getFile());
+                File resumeFile31 = new File(resumeUrl31.getFile());
+                File resumeFile32 = new File(resumeUrl32.getFile());
+                File resumeFile33 = new File(resumeUrl33.getFile());
+                File resumeFile34 = new File(resumeUrl34.getFile());
+                File resumeFile35 = new File(resumeUrl35.getFile());
+                File resumeFile36 = new File(resumeUrl36.getFile());
+                File resumeFile37 = new File(resumeUrl37.getFile());
+                File resumeFile38 = new File(resumeUrl38.getFile());
+                File resumeFile39 = new File(resumeUrl39.getFile());
+                File resumeFile40 = new File(resumeUrl40.getFile());
+                File resumeFile41 = new File(resumeUrl41.getFile());
+                File resumeFile42 = new File(resumeUrl42.getFile());
+                File resumeFile43 = new File(resumeUrl43.getFile());
+                File resumeFile44 = new File(resumeUrl44.getFile());
+                File resumeFile45 = new File(resumeUrl45.getFile());
+                File resumeFile46 = new File(resumeUrl46.getFile());
+                File resumeFile47 = new File(resumeUrl47.getFile());
+                File resumeFile48 = new File(resumeUrl48.getFile());
+                File resumeFile49 = new File(resumeUrl49.getFile());
+                File resumeFile50 = new File(resumeUrl50.getFile());
 
-                getDriver().findElement(By.xpath("//input[@class='dz-hidden-input']")).sendKeys(resumeFile1.getAbsolutePath() + "\n" + resumeFile2.getAbsolutePath());
+                getDriver().findElement(By.xpath("//input[@class='dz-hidden-input']")).sendKeys(resumeFile1.getAbsolutePath() + "\n" + resumeFile2.getAbsolutePath() + "\n" + resumeFile3.getAbsolutePath() + "\n" + resumeFile4.getAbsolutePath() + "\n" + resumeFile5.getAbsolutePath() + "\n" + resumeFile6.getAbsolutePath() + "\n" + resumeFile7.getAbsolutePath() + "\n" + resumeFile8.getAbsolutePath() + "\n" + resumeFile9.getAbsolutePath() + "\n" + resumeFile10.getAbsolutePath() + "\n" + resumeFile11.getAbsolutePath() + "\n" + resumeFile12.getAbsolutePath() + "\n" + resumeFile13.getAbsolutePath() + "\n" + resumeFile14.getAbsolutePath() + "\n" + resumeFile15.getAbsolutePath() + "\n" + resumeFile16.getAbsolutePath() + "\n" + resumeFile17.getAbsolutePath() + "\n" + resumeFile18.getAbsolutePath() + "\n" + resumeFile19.getAbsolutePath() + "\n" + resumeFile20.getAbsolutePath() + "\n" + resumeFile21.getAbsolutePath() + "\n" + resumeFile22.getAbsolutePath() + "\n" + resumeFile23.getAbsolutePath() + "\n" + resumeFile24.getAbsolutePath() + "\n" + resumeFile25.getAbsolutePath() + "\n" + resumeFile26.getAbsolutePath() + "\n" + resumeFile27.getAbsolutePath() + "\n" + resumeFile28.getAbsolutePath() + "\n" + resumeFile29.getAbsolutePath() + "\n" + resumeFile30.getAbsolutePath() + "\n" + resumeFile31.getAbsolutePath() + "\n" + resumeFile32.getAbsolutePath() + "\n" + resumeFile33.getAbsolutePath() + "\n" + resumeFile34.getAbsolutePath() + "\n" + resumeFile35.getAbsolutePath() + "\n" + resumeFile36.getAbsolutePath() + "\n" + resumeFile37.getAbsolutePath() + "\n" + resumeFile38.getAbsolutePath() + "\n" + resumeFile39.getAbsolutePath() + "\n" + resumeFile40.getAbsolutePath() + "\n" + resumeFile41.getAbsolutePath() + "\n" + resumeFile42.getAbsolutePath() + "\n" + resumeFile43.getAbsolutePath() + "\n" + resumeFile44.getAbsolutePath() + "\n" + resumeFile45.getAbsolutePath() + "\n" + resumeFile46.getAbsolutePath() + "\n" + resumeFile47.getAbsolutePath() + "\n" + resumeFile48.getAbsolutePath() + "\n" + resumeFile49.getAbsolutePath() + "\n" + resumeFile50.getAbsolutePath());
                 Thread.sleep(2000);
             } else {
                 throw new Exception("Failed to find resumes' absolute path");
             }
-            Thread.sleep(2000);
+            while (getDriver().findElements(By.xpath("//div[@class='dz-preview dz-file-preview dz-processing dz-success']")).size() != 50) {
+                Thread.sleep(2000);
+                if (getDriver().findElements(By.xpath("//a[text()='Cancel upload']")).size() == 0) {
+                    break;
+                }
+            }
         } else if (arg0.equalsIgnoreCase("Cloud Icon")) {
             Actions actions = new Actions(getDriver());
             actions.moveToElement(getDriver().findElement(By.id("asc-add-file-mini-div")));
@@ -361,15 +462,23 @@ public class PeopleStepDefs {
             Thread.sleep(2000);
         }
 
-        getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']")).click();
-        getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']//input")).sendKeys("Candidate", Keys.ENTER);
+        while (getDriver().findElements(By.xpath("//div[@id='asc_group_select_chosen']//a[@class='search-choice-close']")).size() == 0) {
+            getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']")).click();
+            Thread.sleep(2000);
+            getDriver().findElement(By.xpath("//div[@id='asc_group_select_chosen']//input")).sendKeys("Candidate", Keys.ENTER);
+            Thread.sleep(2000);
+        }
+
+        getDriver().findElement(By.xpath("//input[@id='asc-add-user-tag-input']")).sendKeys("Hire");
+        getDriver().findElement(By.xpath("//button[@id='asc-asd-user-tag-btn']")).click();
         Thread.sleep(2000);
 
         WebElement Source = getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']"));
         String textInsideSource = Source.getAttribute("value");
         if (textInsideSource.isEmpty()) {
+            getDriver().findElement(By.xpath("//div[@id='asc-basic-source-div']//label[contains(text(),'Source')]")).click();
             getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']")).click();
-            getDriver().findElement(By.xpath("//select[@id='asc-basic-source-field']//option[contains(text(),'Employee Referrals')]")).click();
+            getDriver().findElement(By.xpath("(//select[@id='asc-basic-source-field']//option[2])[1]")).click();
         }
         WebElement Recruit = getDriver().findElement(By.xpath("//select[@id='asc-basic-recruiter-field']"));
         String textInsideRecruit = Recruit.getAttribute("value");
@@ -393,10 +502,6 @@ public class PeopleStepDefs {
             getDriver().findElement(By.xpath("//select[contains(@name,'ascendify[client_user_partner_org]')]//option[2]")).click();
             Thread.sleep(2000);
         }
-        getDriver().findElement(By.xpath("//input[@id='asc-add-user-tag-input']")).sendKeys("Hire");
-        getDriver().findElement(By.xpath("//button[@id='asc-asd-user-tag-btn']")).click();
-        Thread.sleep(2000);
-
     }
 
     @And("I click on the right arrow of a candidate PT")
@@ -575,7 +680,6 @@ public class PeopleStepDefs {
                         getDriver().findElement(By.xpath("//body/div[@id='wrap']/div[@id='container']/div[@id='right-system-panel']/div[@id='inner-right-system-panel']/div[@id='asc-app-record-profile-view']/div[@id='asc-job-maindata']/div[@id='asc-extended-tabs-output-holder']/div[@id='asc-staff-aboutme-one']/div[@id='personal-sub-tab']/div[@id='asc-user-custom-data']/div[@class='asc-edit-block-inner']/div[@class='asc-edit-div']/div[@class='asc-edit-readonly']/div[1]")).click();
                     } catch (Exception e) {
                         e.printStackTrace();
-//                        break;
                     }
                 }
                 if (getDriver().findElements(By.xpath("//div[@class='screening-msg-link no-question-message']")).size() != 0) {
@@ -821,58 +925,52 @@ public class PeopleStepDefs {
             Thread.sleep(2000);
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
         } else if (arg0.equalsIgnoreCase("Bulk")) {
-            getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Donald Trump", Keys.ENTER);
-            Thread.sleep(4000);
-            getDriver().findElement(By.xpath("//th[contains(text(),'Created Date')]")).click();
-            try {
-                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Donald Trump')]/../..//i[@class='fa fa-chevron-down']")));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            while (getDriver().findElements(By.xpath("//i[@class='fa fa-chevron-down']")).size() == 0) {
-                getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(Keys.CONTROL, "a", Keys.BACK_SPACE);
-                getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Donald Trump", Keys.ENTER);
-                Thread.sleep(4000);
-                long startTime = System.currentTimeMillis();
-                if ((System.currentTimeMillis() - startTime) == 200000)
-                    System.out.println("Error: Bulk Files are not uploaded");
-                break;
-            }
-
-            getDriver().findElement(By.xpath("//a[contains(text(),'Donald Trump')]/../..//i[@class='fa fa-chevron-down']")).click();
-            Thread.sleep(2000);
-            getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
-            Thread.sleep(2000);
-            Alert alert = getDriver().switchTo().alert();
-            alert.accept();
-            Thread.sleep(2000);
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
-
-            getDriver().findElement(By.xpath("//input[@id='user-search']")).click();
-            getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(Keys.CONTROL, "a", Keys.BACK_SPACE);
-            getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Narendra Modi", Keys.ENTER);
-            try {
-                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Narendra Modi')]/../..//i[@class='fa fa-chevron-down']")));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            while (getDriver().findElements(By.xpath("//i[@class='fa fa-chevron-down']")).size() == 0) {
+            for (int i = 1; i <= 50; i++) {
                 getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(Keys.CONTROL, "a", Keys.BACK_SPACE);
                 getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Narendra Modi", Keys.ENTER);
                 Thread.sleep(4000);
-                long startTime = System.currentTimeMillis();
-                if ((System.currentTimeMillis() - startTime) == 200000)
-                    System.out.println("Error: Bulk Files are not uploaded");
-                break;
+                getDriver().findElement(By.xpath("//th[contains(text(),'Created Date')]")).click();
+                try {
+                    new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Narendra Modi')]/../..//i[@class='fa fa-chevron-down']")));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                int retry = 0;
+                while (getDriver().findElements(By.xpath("//i[@class='fa fa-chevron-down']")).size() == 0) {
+                    getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(Keys.CONTROL, "a", Keys.BACK_SPACE);
+                    getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys("Narendra Modi", Keys.ENTER);
+                    Thread.sleep(4000);
+                    if (retry > 5) {
+                        System.out.println("Error: All resumes were not uploaded");
+                        break;
+                    }
+                    retry++;
+                }
+                if (getDriver().findElements(By.xpath("(//a[contains(text(),'Narendra Modi')]/../..//i[@class='fa fa-chevron-down'])[1]")).size() == 0) {
+                    System.out.println("Only " + (i - 1) + " out of 50 resumes were uploaded");
+                }
+                getDriver().findElement(By.xpath("(//a[contains(text(),'Narendra Modi')]/../..//i[@class='fa fa-chevron-down'])[1]")).click();
+                int trial = 0;
+                while (getDriver().findElement(By.xpath("(//a[@class='action-call-deleteUser'])[1]")).isDisplayed() == false) {
+                    getDriver().findElement(By.xpath("(//a[contains(text(),'Narendra Modi')]/../..//i[@class='fa fa-chevron-down'])[1]")).click();
+                    Thread.sleep(2000);
+                    if (trial > 10) {
+                        break;
+                    }
+                    trial++;
+                }
+                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[@class='action-call-deleteUser'])[1]")));
+                getDriver().findElement(By.xpath("(//a[@class='action-call-deleteUser'])[1]")).click();
+                Thread.sleep(2000);
+                new WebDriverWait(getDriver(), 30).until(alertIsPresent());
+                if (alertIsPresent() == null) {
+                    getDriver().findElement(By.xpath("(//a[@class='action-call-deleteUser'])[1]")).click();
+                }
+                Alert alert = getDriver().switchTo().alert();
+                alert.accept();
+                Thread.sleep(2000);
+                new WebDriverWait(getDriver(), 30).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
             }
-
-            getDriver().findElement(By.xpath("//a[contains(text(),'Narendra Modi')]/../..//i[@class='fa fa-chevron-down']")).click();
-            Thread.sleep(2000);
-            getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
-            Thread.sleep(2000);
-            alert.accept();
-            Thread.sleep(2000);
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='alert alert-success']")));
         } else if (arg0.equalsIgnoreCase("Manual User")) {
             getDriver().findElement(By.xpath("//input[@id='user-search']")).sendKeys(email, Keys.ENTER);
             Thread.sleep(2000);
@@ -1082,12 +1180,6 @@ public class PeopleStepDefs {
                 break;
             }
         }
-
-//        getDriver().findElement(By.xpath("//div[contains(text(),'" + org + "')]/../../../..//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).click();
-//        Thread.sleep(6000);
-//        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='right-system-panel']")));
-//        Thread.sleep(5000);
-//        new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-show-next-opportunity-btn']")));
         candidate = getDriver().findElement(By.xpath("//div[@id='asc-candidate-expanded-name']")).getText();
         System.out.println("Candidate is " + candidate);
     }

@@ -12,6 +12,9 @@ environments {
 
         candidateUsername = "tessy@gmail.com"
         candidatePassword = "Ascendify246!"
+
+        internalUsername = "lauren@ascendify.com"
+        internalPassword = "&G3tty"
     }
 
     prod {
@@ -23,6 +26,9 @@ environments {
 
         candidateUsername = "tessy@gmail.com"
         candidatePassword = "Ascendify246!"
+
+        internalUsername = "tessy.anicattumathew@ascendify.com"
+        internalPassword = "Mac123q!"
     }
 
     //  DomainMapping
@@ -35,6 +41,9 @@ environments {
 
         candidateUsername = "tessy@gmail.com"
         candidatePassword = "Ascendify246!"
+
+        internalUsername = "tessy.anicattumathew@ascendify.com"
+        internalPassword = "test12345"
     }
 
     webdriverUat {
@@ -46,5 +55,8 @@ environments {
 
         candidateUsername = "tessy@gmail.com"
         candidatePassword = "Ascendify246!"
+
+        internalUsername = "tessy.anicattumathew@ascendify.com"
+        internalPassword = "Mac123q!"
     }
 }

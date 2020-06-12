@@ -21,6 +21,8 @@ public class CommonStepDef {
             getDriver().get(getConfig().get("talentCommunityLogin").toString());
         } else if (arg0.equalsIgnoreCase("LinkedIn")) {
             getDriver().get(getConfig().get("linkedInLogin").toString());
+        } else if(arg0.equalsIgnoreCase("BrowserStack")){
+            getDriver().get("https://www.browserstack.com/");
         }
     }
 
@@ -60,6 +62,14 @@ public class CommonStepDef {
 
         getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys(getConfig().get("candidateUsername").toString());
         getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys(getConfig().get("candidatePassword").toString());
+    }
+
+    @And("I sign in to TalentCommunity as an Internal User")
+    public void iSignInToTalentCommunityAsAnInternalUser() {
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='id_username']")));
+
+        getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys(getConfig().get("internalUsername").toString());
+        getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys(getConfig().get("internalPassword").toString());
     }
 
     @And("I sign in to LinkedIn")

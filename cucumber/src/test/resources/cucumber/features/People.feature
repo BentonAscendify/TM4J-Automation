@@ -40,7 +40,7 @@ Feature: People Tab
     Then "CSV processing" message is displayed PT
     And I clean up "CSV" PT
 
-  Scenario: Bulk Add People
+  Scenario: Bulk Add 50 People
     Given I navigate to "CRM login" page
     When I sign in to CRM
     Then "Main Menu" page is displayed PT

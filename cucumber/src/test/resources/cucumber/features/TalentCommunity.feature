@@ -25,7 +25,7 @@ Feature: Talent Community
     And I click on "Apply Now" button TC
     And I choose my file to be uploaded by clicking "Upload Your Resume" button TC
     Then "Application" page is displayed TC
-    And I fill in empty fields TC
+    And I fill in empty fields except Name TC
     And I click and agree to Privacy Policy TC
     And I sign to confirm TC
     And I click on "Submit" button TC
@@ -42,7 +42,41 @@ Feature: Talent Community
     And I click on "Apply Now" button TC
     And I choose my file to be uploaded by clicking "Google Drive" button TC
     Then "Application" page is displayed TC
-    And I fill in empty fields TC
+    And I fill in empty fields except Name TC
+    And I click and agree to Privacy Policy TC
+    And I sign to confirm TC
+    And I click on "Submit" button TC
+    Then "Dashboard" page is displayed TC
+    Then I navigate to "CRM login" page
+    And I sign in as super admin
+    And I clean up TC
+
+  Scenario: Apply to a job via Dropbox
+    Given I navigate to "TC login" page
+    When I click on link text "Search Careers" TC
+    And I search for "Tessy QA" in search box TC
+    And I click on link text "Tessy QA" TC
+    And I click on "Apply Now" button TC
+    And I choose my file to be uploaded by clicking "Dropbox" button TC
+    Then "Application" page is displayed TC
+    And I fill in empty fields except Name TC
+    And I click and agree to Privacy Policy TC
+    And I sign to confirm TC
+    And I click on "Submit" button TC
+    Then "Dashboard" page is displayed TC
+    Then I navigate to "CRM login" page
+    And I sign in as super admin
+    And I clean up TC
+
+  Scenario: Apply to a job via Microsoft OneDrive
+    Given I navigate to "TC login" page
+    When I click on link text "Search Careers" TC
+    And I search for "Tessy QA" in search box TC
+    And I click on link text "Tessy QA" TC
+    And I click on "Apply Now" button TC
+    And I choose my file to be uploaded by clicking "OneDrive" button TC
+    Then "Application" page is displayed TC
+    And I fill in empty fields except Name TC
     And I click and agree to Privacy Policy TC
     And I sign to confirm TC
     And I click on "Submit" button TC
@@ -66,7 +100,7 @@ Feature: Talent Community
     And I fill in "Additional Information" fields TC
     And I fill in "Profile Information" fields TC
     And I fill in "Automatic Routing to Pipelines" fields TC
-    And I fill in empty fields TC
+    And I fill in empty fields except Name TC
     And I click and agree to Privacy Policy TC
     And I click on "Submit" button TC
     Then "Dashboard" page is displayed TC
@@ -113,15 +147,16 @@ Feature: Talent Community
     And I sign in to TalentCommunity as a candidate
     And I click on "Sign In" button on "Sign In" page TC
     Then "Dashboard" page is displayed TC
+    And I make sure I haven't applied to that job already TC
     And I click on link text "Search Careers" TC
     And I search for "Tessy QA" in search box TC
-    And I make sure I haven't applied to that job already TC
     And I click on link text "Tessy QA" TC
     And I click on "Apply Now" button TC
     And I click and agree to Privacy Policy TC
     And I sign to confirm TC
     And I click on "Submit Application" button TC
     Then success message is displayed TC
+    And I make sure my opportunities are visible in Dashboard TC
 
   Scenario: Add all other personal and basic info
     Given I navigate to "TC login" page
@@ -131,6 +166,16 @@ Feature: Talent Community
     Then "Dashboard" page is displayed TC
     And I add "Profile" info TC
     And I add "Personal" info TC
+    And I add "Documents" info TC
+
+  Scenario: Employee Questions & Onboarding Tasks
+    Given I navigate to "TC login" page
+    When I click on "Sign In" button on "Home" page TC
+    And I sign in to TalentCommunity as an Internal User
+    And I click on "Sign In" button on "Sign In" page TC
+    Then "Dashboard" page is displayed TC
+    And I add "Employee Questions" info TC
+    And I add "Onboarding" info TC
 
   Scenario: Org Sign Up
     Given I navigate to "TC login" page
@@ -153,5 +198,7 @@ Feature: Talent Community
     And I sign in as super admin
     And I clean up TC
 
-
-
+  Scenario: Automation Matrix
+    Given I navigate to "BrowserStack" page
+    When I click on "Sign In" button on "BrowserStack" page TC
+    And I sign in to BrowserStack

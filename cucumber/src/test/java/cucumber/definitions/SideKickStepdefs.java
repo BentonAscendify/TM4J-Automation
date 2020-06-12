@@ -8,16 +8,14 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-import java.net.URL;
 
-import static cucumber.support.TestContext.getDriver;
 import static cucumber.support.TestContext.getDownloadDir;
+import static cucumber.support.TestContext.getDriver;
 
 public class SideKickStepdefs {
     @And("save a candidate's resume to pdf")
@@ -28,7 +26,6 @@ public class SideKickStepdefs {
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'More')]")));
         getDriver().findElement(By.xpath("//span[contains(text(),'More')]")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Save to PDF')]")));
-//        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='artdeco-dropdown__content-inner']")));
         getDriver().findElement(By.xpath("//span[contains(text(),'Save to PDF')]")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='artdeco-toast-item__message']")));
         Thread.sleep(2000);
@@ -70,8 +67,6 @@ public class SideKickStepdefs {
         Thread.sleep(2000);
         getDriver().findElement(By.xpath("//input[@id='recruiter-autocomplete']")).sendKeys("Chandler Bing", Keys.DOWN, Keys.ENTER);
         Thread.sleep(2000);
-//        getDriver().findElement(By.xpath("//input[@id='recruiter-autocomplete']")).sendKeys(Keys.ENTER);
-//        Thread.sleep(2000);
         getDriver().findElement(By.xpath("//input[@id='tags-autocomplete']")).sendKeys("Tag");
         Thread.sleep(2000);
         getDriver().findElement(By.xpath("//input[@id='tags-autocomplete']")).sendKeys(Keys.ENTER);
@@ -120,7 +115,6 @@ public class SideKickStepdefs {
             getDriver().findElement(By.xpath("//th[contains(text(),'Created Date')]")).click();
             getDriver().findElement(By.xpath("//a[contains(text(),'Jeffrey Bezos')]/../..//i[@class='fa fa-chevron-down']")).click();
         }
-//        Thread.sleep(2000);
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='action-call-deleteUser']")));
         getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
         Alert alert = getDriver().switchTo().alert();
@@ -148,5 +142,4 @@ public class SideKickStepdefs {
         getDriver().findElement(By.xpath("//span[@class='MuiButton-label']")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='first-name-input']")));
     }
-
 }
