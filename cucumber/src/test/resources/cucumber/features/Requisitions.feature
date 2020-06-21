@@ -19,8 +19,8 @@ Feature: Requisitions Tab
   Scenario: Edit and Add Custom Requisition field
     Given I navigate to "CRM login" page
     When I sign in as super admin
-    And I go to my profile to find my organization PT
-    And I find an opportunity associated with my organization PT
+    And I go to my profile to find my organization REQ
+    And I find an opportunity associated with my organization REQ
     Then I add and save custom requisition field questions' answers REQ
 
   Scenario: Add and Delete Document

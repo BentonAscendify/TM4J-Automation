@@ -20,12 +20,12 @@ Feature: Main Menu Tab
     And I check whether "Organizations Tab" is loading properly MM
     And I check whether "People Tab" is loading properly MM
     And I check whether "Requisitions Tab" is loading properly MM
-    And I check whether "Succession Planning Tab" is loading properly MM
+#    And I check whether "Succession Planning Tab" is loading properly MM
     And I check whether "Campaigns Tab" is loading properly MM
     And I check whether "Referrals Tab" is loading properly MM
     And I check whether "Learning Repository Tab" is loading properly MM
-    And I check whether "Reporting Tab" is loading properly MM
-    And I check whether "Marketplace Tab" is loading properly MM
+#    And I check whether "Reporting Tab" is loading properly MM
+#    And I check whether "Marketplace Tab" is loading properly MM
 
 
 

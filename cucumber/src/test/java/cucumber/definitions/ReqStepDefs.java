@@ -888,6 +888,7 @@ public class ReqStepDefs {
         Thread.sleep(2000);
         getDriver().findElement(By.xpath("//div[@class='tile-list__row-edit workflow_automation']")).isDisplayed();
         Thread.sleep(2000);
+        new WebDriverWait(getDriver(), 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'asc-survey-qualifying-select')]")));
         getDriver().findElement(By.xpath("//div[contains(@class,'asc-survey-qualifying-select')]")).isDisplayed();
 
         getDriver().findElement(By.xpath("//li[@id='tab-approvals']")).click();
@@ -1233,6 +1234,9 @@ public class ReqStepDefs {
         } else if (arg0.equalsIgnoreCase("Activity")) {
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@id='tab-activities']")));
             getDriver().findElement(By.xpath("//li[@id='tab-activities']")).click();
+            Thread.sleep(2000);
+            getDriver().findElement(By.xpath("//li[@id='tab-info']")).click();
+            Thread.sleep(2000);
             getDriver().findElement(By.xpath("//li[@id='tab-activities']")).click();
             Thread.sleep(2000);
         } else if (arg0.equalsIgnoreCase("Notes")) {
@@ -1309,15 +1313,15 @@ public class ReqStepDefs {
             Thread.sleep(4000);
         }
 
-        getDriver().findElement(By.xpath("//input[contains(@id,'txt')]")).sendKeys("Tessy Mathew");
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//li[@class='ui-menu-item'])[1]")));
-        getDriver().findElement(By.xpath("(//li[@class='ui-menu-item'])[1]")).click();
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='wrap team-member_info clearfix']//*[contains(text(),'Tessy')]")));
-
         getDriver().findElement(By.xpath("//input[contains(@id,'primary-recruiter')]")).sendKeys("Chandler Bing");
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//li[@class='ui-menu-item'])[1]")));
         getDriver().findElement(By.xpath("(//li[@class='ui-menu-item'])[1]")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='wrap team-member_info clearfix']//*[contains(text(),'Bing')]")));
+
+        getDriver().findElement(By.xpath("//input[contains(@id,'txt')]")).sendKeys("Tessy Mathew");
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//li[@class='ui-menu-item'])[1]")));
+        getDriver().findElement(By.xpath("(//li[@class='ui-menu-item'])[1]")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='wrap team-member_info clearfix']//*[contains(text(),'Tessy')]")));
 
         getDriver().findElement(By.xpath("//input[contains(@id,'primary-hiring-manager')]")).sendKeys("Bahu Bali");
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//li[@class='ui-menu-item'])[1]")));
@@ -1495,7 +1499,7 @@ public class ReqStepDefs {
 
     @Then("I edit and save intake form REQ")
     public void iAddAndDeleteIntakeFormREQ() throws Throwable {
-        getDriver().findElement(By.xpath("//button[contains(text(),'Edit')]")).click();
+        getDriver().findElement(By.xpath("//body[@class='capability-widget-body']/div[@id='wrap']/div[@id='container']/div[@id='right-system-panel']/div[@id='inner-right-system-panel']/div[@id='asc-record-profile-view']/div[@id='asc-job-maindata']/div[@id='asc-job-expanded-tab-divs']/div[@id='asc-intake']//div[@class='asc-edit-block-inner']/div[@class='asc-edit-div']/div[1]//button[contains(text(),'Edit')]")).click();
 
         java.util.List<WebElement> radio = getDriver().findElements(By.xpath("//div[@class='asc-survey-question-answer-radio'][1]//input[@type='radio']"));
         for (WebElement element : radio) {
@@ -1630,7 +1634,17 @@ public class ReqStepDefs {
 
     @Then("I add and delete private and public notes REQ")
     public void iAddAndDeletePrivateAndPublicNotes() throws Throwable {
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@id='asc-note-comment']")));
+        try {
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@id='asc-note-comment']")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (getDriver().findElements(By.xpath("//textarea[@id='asc-note-comment']")).size() == 0) {
+            getDriver().findElement(By.xpath("//li[@id='tab-info']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Edit')]")));
+            getDriver().findElement(By.xpath("//li[@id='tab-notes']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@id='asc-note-comment']")));
+        }
         int x = getDriver().findElements(By.xpath("//div[@class='asc-note-bubble asc-panel']")).size();
         getDriver().findElement(By.xpath("//textarea[@id='asc-note-comment']")).sendKeys("Public Note");
         getDriver().findElement(By.xpath("//input[@id='asc-note-share']")).sendKeys("Chandler Bing");
@@ -1694,7 +1708,7 @@ public class ReqStepDefs {
             e.printStackTrace();
         }
         Thread.sleep(4000);
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//i[contains(@class,'fa fa-trash-o action-icon icon')])[1]")));
+        new WebDriverWait(getDriver(), 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//i[contains(@class,'fa fa-trash-o action-icon icon')])[1]")));
         getDriver().findElement(By.xpath("(//i[contains(@class,'fa fa-trash-o action-icon icon')])[1]")).click();
         Thread.sleep(2000);
         getDriver().findElement(By.xpath("(//button[contains(text(),'Confirm')])[1]")).click();
@@ -1758,5 +1772,30 @@ public class ReqStepDefs {
         Thread.sleep(3000);
         alert.accept();
         Thread.sleep(6000);
+    }
+
+    String org;
+
+    @And("I go to my profile to find my organization REQ")
+    public void iGoToMyProfileToFindMyOrganization() throws Throwable {
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='nav__user']")));
+        getDriver().findElement(By.xpath("//div[@class='nav__user']")).click();
+        Thread.sleep(2000);
+        getDriver().findElement(By.xpath("//a[contains(text(),'View Profile')]")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@id='tab-personal']")));
+        getDriver().findElement(By.xpath("//li[@id='tab-profile']")).click();
+        getDriver().findElement(By.xpath("//li[@id='tab-personal']")).click();
+        String organization = getDriver().findElement(By.xpath("(//div[@class='asc-read-org'])[1]")).getText();
+        org = organization.replace(" *", "");
+        System.out.println("Organization is " + org);
+    }
+
+    @And("I find an opportunity associated with my organization REQ")
+    public void iFindAnOpportunityAssociatedWithMyOrganization() throws Throwable {
+        getDriver().findElement(By.xpath("//div[@class='section-tab']")).click();
+        new WebDriverWait(getDriver(), 50).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/requisitions']")));
+        getDriver().findElement(By.xpath("//a[@href='/requisitions']")).click();
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
+        getDriver().findElement(By.xpath("//div[contains(text(),'" + org + "')]/..//div[@class='asc-job-status']/../../../..//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).click();
     }
 }

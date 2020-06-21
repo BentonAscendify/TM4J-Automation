@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 description = "Cucumber Module"
 
 buildscript {
@@ -60,11 +62,11 @@ task cucumber(group: "cucumber") {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             systemProperties = [
-                    "cucumber.headless": project.property("cucumber.headless"),
-                    "cucumber.config.path": project.property("cucumber.config.path"),
-                    "cucumber.config.env": project.property("cucumber.config.env"),
-                    "cucumber.download.path": project.property("cucumber.download.path"),
-                    "cucumber.browserstack.enabled": project.property("cucumber.browser.enabled")
+                    "cucumber.headless"            : project.property("cucumber.headless"),
+                    "cucumber.config.path"         : project.property("cucumber.config.path"),
+                    "cucumber.config.env"          : project.property("cucumber.config.env"),
+                    "cucumber.download.path"       : project.property("cucumber.download.path"),
+                    "cucumber.browserstack.enabled": project.property("cucumber.browserstack.enabled")
             ]
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
             args = [
@@ -74,50 +76,78 @@ task cucumber(group: "cucumber") {
                     'src/test/resources/cucumber/features']
 //            args = ['--help']
         }
-    }
-}
-
-task cucumberBrowserstackYaml() {
-    doLast {
-        //def cfg = new org.yaml.snakeyaml.Yaml().load(new File("cfg.yaml").newInputStream())
-        def yamlParser = new org.yaml.snakeyaml.Yaml()
-        def yaml = yamlParser.load(file("${project.projectDir}/src/test/resources/browserstack.yml").newInputStream())
-        yaml.browserstack.desktop.each { d ->
-
-        }
-
-        //println browserstack['desktop']
     }
 }
 
 task cucumberBrowserstack(group: "cucumber") {
-    dependsOn assemble, compileTestJava
-    doLast {
-        def r = file("${project.buildDir}/cucumber")
-        def yamlParser = new org.yaml.snakeyaml.Yaml()
-        def yaml = yamlParser.load(file("${project.projectDir}/src/test/resources/browserstack.yml").newInputStream())
-        javaexec {
-            main = "io.cucumber.core.cli.Main"
-            systemProperties = [
-                    "cucumber.headless": project.property("cucumber.headless"),
-                    "cucumber.config.path": project.property("cucumber.config.path"),
-                    "cucumber.config.env": project.property("cucumber.config.env"),
-                    "cucumber.download.path": project.property("cucumber.download.path"),
-                    "cucumber.browserstack.enabled": project.property("cucumber.browser.enabled")
-
-            ]
-            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = [
-                    '-p', "json:build/cucumber/json/report.json",
-                    '-p', 'pretty',
-                    '-p', 'html:build/cucumber/html',
-                    'src/test/resources/cucumber/features']
-//            args = ['--help']
-        }
-    }
 
 }
 
+def yamlParser = new org.yaml.snakeyaml.Yaml()
+def yaml = yamlParser.load(file("${project.projectDir}/src/test/resources/browserstack.yml").newInputStream())
+def buildTime = getBuildTime()
+yaml.browserstack.desktop.each { d ->
+    createBrowserstackTask(d)
+}
+
+yaml.browserstack.mobile.each { m ->
+    createBrowserstackTask(m)
+}
+
+
+def createBrowserstackTask(d) {
+    String taskName = "_cucumberBrowser${d['name'].replaceAll('-', '')}"
+    def bs = [:]
+    def keys = d.keySet() as List
+    keys.add("project")
+    keys.add("build")
+    bs["cucumber.browserstack.capabilities.keys"] = keys.join(",")
+    d.each { k, v ->
+        bs["cucumber.browserstack.capabilities.key.$k"] = v
+    }
+    bs["cucumber.browserstack.capabilities.key.project"] = "qa-automation"
+    bs["cucumber.browserstack.capabilities.key.build"] = "qa-automation-${buildTime}"
+
+    task "$taskName" {
+        dependsOn assemble, compileTestJava
+        doLast {
+            javaexec {
+                main = "io.cucumber.core.cli.Main"
+                systemProperties = [
+                        "cucumber.headless"               : project.property("cucumber.headless"),
+                        "cucumber.config.path"            : project.property("cucumber.config.path"),
+                        "cucumber.config.env"             : project.property("cucumber.config.env"),
+                        "cucumber.download.path"          : project.property("cucumber.download.path"),
+//                        "cucumber.browserstack.enabled"   : project.property("cucumber.browserstack.enabled"),
+                        "cucumber.browserstack.enabled"   : "true",
+
+                        "cucumber.browserstack.username"  : project.property("cucumber.browserstack.username"),
+                        "cucumber.browserstack.password"  : project.property("cucumber.browserstack.password"),
+                        "cucumber.browserstack.url.scheme": project.property("cucumber.browserstack.url.scheme"),
+                        "cucumber.browserstack.url.host"  : project.property("cucumber.browserstack.url.host"),
+                        "cucumber.browserstack.url.path"  : project.property("cucumber.browserstack.url.path")
+                ]
+                systemProperties.putAll(bs)
+
+                classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+                args = [
+                        '-p', "json:build/cucumber/json/report.json",
+                        '-p', 'pretty',
+                        '-p', 'html:build/cucumber/html',
+                        '-t', '@browserstack',
+                        'src/test/resources/cucumber/features']
+//            args = ['--help']
+            }
+        }
+    }
+    cucumberBrowserstack.dependsOn(taskName)
+}
+
+def getBuildTime() {
+    def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
+    df.setTimeZone(TimeZone.getTimeZone("UTC"))
+    return df.format(new Date())
+}
 
 publishing {
     publications {

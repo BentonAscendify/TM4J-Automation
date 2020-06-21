@@ -1,20 +1,17 @@
 browserstack:
-#  credentials:
-#    username: nickgarland2
-#    password: QfpBs22d3PZkxCNXH9nm
   desktop:
     # Windows 10
-#    - {browser: "IE", browser_version: "11.0", os: "Windows", os_version: "10", resolution: "1024x768", name: "qa-automation" }
-#    - {browser: "Edge", browser_version: "84.0 beta", os: "Windows", os_version: "10", resolution: "1024x768", name: "qa-automation" }
-#    - {browser: "Firefox", browser_version: "78.0 beta", os: "Windows", os_version: "10", resolution: "1024x768", name: "qa-automation" }
-    - {browser: "Chrome", browser_version: "84.0 beta", os: "Windows", os_version: "10", resolution: "1024x768", name: "qa-automation" }
+    - {browser: "IE", browser_version: "11.0", os: "Windows", os_version: "10", resolution: "1024x768", name: "qa-automation-win10-ie11" }
+    - {browser: "Edge", browser_version: "84.0 beta", os: "Windows", os_version: "10", resolution: "1024x768", name: "qa-automation-win10-edge84" }
+    - {browser: "Firefox", browser_version: "78.0 beta", os: "Windows", os_version: "10", resolution: "1024x768", name: "qa-automation-win10-ff78" }
+    - {browser: "Chrome", browser_version: "84.0 beta", os: "Windows", os_version: "10", resolution: "1024x768", name: "qa-automation-win10-chrome84" }
 
     # MAC OS
-#  mobile:
-#    - {browser: "Safari", browser_version: "13.0", os: "OS X", os_version: "Catalina", resolution: "1024x768", name: "qa-automation" }
-#    - {browser: "Firefox", browser_version: "78.0 beta", os: "OS X", os_version: "Catalina", resolution: "1024x768", name: "qa-automation" }
-#    - {browser: "Edge", browser_version: "84.0 beta", os: "OS X", os_version: "Catalina", resolution: "1024x768", name: "qa-automation" }
-#    - {browser: "Chrome", browser_version: "84.0 beta", os: "OS X", os_version: "Catalina", resolution: "1024x768", name: "qa-automation" }
+    - {browser: "Safari", browser_version: "13.0", os: "OS X", os_version: "Catalina", resolution: "1024x768", name: "qa-automation-mac-safari13" }
+    - {browser: "Firefox", browser_version: "78.0 beta", os: "OS X", os_version: "Catalina", resolution: "1024x768", name: "qa-automation-mac-ff78" }
+    - {browser: "Edge", browser_version: "84.0 beta", os: "OS X", os_version: "Catalina", resolution: "1024x768", name: "qa-automation-mac-edge84" }
+    - {browser: "Chrome", browser_version: "84.0 beta", os: "OS X", os_version: "Catalina", resolution: "1024x768", name: "qa-automation-mac-chrome84" }
 
   mobile:
-#    - {browserName: "iPhone", device: "iPhone 8 Plus", realMobile: "true", os_version: "11", name: "qa-automation" }
+    - {browserName: "iPhone", device: "iPhone 8 Plus", realMobile: "true", os_version: "11", name: "qa-automation-iphone-8plus" }
+    - {browserName: "android", device: "Google Pixel 4 XL", realMobile: "true", os_version: "10.0", name: "qa-automation-android-pixel4xl" }

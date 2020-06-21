@@ -7,8 +7,11 @@ environments {
         testCommunityLogin = "https://testcommunity.ascendify.works/"
         talentCommunityLogin = "https://master.client.ascendify.works/"
 
-        superAdminUsername = "tessy.mathew@ascendify.com"
+        superAdminUsername = "tessy.anicattumathew+41@ascendify.com"
         superAdminPassword = "Ascendify246!"
+
+        systemAdminUsername = "jason@ascendify.com"
+        systemAdminPassword = "&G3tty"
 
         candidateUsername = "tessy@gmail.com"
         candidatePassword = "Ascendify246!"
@@ -23,6 +26,9 @@ environments {
 
         superAdminUsername = "tessy.anicattumathew@ascendify.com"
         superAdminPassword = "Mac123q!"
+
+        systemAdminUsername = "jason@ascendify.com"
+        systemAdminPassword = "Arm\$tr0ng!"
 
         candidateUsername = "tessy@gmail.com"
         candidatePassword = "Ascendify246!"
@@ -39,6 +45,9 @@ environments {
         superAdminUsername = "tessy.anicattumathew@ascendify.com"
         superAdminPassword = "test12345"
 
+        systemAdminUsername = "jason@ascendify.com"
+        systemAdminPassword = "test12345"
+
         candidateUsername = "tessy@gmail.com"
         candidatePassword = "Ascendify246!"
 
@@ -52,6 +61,9 @@ environments {
 
         superAdminUsername = "tessy.anicattumathew@ascendify.com"
         superAdminPassword = "Mac123q!"
+
+        systemAdminUsername = "admin@ascendify.com"
+        systemAdminPassword = "&G3tty"
 
         candidateUsername = "tessy@gmail.com"
         candidatePassword = "Ascendify246!"

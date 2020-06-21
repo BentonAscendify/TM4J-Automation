@@ -25,30 +25,14 @@ import java.util.Map;
 public class TestContext extends AbstractContext {
 
     public static void initialize() throws MalformedURLException {
-        String cucumberHeadlessProp = getProperty("cucumber.headless", "true");
+        String cucumberHeadlessProp = Util.getProperty("cucumber.headless", "false");
         boolean isHeadless = Boolean.valueOf(cucumberHeadlessProp);
         System.out.println("Automation running in headless mode ? " + isHeadless);
 
-        String environment = getProperty("cucumber.config.env", "uat");
-        String configPath = getProperty("cucumber.config.path", "config.groovy");
-        File configFile = new File(configPath);
-        URL configFileUrl = null;
-        if (!configFile.exists()) {
-            System.out.println("Checking file in classpath as config object is missing in given path");
-            configFileUrl = TestContext.class.getClassLoader().getResource("config.groovy");
-            System.out.println("Checking file in classpath: " + configFileUrl);
-        } else {
-            configFileUrl = configFile.toURI().toURL();
-        }
-
-        config = new ConfigSlurper(environment).parse(configFileUrl);
-
+        loadConfig();
         initialize("chrome", isHeadless);
     }
 
-    public static void teardown() {
-        driver.quit();
-    }
 
     public static void initialize(String browser, boolean isHeadless) {
         switch (browser) {
@@ -118,7 +102,7 @@ public class TestContext extends AbstractContext {
     }
 
     private static File getDefaultDownloadDirectoryForChrome(boolean clean) {
-        String downloadPath = getProperty("cucumber.download.path", "downloads");
+        String downloadPath = Util.getProperty("cucumber.download.path", "downloads");
         File downloadDir = new File(downloadPath);
         if (clean) {
             try {

@@ -1,6 +1,7 @@
 @java
 Feature: Talent Community
 
+  @browserstack
   Scenario: Join community via email
     Given I navigate to "TC login" page
     When I click on "Join Our Team" button TC
@@ -88,7 +89,6 @@ Feature: Talent Community
   Scenario: Login/SignUp via Social
     Given I navigate to "LinkedIn" page
     When I click on "Sign In" button on "LinkedIn Sign In" page TC
-#    NOTE:Use a valid LinkedIn email and password that is not present in the Ascendify Database
     And I sign in to LinkedIn
     And I click on "Sign In" button on "LinkedIn 2nd Sign In" page TC
     Given I navigate to "TC login" page
@@ -105,8 +105,8 @@ Feature: Talent Community
     And I click on "Submit" button TC
     Then "Dashboard" page is displayed TC
     Then I navigate to "CRM login" page
-    And I sign in as super admin
-    And I clean up TC
+    And I sign in as system admin
+    And I clean up as system admin TC
 
   Scenario: Search for opportunity and apply with email
     Given I navigate to "TC login" page
@@ -125,21 +125,21 @@ Feature: Talent Community
     And I sign in as super admin
     And I clean up TC
 
-  Scenario: Apply to a job by sign-in to a community
-    Given I navigate to "TC login" page
-    When I click on link text "Search Careers" TC
-    And I search for "Tessy QA" in search box TC
-    And I click on link text "Tessy QA" TC
-    And I click on "Apply Now" button TC
-    And I click on link text "Sign In" TC
-    Then "Sign In" page is displayed TC
-    And I sign in to TalentCommunity as a candidate
-    And I click on "Sign In" button on "Sign In" page TC
-    And I make sure I haven't applied to that job already TC
-    And I click on "Apply Now" button TC
-    And I sign to confirm TC
-    And I click on "Submit Application" button TC
-    Then success message is displayed TC
+#  Scenario: Apply to a job by sign-in to a community
+#    Given I navigate to "TC login" page
+#    When I click on link text "Search Careers" TC
+#    And I search for "Tessy QA" in search box TC
+#    And I click on link text "Tessy QA" TC
+#    And I click on "Apply Now" button TC
+#    And I click on link text "Sign In" TC
+#    Then "Sign In" page is displayed TC
+#    And I sign in to TalentCommunity as a candidate
+#    And I click on "Sign In" button on "Sign In" page TC
+#    And I make sure I haven't applied to that job already TC
+#    And I click on "Apply Now" button TC
+#    And I sign to confirm TC
+#    And I click on "Submit Application" button TC
+#    Then success message is displayed TC
 
   Scenario: Login as a candidate and apply to a job
     Given I navigate to "TC login" page
@@ -197,8 +197,3 @@ Feature: Talent Community
     Then I navigate to "CRM login" page
     And I sign in as super admin
     And I clean up TC
-
-  Scenario: Automation Matrix
-    Given I navigate to "BrowserStack" page
-    When I click on "Sign In" button on "BrowserStack" page TC
-    And I sign in to BrowserStack

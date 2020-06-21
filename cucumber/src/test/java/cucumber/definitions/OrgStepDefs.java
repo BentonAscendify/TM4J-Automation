@@ -129,8 +129,10 @@ public class OrgStepDefs {
     @And("I click on {string} button ORG")
     public void iClickOnButton(String arg0) throws Throwable {
         if (arg0.equalsIgnoreCase("Add Profile")) {
-            while (getDriver().findElements(By.xpath("//button[@id='asc-add-user-btn']")).size() != 0) {
+            boolean flag = false;
+            while (getDriver().findElements(By.xpath("//button[@id='asc-add-user-btn']")).size() != 0 || !flag) {
                 getDriver().findElement(By.xpath("//button[@id='asc-add-user-btn']")).click();
+                flag = true;
                 Thread.sleep(500);
             }
         }
@@ -183,6 +185,7 @@ public class OrgStepDefs {
             }
             retry++;
         }
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'link-text')][contains(text(),'" + list + "')]")));
         getDriver().findElement(By.xpath("//div[contains(@class,'link-text')][contains(text(),'" + list + "')]")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@id='asc-sort-by-div']")));
         getDriver().findElement(By.xpath("//span[@id='asc-sort-by-div']")).click();

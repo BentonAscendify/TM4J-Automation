@@ -10,7 +10,7 @@ Feature: People Tab
     And I navigate to "Add Manually" PT
     Then I manually add new user's profile PT
     And I click on "Add Profile" button PT
-    Then "New user was added" message is displayed PT
+    Then "New manual user was added" message is displayed PT
     And I make sure that Organize functions in the form are working as expected PT
     Then I search for user by email in the global bar at top PT
     And I clean up "Manual User" PT
@@ -23,7 +23,7 @@ Feature: People Tab
     And I choose my file to be uploaded by clicking "Cloud Icon" button PT
     Then I fill in empty fields for the profile PT
     And I click on "Add Profile" button PT
-    Then "New user was added" message is displayed PT
+    Then "New resume user was added" message is displayed PT
     And I clean up "Cloud User" PT
 
   Scenario: Add new user by uploading a CSV file
@@ -38,7 +38,8 @@ Feature: People Tab
     And I map the fields in the .CSV file to the appropriate fields in the application PT
     And I click on "Import" button PT
     Then "CSV processing" message is displayed PT
-    And I clean up "CSV" PT
+    And I sign in as system admin
+    And I clean up "CSV" as system admin PT
 
   Scenario: Bulk Add 50 People
     Given I navigate to "CRM login" page
@@ -94,8 +95,11 @@ Feature: People Tab
     Then "Main Menu" page is displayed PT
     And I go to my profile to find my organization PT
     And I find an opportunity associated with my organization PT
+    And I make sure workflow status is selected for this opportunity PT
+    And I make sure skills are assigned to this opportunity PT
     And I make sure interview is setup for this opportunity PT
     And I click on "People" tab PT
+    And I make sure I haven't applied to that opportunity PT
     And I choose a person who is associated with the same organization as mine PT
     And I consider for same opportunity PT
     Then candidate of same org has been "Applied to Opportunity" PT

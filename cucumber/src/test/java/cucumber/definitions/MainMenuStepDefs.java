@@ -18,8 +18,8 @@ public class MainMenuStepDefs {
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='main_menu_anc']")));
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='asc-reminder-tile-heading asc-list-tile']")));
         } else if (arg0.equalsIgnoreCase("Admin Console")) {
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[contains(@class,'fa fa-caret-down')]")));
-            getDriver().findElement(By.xpath("//i[contains(@class,'fa fa-caret-down')]")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'nav__user')]")));
+            getDriver().findElement(By.xpath("//div[contains(@class,'nav__user')]")).click();
             Thread.sleep(1000);
             getDriver().findElement(By.xpath("//li[contains(text(),'Admin Console')]")).click();
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//aside[@id='left-system-panel']")));
@@ -199,6 +199,7 @@ public class MainMenuStepDefs {
             WebElement element = getDriver().findElement(By.xpath("//ul[contains(@class,'sections-menu nav navbar-nav')]"));
             JavascriptExecutor jse = (JavascriptExecutor) getDriver();
             jse.executeScript("arguments[0].scrollIntoView();", element);
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/campaigns']")));
             getDriver().findElement(By.xpath("//a[@href='/campaigns']")).click();
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='left-system-panel']")));
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-campaigns']")));
@@ -238,7 +239,7 @@ public class MainMenuStepDefs {
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='middle-system-panel']")));
             getDriver().findElement(By.xpath("//div[@class='section-tab']")).click();
         } else if (arg0.equalsIgnoreCase("Reporting Tab")) {
-            WebElement element = getDriver().findElement(By.xpath("//ul[contains(@class,'sections-menu nav navbar-nav')]"));
+            WebElement element = getDriver().findElement(By.xpath("//a[@href='/reporting']"));
             JavascriptExecutor jse = (JavascriptExecutor) getDriver();
             jse.executeScript("arguments[0].scrollIntoView();", element);
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/reporting']")));

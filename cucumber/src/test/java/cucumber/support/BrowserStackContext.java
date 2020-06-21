@@ -1,45 +1,44 @@
 package cucumber.support;
 
-import groovy.util.ConfigObject;
-import groovy.util.ConfigSlurper;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 public class BrowserStackContext extends AbstractContext {
 
-    private static WebDriver driver;
-    private static ConfigObject config;
-
-    private static File downloadDir;
-
-    public static WebDriver getDriver() {
-        return driver;
-    }
-
-    public static ConfigObject getConfig() {
-        return config;
-    }
-
-    public static File getDownloadDir() {
-        return downloadDir;
-    }
-
     public static void initialize() throws MalformedURLException {
-        String environment = getProperty("cucumber.config.env", "uat");
-        String configPath = getProperty("cucumber.config.path", "config.groovy");
-        File configFile = new File(configPath);
-        URL configFileUrl = null;
-        if (!configFile.exists()) {
-            System.out.println("Checking file in classpath as config object is missing in given path");
-            configFileUrl = TestContext.class.getClassLoader().getResource("config.groovy");
-            System.out.println("Checking file in classpath: " + configFileUrl);
-        } else {
-            configFileUrl = configFile.toURI().toURL();
+        loadConfig();
+
+        BrowserStack browserStack = createBrowserStackFromProps();
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        for(Map.Entry<String,String> entry: browserStack.getCapabilities().entrySet()) {
+            capabilities.setCapability(entry.getKey(), entry.getValue());
         }
 
-        config = new ConfigSlurper(environment).parse(configFileUrl);
+        driver = new RemoteWebDriver(new URL(browserStack.toUrl()), capabilities);
     }
+
+    private static BrowserStack createBrowserStackFromProps() {
+        BrowserStack browserStack = new BrowserStack();
+        browserStack.setUsername(Util.getProperty("cucumber.browserstack.username", ""));
+        browserStack.setPassword(Util.getProperty("cucumber.browserstack.password", ""));
+        browserStack.setUrlScheme(Util.getProperty("cucumber.browserstack.url.scheme", ""));
+        browserStack.setUrlHost(Util.getProperty("cucumber.browserstack.url.host", ""));
+        browserStack.setUrlPath(Util.getProperty("cucumber.browserstack.url.path", ""));
+
+        String[] capabilityKeys = Util.getProperty("cucumber.browserstack.capabilities.keys", "").split(",");
+        for (String capabilityKey : capabilityKeys) {
+            String keyName = String.format("cucumber.browserstack.capabilities.key.%s", capabilityKey);
+            String value = Util.getProperty(keyName, "");
+            browserStack.getCapabilities().put(capabilityKey, value);
+        }
+
+        return browserStack;
+    }
+
 }

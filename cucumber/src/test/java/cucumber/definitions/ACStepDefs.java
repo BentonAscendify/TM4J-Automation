@@ -19,16 +19,19 @@ public class ACStepDefs {
     @Then("{string} page is displayed AC")
     public void pageIsDisplayedAC(String arg0) throws Throwable {
         if (arg0.equalsIgnoreCase("Main Menu")) {
-            Thread.sleep(8000);
-            new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu')]")));
+//            selenium.waitForCondition("selenium.browserbot.getCurrentWindow().jQuery.active == 0", timeout);
+//            new WebDriverWait(getDriver(), 200).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'View')]")));
+//            getDriver().findElement(By.xpath("//button[contains(text(),'View')]")).click();
+            Thread.sleep(2000);
+            new WebDriverWait(getDriver(), 100).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu')]")));
             getDriver().findElement(By.xpath("//span[contains(text(),'Main Menu')]")).isDisplayed();
         }
     }
 
     @And("I go to Admin Console AC")
     public void iGoToAdminConsoleAC() throws Throwable {
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[contains(@class,'fa fa-caret-down')]")));
-        getDriver().findElement(By.xpath("//i[contains(@class,'fa fa-caret-down')]")).click();
+        new WebDriverWait(getDriver(), 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='nav__user']")));
+        getDriver().findElement(By.xpath("//div[@class='nav__user']")).click();
         Thread.sleep(1000);
         getDriver().findElement(By.xpath("//li[contains(text(),'Admin Console')]")).click();
         Thread.sleep(2000);

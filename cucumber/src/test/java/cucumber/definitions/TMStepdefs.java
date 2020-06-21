@@ -129,7 +129,7 @@ public class TMStepdefs {
                 Thread.sleep(4000);
             }
             getDriver().findElement(By.xpath("(//a[contains(text(),'" + candidate + "')]/../..//i[@class='fa fa-chevron-down'])[1]")).click();
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='action-call-deleteUser']")));
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[contains(text(),'" + candidate + "')]/../..//i[@class='fa fa-chevron-down'])[1]/../..//a[@class='action-call-deleteUser']")));
             getDriver().findElement(By.xpath("//a[@class='action-call-deleteUser']")).click();
             Thread.sleep(500);
             Alert alert = getDriver().switchTo().alert();

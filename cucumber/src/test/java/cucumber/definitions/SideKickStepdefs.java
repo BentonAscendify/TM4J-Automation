@@ -34,7 +34,24 @@ public class SideKickStepdefs {
     @Then("I open Ascendify Sidekick Extension")
     public void iOpenAscendifySidekickExtension() throws Throwable {
         getDriver().get("chrome-extension://iallplkmolehjfdjjnjjolhikndeiehb/index.html");
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='web-address-input']")));
+        try {
+            new WebDriverWait(getDriver(), 30).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='web-address-input']")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        int retry = 0;
+        while (getDriver().findElements(By.xpath("//input[@id='web-address-input']")).size() == 0) {
+            getDriver().get("chrome-extension://iallplkmolehjfdjjnjjolhikndeiehb/index.html");
+            try {
+                new WebDriverWait(getDriver(), 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='web-address-input']")));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (retry > 4) {
+                break;
+            }
+            retry++;
+        }
     }
 
     @And("I choose my file to be uploaded by clicking {string} button")
@@ -74,7 +91,7 @@ public class SideKickStepdefs {
         getDriver().findElement(By.xpath("//textarea[@id='notes-input']")).sendKeys("Executive Chairman, The Jack Welch Management Institute");
         Thread.sleep(2000);
         getDriver().findElement(By.xpath("//button//span[@class='MuiButton-label']")).click();
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button//span[contains(text(),'Create Record')]")));
+        new WebDriverWait(getDriver(), 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button//span[contains(text(),'Create Record')]")));
     }
 
     @And("I clean up {string} candidate")

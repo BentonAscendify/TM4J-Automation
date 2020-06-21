@@ -7,8 +7,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static cucumber.support.TestContext.getDriver;
 import static cucumber.support.TestContext.getConfig;
+import static cucumber.support.TestContext.getDriver;
 
 
 public class CommonStepDef {
@@ -21,8 +21,6 @@ public class CommonStepDef {
             getDriver().get(getConfig().get("talentCommunityLogin").toString());
         } else if (arg0.equalsIgnoreCase("LinkedIn")) {
             getDriver().get(getConfig().get("linkedInLogin").toString());
-        } else if(arg0.equalsIgnoreCase("BrowserStack")){
-            getDriver().get("https://www.browserstack.com/");
         }
     }
 
@@ -42,8 +40,46 @@ public class CommonStepDef {
         getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys(getConfig().get("superAdminPassword").toString());
 
         getDriver().findElement(By.xpath("//button[@id='asc-signin-btn']")).click();
-        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu')]")));
-        getDriver().findElement(By.xpath("//span[contains(text(),'Main Menu')]")).isDisplayed();
+        try {
+            new WebDriverWait(getDriver(), 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu')]")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (getDriver().findElements(By.xpath("//span[contains(text(),'Main Menu')]")).size() == 0) {
+            getDriver().findElement(By.xpath("//div[@class='section-tab']")).click();
+            getDriver().findElement(By.xpath("//div[@class='sections-container']")).isDisplayed();
+            getDriver().findElement(By.xpath("//a[@id='header-main-menu']")).click();
+            new WebDriverWait(getDriver(), 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu')]")));
+        }
+    }
+
+    @When("I sign in as system admin")
+    public void iSignInAsSystemAdminMM() throws Throwable {
+        Thread.sleep(4000);
+        if (getDriver().findElements(By.xpath("//div[@class='nav__user']")).size() != 0) {
+            getDriver().findElement(By.xpath("//div[@class='nav__user']")).click();
+            Thread.sleep(1000);
+            getDriver().findElement(By.xpath("//li[@id='asc-sign-out-button']")).click();
+        }
+        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='id_username']")));
+        getDriver().findElement(By.xpath("//input[@id='id_username']")).click();
+
+        getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys(getConfig().get("systemAdminUsername").toString());
+        getDriver().findElement(By.xpath("//input[@id='id_password']")).click();
+        getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys(getConfig().get("systemAdminPassword").toString());
+
+        getDriver().findElement(By.xpath("//button[@id='asc-signin-btn']")).click();
+        try {
+            new WebDriverWait(getDriver(), 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu')]")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (getDriver().findElements(By.xpath("//span[contains(text(),'Main Menu')]")).size() == 0) {
+            getDriver().findElement(By.xpath("//div[@class='section-tab']")).click();
+            getDriver().findElement(By.xpath("//div[@class='sections-container']")).isDisplayed();
+            getDriver().findElement(By.xpath("//a[@id='header-main-menu']")).click();
+            new WebDriverWait(getDriver(), 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Main Menu')]")));
+        }
     }
 
     @When("I sign in to CRM")
@@ -52,7 +88,7 @@ public class CommonStepDef {
 
         getDriver().findElement(By.xpath("//input[@id='id_username']")).sendKeys(getConfig().get("superAdminUsername").toString());
         getDriver().findElement(By.xpath("//input[@id='id_password']")).sendKeys(getConfig().get("superAdminPassword").toString());
-
+//        getDriver().manage().timeouts().implicitlyWait(10000, TimeUnit.SECONDS);
         getDriver().findElement(By.xpath("//button[@id='asc-signin-btn']")).click();
     }
 
