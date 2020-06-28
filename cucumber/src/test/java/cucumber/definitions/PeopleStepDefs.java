@@ -1039,9 +1039,7 @@ public class PeopleStepDefs {
             if (getDriver().findElements(By.xpath("//div[@class='link asc-list-name highlight'][contains(text(),'Megan Terry')]/../../../../..//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).size() == 0) {
                 Thread.sleep(300000);
                 getDriver().findElement(By.xpath("//input[@id='inputGlobal']")).sendKeys("donald@gmail.com", Keys.ENTER);
-//            getDriver().findElement(By.xpath("//input[@id='inputGlobal']")).sendKeys(Keys.ENTER);
                 Thread.sleep(4000);
-//                new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")));
                 int retry = 0;
                 while (getDriver().findElements(By.xpath("//div[@class='link asc-list-name highlight'][contains(text(),'Megan Terry')]/../../../../..//i[@class='fa fa-chevron-circle-right asc-list-more-information-arrow']")).size() == 0) {
                     getDriver().findElement(By.xpath("//input[@id='inputGlobal']")).sendKeys(Keys.CONTROL, "a", Keys.BACK_SPACE);
@@ -1058,8 +1056,8 @@ public class PeopleStepDefs {
             getDriver().findElement(By.xpath("//div[contains(text(),'Megan Terry')]/..//i[@class='fa fa-link doNotContactHide']")).click();
             getDriver().findElement(By.xpath("//div[contains(text(),'donald@gmail.com')]")).isDisplayed();
             getDriver().findElement(By.xpath("//div[contains(text(),'Megan Terry')]/../../../../..//div[@class='asc-dropdown-button']")).click();
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='asc-tile-menu-item asc-list-delete-profile link']")));
-            getDriver().findElement(By.xpath("//a[@class='asc-tile-menu-item asc-list-delete-profile link']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'Megan Terry')]/../../../../..//a[@class='asc-tile-menu-item asc-list-delete-profile link']")));
+            getDriver().findElement(By.xpath("//div[contains(text(),'Megan Terry')]/../../../../..//a[@class='asc-tile-menu-item asc-list-delete-profile link']")).click();
             Thread.sleep(2000);
             Alert alert = getDriver().switchTo().alert();
             alert.accept();
@@ -1073,8 +1071,8 @@ public class PeopleStepDefs {
             getDriver().findElement(By.xpath("//div[contains(text(),'Grayson Martin')]/..//i[@class='fa fa-link doNotContactHide']")).click();
             getDriver().findElement(By.xpath("//div[contains(text(),'trump@gmail.com')]")).isDisplayed();
             getDriver().findElement(By.xpath("//div[contains(text(),'Grayson Martin')]/../../../../..//div[@class='asc-dropdown-button']")).click();
-            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='asc-tile-menu-item asc-list-delete-profile link']")));
-            getDriver().findElement(By.xpath("//a[@class='asc-tile-menu-item asc-list-delete-profile link']")).click();
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'Grayson Martin')]/../../../../..//a[@class='asc-tile-menu-item asc-list-delete-profile link']")));
+            getDriver().findElement(By.xpath("//div[contains(text(),'Grayson Martin')]/../../../../..//a[@class='asc-tile-menu-item asc-list-delete-profile link']")).click();
             Thread.sleep(2000);
             getDriver().switchTo().alert();
             alert.accept();
@@ -1735,6 +1733,7 @@ public class PeopleStepDefs {
         JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         jse.executeScript("arguments[0].click()", archive);
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", archive);
+        getDriver().findElement(By.xpath("//li[@id='tab-profile']")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@id='tab-interview']")));
         getDriver().findElement(By.xpath("//li[@id='tab-interview']")).click();
         new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='schedule-interview-btn']")));

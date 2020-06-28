@@ -18,6 +18,7 @@ Feature: Talent Community
     And I sign in as super admin
     And I clean up TC
 
+#  @browserstack
   Scenario: Apply to a job by uploading your resume
     Given I navigate to "TC login" page
     When I click on link text "Search Careers" TC
@@ -35,6 +36,7 @@ Feature: Talent Community
     And I sign in as super admin
     And I clean up TC
 
+#  @browserstack
   Scenario: Apply to a job via Google Drive
     Given I navigate to "TC login" page
     When I click on link text "Search Careers" TC
@@ -52,6 +54,7 @@ Feature: Talent Community
     And I sign in as super admin
     And I clean up TC
 
+#  @browserstack
   Scenario: Apply to a job via Dropbox
     Given I navigate to "TC login" page
     When I click on link text "Search Careers" TC
@@ -69,6 +72,7 @@ Feature: Talent Community
     And I sign in as super admin
     And I clean up TC
 
+#  @browserstack
   Scenario: Apply to a job via Microsoft OneDrive
     Given I navigate to "TC login" page
     When I click on link text "Search Careers" TC
@@ -86,6 +90,7 @@ Feature: Talent Community
     And I sign in as super admin
     And I clean up TC
 
+#  @browserstack
   Scenario: Login/SignUp via Social
     Given I navigate to "LinkedIn" page
     When I click on "Sign In" button on "LinkedIn Sign In" page TC

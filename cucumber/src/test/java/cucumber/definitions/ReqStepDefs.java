@@ -1298,6 +1298,22 @@ public class ReqStepDefs {
                 retry++;
             }
         } else if (arg0.equalsIgnoreCase("Approvals")) {
+            new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-job-name']")));
+            req = getDriver().findElement(By.xpath("//div[@id='asc-job-name']")).getText();
+            while (req.contains("'")) {
+                int i = getDriver().findElements(By.xpath("//i[contains(@class,'fa fa-chevron-circle-right asc-list-more-information-arrow')]")).size();
+                for (int j = 2; j <= i; j++) {
+                    req = getDriver().findElement(By.xpath("//div[@id='asc-job-name']")).getText();
+                    if (req.contains("'")) {
+                        getDriver().findElement(By.xpath("(//i[contains(@class,'fa fa-chevron-circle-right asc-list-more-information-arrow')])[" + j + "]")).click();
+                        new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='asc-job-name']")));
+                    } else {
+                        break;
+                    }
+                }
+                req = getDriver().findElement(By.xpath("//div[@id='asc-job-name']")).getText();
+            }
+
             new WebDriverWait(getDriver(), 20).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@id='tab-approvals']")));
             getDriver().findElement(By.xpath("//li[@id='tab-approvals']")).click();
             req = getDriver().findElement(By.xpath("//div[@id='asc-job-name']")).getText();

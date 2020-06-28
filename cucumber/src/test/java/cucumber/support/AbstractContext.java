@@ -16,7 +16,7 @@ public abstract class AbstractContext {
     protected static File downloadDir;
 
     protected static void loadConfig() throws MalformedURLException {
-        String environment = Util.getProperty("cucumber.config.env", "webdriverUat");
+        String environment = Util.getProperty("cucumber.config.env", "prod");
         String configPath = Util.getProperty("cucumber.config.path", "config.groovy");
         File configFile = new File(configPath);
         URL configFileUrl = null;
